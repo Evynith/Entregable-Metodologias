@@ -1,4 +1,5 @@
 /** Script de creación de la base de datos */
+DROP TABLE IF EXISTS unc_249456.materiales;
 CREATE TABLE unc_249456.materiales (
     id SERIAL NOT NULL,    
     nombre varchar(20)   NOT NULL,
