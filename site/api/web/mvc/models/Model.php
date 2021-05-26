@@ -10,7 +10,8 @@ class Model {
         $DB_PASS = '249456';
         try {
             $this->db = new PDO("pgsql:host=${HOST};port=${PORT};dbname=${DB_NAME};user=${DB_USER};password=${DB_PASS}");
-            var_dump("estoy conectado a la db");
+        
+         
         }
         catch (PDOException $e) {
             var_dump($e);
