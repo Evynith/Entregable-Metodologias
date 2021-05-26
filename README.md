@@ -2,6 +2,7 @@
 
 _Espacio de trabajo para los entregables de la materia de Introducción a las metodologías de software de TUDAI del grupo 7_
 
+[Enlace al sitio](https://federico-de-muguruza.github.io/tpe_metodologias/#/)
 
 ## Entregas:
 
@@ -25,7 +26,7 @@ _Entrega Sprint #3 con diagrama de clases actualizado._
 * [Heroku](https://www.heroku.com) - PaaS
 * [PostgreSQL](https://www.postgresql.org) - Base de datos
 * [Nominatim (Open Street Map)](https://nominatim.org/release-docs/latest/api/Search/) - API de mapas
-* [Bootstrap](https://getbootstrap.com) - Base de datos
+* [Bootstrap](https://getbootstrap.com) - Librería de css
 
 ## Autores ✒️
 
