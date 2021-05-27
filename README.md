@@ -14,6 +14,8 @@ https://docs.google.com/presentation/d/1oEadJTo31RLvuVdCsteE3clD8yzXiJGQDXgZRMOx
 ### Segunda entrega 27-05 :
 _Entrega sprint #1 (Implementar la visualización de la carga de pedido de retiro (ciudadano) Implementar la visualización de la sección de ver materiales aceptados y forma de entregarlos (ciudadano))_
 
+https://docs.google.com/presentation/d/1bH-TIVPgWp_KQzA6W_9y4WopxfQprrbzC2g2NMY_pnQ/edit?usp=sharing
+
 ### Tercera entrega 17-06 :
 _Entrega Sprint #2 con diagrama de clases de lo implementado hasta el momento._
 
