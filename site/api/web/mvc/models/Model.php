@@ -9,11 +9,17 @@ class Model {
         $DB_USER = 'unc_249456';
         $DB_PASS = '249456';
         try {
-            $this->db = new PDO("pgsql:host=${HOST};port=${PORT};dbname=${DB_NAME};user=${DB_USER};password=${DB_PASS}");
-            var_dump("estoy conectado a la db");
+            $this->db = new PDO(
+                "pgsql:host=${HOST};port=${PORT};dbname=${DB_NAME}",
+                $DB_USER,
+                $DB_PASS,
+                array(
+                    PDO::ATTR_TIMEOUT => 3,
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+                ));
         }
         catch (PDOException $e) {
-            var_dump($e);
+            // var_dump($e);
         }
     }
 }
