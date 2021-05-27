@@ -1,5 +1,6 @@
 // components
 import Nav from './components/Nav.js'
+import MaterialesAceptados from './components/MaterialesAceptados.js'
 
 const Home     = { template: '<div>Home</div>' }
 const NotFound = { template: '<div>Not found</div>' }
@@ -8,6 +9,7 @@ const NotFound = { template: '<div>Not found</div>' }
 const routes = [
   { path: '/', component: Home },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
+  { path: '/materiales-aceptados', component: MaterialesAceptados },
   // { path: '*', component: NotFound }
 ]
 // 3. Create the router instance and pass the `routes` option
