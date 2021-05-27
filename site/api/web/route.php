@@ -17,6 +17,7 @@ $router = new Router();
 
 $router->addRoute("franjas_horarias", "GET", "AvisoRetiroController", "getFranjasHorarias");
 $router->addRoute("volumenes_materiales", "GET", "AvisoRetiroController", "getVolumenesMateriales");
+$router->addRoute("aviso_retiro","POST","AvisoRetiroController","postAvisoRetiro");
 /* $router->addRoute("avisoRetiro", "POST", "AvisoRetiroController", "postAvisoRetiro");
 $router->addRoute("materiales", "GET", "AvisoRetiroController", "getMateriales"); */
 
