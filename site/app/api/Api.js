@@ -1,24 +1,41 @@
 export default class Api {
 
   static async postAvisoRetiro(a) {
-    return (Math.random() > 0.5)
-      ? { ok: true, mensaje: 'El aviso de retiro de material ha sido cargado con éxito, un recolector pasará por su casa dentro de los horarios elegidos..' }
-      : { ok: false, 
-          mensaje: 'Usted vive a más de 6km del centro de recolección, puede acercarse personalmente o vincularse a otros ciudadanos a traves de la cartelera de ofertas de transporte.',
-          direccion: true }
+    const r = await Api.fetchLocalAPI('aviso_retiro', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(a)
+    })
+    // console.log(r)
+    return r
+    // return (Math.random() > 0.5)
+    //   ? { ok: true, mensaje: 'El aviso de retiro de material ha sido cargado con éxito, un recolector pasará por su casa dentro de los horarios elegidos..' }
+    //   : { ok: false, 
+    //       mensaje: 'Usted vive a más de 6km del centro de recolección, puede acercarse personalmente o vincularse a otros ciudadanos a traves de la cartelera de ofertas de transporte.',
+    //       direccion: true }
   }
 
   static async getVolumenesMateriales() {
-    const URL_JSON_LOCAL = './api/volumenes-materiales.json' // json local
-    return fetch(URL_JSON_LOCAL).then(r => r.json())
+    return Api.getData('volumenes_materiales')
   }
   static async getFranjasHorarias() {
-    const URL_JSON_LOCAL = './api/franjas-horarias.json' // json local
-    return fetch(URL_JSON_LOCAL).then(r => r.json())
+    return Api.getData('franjas_horarias')
   }
 
-  static #localApiUrl = function (endpoint) {
-    return `http://localhost/tpe_metodologias/site/api/web/${endpoint}`
+  static async getData(endpoint) {
+    const r_local_api = await Api.fetchLocalAPI(endpoint)
+    let json = r_local_api.ok ? r_local_api : await Api.fetchLocalJSON(endpoint)
+    return json
+  }
+
+  static fetchLocalAPI(endpoint, options = {}) {
+    const url = `http://localhost/tpe_metodologias/site/api/web/${endpoint}`
+    return fetch(url, options).then(r => r.json())
+  }
+
+  static fetchLocalJSON(endpoint) {
+    const url = `./api/${endpoint}.json`
+    return fetch(url).then(r => r.json())
   }
 }
 

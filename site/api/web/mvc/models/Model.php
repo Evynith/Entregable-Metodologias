@@ -14,7 +14,7 @@ class Model {
                 $DB_USER,
                 $DB_PASS,
                 array(
-                    PDO::ATTR_TIMEOUT => 3,
+                    PDO::ATTR_TIMEOUT => 1,
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
                 ));
         }

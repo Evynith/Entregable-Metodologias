@@ -2,7 +2,12 @@ import Api from '../api/Api.js'
 import InputFile from './InputFile.js'
 
 const AvisoRetiroTemplate = `
-<section>
+<div v-if="loading" class="d-flex justify-content-center">
+  <div class="spinner-border text-success" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<section v-else>
   <h1 class="fs-1 text-center"> Crear aviso de retiro de materiales</h1>
 
   <form v-on:submit.prevent="post" class="p-2 form-control-sm" id="form-ar">
@@ -40,14 +45,19 @@ const AvisoRetiroTemplate = `
     </div>
     
     <div class="d-grid gap-2">
-      <button :disabled="!verificado" class="btn btn-primary btn-block w-100 py-2 text-uppercase">Enviar</button>
-      <button @click.prevent="$router.go(-1)" class="btn btn-link btn-block w-100 py-2 text-uppercase">Cancelar</button>
+      <button :disabled="!verificado || posting" class="btn btn-primary btn-block w-100 py-2 text-uppercase">
+        <template v-if="!posting">Enviar</template>
+        <div v-else class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </button>
+      <!-- <button @click.prevent="$router.go(-1)" class="btn btn-link btn-block w-100 py-2 text-uppercase">Cancelar</button> -->
     </div>
     <p v-if="mensajeError != ''" class="alert alert-danger mt-4">{{ mensajeError }}</p>
   </form>
 
-  <div id="modal-respuesta" class="modal modal-fullscreen-sm-down" style="margin-top: 50%" role="dialog">
-    <div class="modal-dialog" role="document">
+  <div id="modal-respuesta" class="modal modal-fullscreen-sm-down" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <template v-if="respuesta">
@@ -90,8 +100,9 @@ export default {
                 id_volumen: '',
                 foto: ''
             },
-            volumenesMateriales: [],
-            franjasHorarias: [],
+            volumenesMateriales: undefined,
+            franjasHorarias: undefined,
+            posting: false,
             mensajeError: '',
             respuesta: undefined
         }
@@ -99,9 +110,12 @@ export default {
     computed: {
       verificado() {
         return true
+      },
+      loading() {
+        return this.volumenesMateriales == undefined || this.franjasHorarias == undefined
       }
     },
-    mounted() {
+    async mounted() {
         const t = this
         Api.getFranjasHorarias().then(f => t.franjasHorarias = f)
         Api.getVolumenesMateriales().then(m => t.volumenesMateriales = m)
@@ -113,11 +127,11 @@ export default {
     },
     methods: {
         async post() {
-          const data = this.ar
-          console.log('# Post: ', JSON.stringify({ ar: data }))
-          const r = await Api.postAvisoRetiro({ ar: data })
-          // console.log(r)
-          this.respuesta = r // true/false
+          console.log('# Post: ', JSON.stringify(this.ar))
+          this.posting = true
+          const r = await Api.postAvisoRetiro(this.ar)
+          this.respuesta = r 
+          this.posting = false
           new bootstrap.Modal(document.querySelector('#modal-respuesta'), { // launch modal
                   keyboard: false
               }).show()
