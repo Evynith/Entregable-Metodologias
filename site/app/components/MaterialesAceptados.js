@@ -1,7 +1,13 @@
 import Api from '../api/Api.js'
 
 const MaterialesAceptadosTemplate = `
-<section>
+
+<div v-if="loading" class="d-flex justify-content-center">
+  <div class="spinner-border text-success" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<section v-else>
   <h1 class="fs-1 text-center mb-4">Materiales aceptados</h1>
 
   <ul class="nav d-flex justify-content-between mb-3" id="pills-tab" role="tablist">
@@ -40,8 +46,13 @@ const MaterialesAceptadosTemplate = `
 export default {
     data() {
         return {
-            materiales: [ ]
+            materiales: undefined
         }
+    },
+    computed: {
+      loading() {
+        return this.materiales == undefined
+      }
     },
     async mounted() {
         // console.log('estoy')
