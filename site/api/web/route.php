@@ -1,6 +1,6 @@
 <?php
 
-require_once "./mvc/models/Model.php";
+require_once "./mvc/controllers/MaterialController.php";
 require_once "./libs/Router.php";
 
 
@@ -16,17 +16,7 @@ $method = $_SERVER["REQUEST_METHOD"];
 $router = new Router();
 
 // arma la tabla de ruteo
-
-
-
-// rutea
-/* $router->route($resource, $method); */
 $router->addRoute("materiales_aceptados", "GET", "MaterialController", "getMateriales");
 
-
-
-echo '<pre>';
-var_dump("ruteando: " . $_GET[ 'action' ] 
-         . "<br>Conectando a db...");
-
-$model = new Model();
+// rutea
+$router->route($resource, $method); 

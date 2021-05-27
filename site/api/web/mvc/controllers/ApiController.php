@@ -1,5 +1,7 @@
 <?php
 
+require_once "./mvc/view/JSONView.php";
+
 abstract class ApiController {
 
     protected $view;

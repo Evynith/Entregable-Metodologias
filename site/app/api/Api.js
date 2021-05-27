@@ -1,12 +1,22 @@
 export default class Api {
 
-    //"conexion" al JSON local
     static async getMaterialesAceptados() {
-        return fetch('../app/api/materiales-aceptados.json').then(r => r.json());
+        return Api.getData('materiales_aceptados')
     }
 
-    // static async getMaterialesAceptados() {
-    //     const URL = ''
-    //     return fetch(URL).then(r => r.json())
-    // }
+    static async getData(endpoint) {
+        const r_local_api = await Api.fetchLocalAPI(endpoint)
+        let json = r_local_api.ok ? r_local_api : await Api.fetchLocalJSON(endpoint)
+        return json
+    }
+
+    static fetchLocalAPI(endpoint, options = {}) {
+        const url = `http://localhost/tpe_metodologias/site/api/web/${endpoint}`
+        return fetch(url, options).then(r => r.json())
+    }
+
+    static fetchLocalJSON(endpoint) {
+        const url = `./api/${endpoint}.json`
+        return fetch(url).then(r => r.json())
+    }
 }
