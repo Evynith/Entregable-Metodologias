@@ -21,7 +21,7 @@ $router = new Router();
 
 // rutea
 /* $router->route($resource, $method); */
-
+$router->addRoute("materiales_aceptados", "GET", "MaterialController", "getMateriales");
 
 
 
