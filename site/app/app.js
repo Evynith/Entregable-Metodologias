@@ -1,5 +1,6 @@
 // components
 import Nav from './components/Nav.js'
+import AvisoRetiro from './components/AvisoRetiro.js'
 
 const Home     = { template: '<div>Home</div>' }
 const NotFound = { template: '<div>Not found</div>' }
@@ -7,6 +8,7 @@ const NotFound = { template: '<div>Not found</div>' }
 //router
 const routes = [
   { path: '/', component: Home },
+  { path: '/ofrecer-materiales', component: AvisoRetiro },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
   // { path: '*', component: NotFound }
 ]

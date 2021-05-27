@@ -1,11 +1,10 @@
 <?php
 
-require_once "./mvc/models/Model.php";
 require_once "./libs/Router.php";
+require_once "./libs/GeoChe.php";
 
+require_once "./mvc/controllers/AvisoRetiroController.php";
 
-//ruta base 
-//define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
 
 $resource = $_GET["action"];
 
@@ -17,9 +16,11 @@ $router = new Router();
 
 // arma la tabla de ruteo
 
-
+$router->addRoute("franjas_horarias", "GET", "AvisoRetiroController", "getFranjasHorarias");
+$router->addRoute("volumenes_materiales", "GET", "AvisoRetiroController", "getVolumenesMateriales");
+$router->addRoute("aviso_retiro","POST","AvisoRetiroController","postAvisoRetiro");
+/* $router->addRoute("avisoRetiro", "POST", "AvisoRetiroController", "postAvisoRetiro");
+$router->addRoute("materiales", "GET", "AvisoRetiroController", "getMateriales"); */
 
 // rutea
-/* $router->route($resource, $method); */
-
-new Model(); // control coneccion a la base de datos
+$router->route($resource, $method);
