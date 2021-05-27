@@ -15,6 +15,10 @@ export default class Api {
     //       direccion: true }
   }
 
+  static async getMaterialesAceptados() {
+    return Api.getData('materiales_aceptados')
+}
+
   static async getVolumenesMateriales() {
     return Api.getData('volumenes_materiales')
   }
@@ -53,3 +57,4 @@ async function fetchTimeout(url, options = {}) { // https://dmitripavlutin.com/t
   return response
 }
 */
+
