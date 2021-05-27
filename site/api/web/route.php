@@ -1,7 +1,8 @@
 <?php
 
-require_once "./mvc/models/Model.php";
 require_once "./libs/Router.php";
+require_once "./libs/GeoChe.php";
+
 require_once "./mvc/controllers/AvisoRetiroController.php";
 
 
@@ -23,5 +24,3 @@ $router->addRoute("materiales", "GET", "AvisoRetiroController", "getMateriales")
 
 // rutea
 $router->route($resource, $method);
-
-
