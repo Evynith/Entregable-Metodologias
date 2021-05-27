@@ -22,11 +22,4 @@ $router = new Router();
 // rutea
 /* $router->route($resource, $method); */
 
-
-
-
-echo '<pre>';
-var_dump("ruteando: " . $_GET[ 'action' ] 
-         . "<br>Conectando a db...");
-
-$model = new Model();
+new Model(); // control coneccion a la base de datos
