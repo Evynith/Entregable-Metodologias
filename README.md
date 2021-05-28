@@ -2,9 +2,9 @@
 
 _Espacio de trabajo para los entregables de la materia de Introducción a las metodologías de software de TUDAI del grupo 7_
 
-## [Enlace al sitio](https://federico-de-muguruza.github.io/tpe_metodologias/#/) - Aún sólo anda en Localhost, se recomienda usar XAMPP
+### [Enlace al sitio](https://federico-de-muguruza.github.io/tpe_metodologias/#/)
 
-[Solucionar error de driver en XAMPP](https://parzibyte.me/blog/2019/06/04/php-habilitar-extension-postgres-pdo-windows/)
+**Si se lo ejecuta de manera local y se utiliza XAMPP: ** [Solucionar error de driver en XAMPP](https://parzibyte.me/blog/2019/06/04/php-habilitar-extension-postgres-pdo-windows/)
 
 ## Entregas:
 
