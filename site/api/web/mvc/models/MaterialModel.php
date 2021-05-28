@@ -9,6 +9,13 @@ class MaterialModel extends Model {
             $sentencia = $this->db->prepare("SELECT * FROM  unc_249456.materiales");
             $sentencia->execute();
             $materiales = $sentencia->fetchAll(PDO::FETCH_OBJ);
+
+            foreach ($materiales as $material) {
+                $desempaquetado = stream_get_contents($material->imagen);
+                $material->imagen = $desempaquetado;
+            }
+            // var_dump(json_encode(stream_get_contents($materiales[0]->imagen))); // materiales[0].imagen
+            // stream_get_contents() : https://www.php.net/manual/es/function.stream-get-contents.php
             return $materiales;
         }
         else {

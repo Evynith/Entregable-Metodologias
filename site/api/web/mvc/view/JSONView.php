@@ -6,6 +6,7 @@ class JSONView {
      * Convierte los datos de la respuesta a JSON y los imprime.
      */
     public function response($data, $status) {
+      // var_dump($data);
         header("Content-Type: application/json");
         header("HTTP/1.1 " . $status . " " . $this->_requestStatus($status));
         echo json_encode($data);
