@@ -1,7 +1,7 @@
 <?php
 require_once('./libs/GeoChe.php');
 require_once('./mvc/models/VolumenMaterialesModel.php');
-require_once('./mvc/models/FranjahorariaModel.php');
+require_once('./mvc/models/FranjaHorariaModel.php');
 require_once('./mvc/models/AvisoRetiroModel.php');
 require_once('./mvc/controllers/ApiController.php');
 
