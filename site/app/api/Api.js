@@ -1,18 +1,23 @@
 export default class Api {
 
   static async postAvisoRetiro(a) {
-    const r = await Api.fetchLocalAPI('aviso_retiro', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(a)
-    })
+    // const r = await Api.fetchLocalAPI('aviso_retiro', {
+    let r;
+    try {
+      r = await Api.fetchHerokuAPI('aviso_retiro', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(a)
+      })
+    }
+    catch (e) {
+      r = {
+        ok: false,
+        mensaje: 'Error de conexión'
+      }
+    }
     // console.log(r)
     return r
-    // return (Math.random() > 0.5)
-    //   ? { ok: true, mensaje: 'El aviso de retiro de material ha sido cargado con éxito, un recolector pasará por su casa dentro de los horarios elegidos..' }
-    //   : { ok: false, 
-    //       mensaje: 'Usted vive a más de 6km del centro de recolección, puede acercarse personalmente o vincularse a otros ciudadanos a traves de la cartelera de ofertas de transporte.',
-    //       direccion: true }
   }
 
   static async getMaterialesAceptados() {
@@ -27,9 +32,21 @@ export default class Api {
   }
 
   static async getData(endpoint) {
-    const r_local_api = await Api.fetchLocalAPI(endpoint)
-    let json = r_local_api.ok ? r_local_api : await Api.fetchLocalJSON(endpoint)
+    let json;
+    try {
+      json = await Api.fetchHerokuAPI(endpoint)
+    }
+    catch (e) {
+      console.log(e)
+      console.log('#Obteniendo datos de json local...')
+      json = await Api.fetchLocalJSON(endpoint)
+    }
     return json
+  }
+
+  static fetchHerokuAPI(endpoint, options = { }) {
+    const url = `https://coop-rec-api.herokuapp.com/${endpoint}`
+    return fetch(url, options).then(r => r.json()).catch(e => console.log(e))
   }
 
   static fetchLocalAPI(endpoint, options = {}) {

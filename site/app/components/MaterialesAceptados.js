@@ -19,7 +19,7 @@ const MaterialesAceptadosTemplate = `
         :aria-controls="getTabId(i)"
         @click="scrollToTabContent"
       >
-        <img :src="m.img" class="card-img-top">
+        <img :src="m.imagen" class="card-img-top">
         <span v-html="m.nombre" class="w-100 text-center py-1 small"></span>
       </button>
     </li>
@@ -55,7 +55,6 @@ export default {
       }
     },
     async mounted() {
-        // console.log('estoy')
         this.materiales = await Api.getMaterialesAceptados()
         // console.log('pude obtener datos', this.materiales)
     },
