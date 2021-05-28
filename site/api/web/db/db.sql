@@ -36,12 +36,12 @@ CREATE TABLE unc_249456.aviso_retiro (
 
 ALTER TABLE unc_249456.aviso_retiro ADD CONSTRAINT aviso_retiro_franja_horaria
     FOREIGN KEY (id_horario)
-    REFERENCES franja_horaria (id)
+    REFERENCES unc_249456.franja_horaria (id)
 ;
 
 ALTER TABLE unc_249456.aviso_retiro ADD CONSTRAINT aviso_retiro_volumen_materiales
     FOREIGN KEY (id_volumen)
-    REFERENCES volumen_materiales (id) 
+    REFERENCES unc_249456.volumen_materiales (id) 
 ;
 DROP TABLE IF EXISTS unc_249456.materiales;
 CREATE TABLE unc_249456.materiales (
