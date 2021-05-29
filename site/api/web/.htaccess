@@ -1,5 +1,5 @@
 <IfModule mod_headers.c>
-    Header set Access-Control-Allow-Origin "https://federico-de-muguruza.github.io"
+    Header set Access-Control-Allow-Origin "*"
     Header set Access-Control-Allow-Methods "GET, POST"
     Header set Access-Control-Allow-Headers "Content-Type"
 </IfModule>
