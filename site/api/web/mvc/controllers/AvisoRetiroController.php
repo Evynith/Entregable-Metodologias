@@ -22,8 +22,7 @@ class AvisoRetiroController extends ApiController {
         $respuesta = []; 
         $codigo;
         $data = $this->getData();
-        if ( ! empty($data->nombre) && ! empty($data->apellido) && ! empty($data->direccion) &&
-         ! empty($data->foto) && ! empty($data->id_horario) && ! empty($data->id_volumen)) {
+        if ( ! empty($data->nombre) && ! empty($data->apellido) && ! empty($data->direccion) && ! empty($data->id_horario) && ! empty($data->id_volumen)) {
             if ( ! empty($data->direccion)) {
                 $g = new GeoChe('Hipólito Yrigoyen 1178', 'tandil');
                 $distancia = $g->distanciaDe($data->direccion);
