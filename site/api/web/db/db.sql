@@ -24,8 +24,9 @@ INSERT INTO unc_249456.volumen_materiales (categoria) VALUES ('Camión');
 
 CREATE TABLE unc_249456.aviso_retiro (
     id SERIAL NOT NULL,
-    fecha_emision timestamp  NOT NULL,
+    fecha_emision TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     nombre varchar(20)   NOT NULL,
+    apellido varchar(20) NOT NULL,
     telefono int   NOT NULL,
     direccion varchar(25)   NOT NULL,
     foto bytea  NULL,
