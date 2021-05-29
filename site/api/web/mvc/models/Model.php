@@ -21,18 +21,13 @@ class Database {
             return self::$db;
         }
         else {
-            $HOST = 'dbases.exa.unicen.edu.ar';
-            $PORT = '6432';
-            $DB_NAME = 'cursada2021';
-            $DB_USER = 'unc_249456';
-            $DB_PASS = '249456';
             try {
                 self::$db = new PDO(
-                    "pgsql:host=${HOST};port=${PORT};dbname=${DB_NAME}",
-                    $DB_USER,
-                    $DB_PASS,
+                    "pgsql:host=ec2-174-129-225-160.compute-1.amazonaws.com;port=5432;dbname=deh1iar4iml0ju",
+                    "mbjldpmoeapiwl",
+                    "5dffad59dade13ca1e67efdbbe94233662694126388f0ee60f1d4f3b960887b8",
                     array(
-                        PDO::ATTR_TIMEOUT => 1,
+                        PDO::ATTR_TIMEOUT => 3,
                         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
                     ));
                 return self::$db;
