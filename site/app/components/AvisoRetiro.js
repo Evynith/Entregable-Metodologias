@@ -16,6 +16,10 @@ const AvisoRetiroTemplate = `
       <input v-model.lazy="ar.nombre" type="text" class="form-control form-control-sm">
     </div>
     <div class="form-group mb-2">
+      <label>Apellido *</label>
+      <input v-model.lazy="ar.apellido" type="text" class="form-control form-control-sm">
+    </div>
+    <div class="form-group mb-2">
       <label>Direccion *</label>
       <input v-model="ar.direccion" type="text" class="form-control form-control-sm">
     </div>
@@ -51,7 +55,7 @@ const AvisoRetiroTemplate = `
           <span class="visually-hidden">Loading...</span>
         </div>
       </button>
-      <!-- <button @click.prevent="$router.go(-1)" class="btn btn-link btn-block w-100 py-2 text-uppercase">Cancelar</button> -->
+      <button @click.prevent="$router.go(-1)" class="btn btn-link btn-block w-100 py-2 text-uppercase">Cancelar</button>
     </div>
     <p v-if="mensajeError != ''" class="alert alert-danger mt-4">{{ mensajeError }}</p>
   </form>
@@ -94,6 +98,7 @@ export default {
         return {
             ar: {
                 nombre: '',
+                apellido: '',
                 direccion: '',
                 telefono: '',
                 id_horario: '',
