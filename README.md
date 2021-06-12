@@ -19,7 +19,7 @@ _Entrega sprint #1 (Implementar la visualización de la carga de pedido de retir
 https://docs.google.com/presentation/d/1bH-TIVPgWp_KQzA6W_9y4WopxfQprrbzC2g2NMY_pnQ/edit?usp=sharing
 
 ### Tercera entrega 17-06 :
-_Entrega Sprint #2 con diagrama de clases de lo implementado hasta el momento._
+_Entrega Sprint #2 con diagrama de clases de lo implementado hasta el momento. <br> Se debe lograr que la secretaria pueda obtener el listado "manual" de los pedidos de retiro, el listado de las personas que pidieron la recolección, el ABM de materiales aceptados y la sección del pesaje ("manual" sin consulta de recorrido).  El sitio debe verse como una pagina web (continuar responsive)_
 
 ### Cuarta entrega 08-07 :
 _Entrega Sprint #3 con diagrama de clases actualizado._
