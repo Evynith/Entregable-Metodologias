@@ -13,7 +13,7 @@ class CartoneroController extends ApiController {
     }
     
     public function getCartoneros() { 
-        $cartoneros = $this->modelMaterial->getCartoneros();
+        $cartoneros = $this->modelCartonero->getCartoneros();
         $this->view->response($cartoneros, 200);
     }  
 }
