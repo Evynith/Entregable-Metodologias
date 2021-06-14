@@ -1,7 +1,7 @@
 import Api from '../api/Api.js'
 import InputFile from './InputFile.js'
 
-const MaterialesAceptadosSecretariaTemplate = `
+const ABMmaterialesTemplate = `
 
 <div v-if="loading" class="d-flex justify-content-center">
   <div class="spinner-border text-success" role="status">
