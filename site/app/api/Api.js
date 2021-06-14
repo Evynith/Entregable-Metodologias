@@ -37,6 +37,9 @@ export default class Api {
   static async getFranjasHorarias() {
     return Api.getData('franjas_horarias')
   }
+  static async getAvisosRetiro() {
+    return Api.getData('admin/avisos-retiro');
+  }
 
   static async getData(endpoint) {
     let json;
@@ -68,6 +71,7 @@ export default class Api {
 
   static fetchLocalJSON(endpoint) {
     const url = `./api/${endpoint}.json`
+    // console.log(url)
     return fetch(url).then(r => r.json())
   }
 }
