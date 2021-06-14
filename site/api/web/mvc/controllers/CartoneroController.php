@@ -9,7 +9,7 @@ class CartoneroController extends ApiController {
 
     public function __construct() {
         parent::__construct();
-        $this->modelMaterial = new CartoneroModel();
+        $this->modelCartonero = new CartoneroModel();
     }
     
     public function getCartoneros() { 
