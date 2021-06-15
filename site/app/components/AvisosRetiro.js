@@ -8,14 +8,14 @@ const AvisoRetiroRow = {
     <tr @click="desplegada = !desplegada" :class="[ { 'bg-lg': desplegada } ]">
       <template v-if="!desplegada">
         <td class="p-3">{{ aviso.direccion }}</td>
-        <td class="p-3">{{ aviso.volumen }}</td>
+        <td class="p-3">{{ aviso.cod_categoria }}</td>
         <td class="p-3">{{ aviso.franja_horaria }}</td>
       </template>
       <template v-else>
         <td colspan="3" class="py-2 px-2">
           <div class="d-flex justify-content-between pe-4 ps-1 my-2">
             <p class="fs-5 fw-bold mb-0">{{ aviso.direccion }}</p>
-            <p class="fs-6 fw-light mb-0">{{ aviso.volumen }}</p>
+            <p class="fs-6 fw-light mb-0">{{ aviso.cod_categoria }}</p>
             <p class="fs-6 fw-light mb-0">{{ aviso.franja_horaria }}</p>
           </div>
           <div class="d-flex justify-content-around align-items-center">
@@ -67,10 +67,10 @@ const AvisosRetiroTemplate = `
   <table class="table table-striped border border-3">
     <caption class= "h-6 lh-1">
       * Las categorías del volumen de materiales se rigen de menor a mayor siendo: <br> 
-        a) entra en una caja <br>
-        b) entra en el baúl de un auto <br> 
-        c) entra en la caja de una camioneta <br> 
-        d) es necesario un camión.
+        A. entra en una caja <br>
+        B. entra en el baúl de un auto <br> 
+        C. entra en la caja de una camioneta <br> 
+        D. es necesario un camión.
     </caption>
     <thead class="ml-2" style="background-color: forestgreen;">
       <td class="p-3 fw-bold text-white" @click="ordenarPor('direccion')">Domicilio</td>
