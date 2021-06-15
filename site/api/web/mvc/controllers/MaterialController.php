@@ -16,4 +16,8 @@ class MaterialController extends ApiController {
         $materiales = $this->modelMaterial->getMateriales();
         $this->view->response($materiales, 200);
     }  
+    public function getHistoricos() { 
+        $materiales = $this->modelMaterial->getHistoricos();
+        $this->view->response($materiales, 200);
+    }  
 }

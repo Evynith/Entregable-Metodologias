@@ -26,5 +26,22 @@ class MaterialModel extends Model {
             die();
         }  
     }	 
+    public function getHistoricos() {
+        if ($this->db) {
+            $q = $this->db->query('select id,nombre from unc_249456.material_historico where material_id is not null');
+            $q->execute();
+            $materiales = $q->fetchAll(PDO::FETCH_OBJ);
+            // var_dump(json_encode(stream_get_contents($materiales[0]->imagen))); // materiales[0].imagen
+            // stream_get_contents() : https://www.php.net/manual/es/function.stream-get-contents.php
+            return $materiales;
+        }
+        else {
+            (new JSONView())->response([
+                "ok" => false,
+                "mensaje" => "No se ha podido conectar a la base de datos"
+            ], 503);
+            die();
+        }  
+    }	 
 }
 
