@@ -6,7 +6,7 @@ class CartoneroModel extends Model{
 
 public function getCartoneros(){
     if ($this->db) {
-        $sentencia = $this->db->prepare("SELECT * FROM  unc_249456.cartonero");
+        $sentencia = $this->db->prepare("SELECT id, nombre, apellido  FROM  unc_249456.cartonero");
         $sentencia->execute();
         $cartoneros = $sentencia->fetchAll(PDO::FETCH_OBJ);
         return $cartoneros;
