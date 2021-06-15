@@ -26,6 +26,31 @@ export default class Api {
     // console.log(r)
     return r
   }
+  static async postData(endpoint, data, method = 'POST') {
+    let options = {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }
+    // let r;
+    // try {
+    //   r = await Api.fetchHerokuAPI(endpoint, options)
+    // }
+    // catch (e) {
+    //   console.log(e, '#Posteando datos a API local...')
+    //   try {
+    //     r = await Api.fetchLocalAPI(endpoint, options)
+    //   }
+    //   catch (e2) {
+    //     r = {
+    //       ok: false,
+    //       mensaje: 'Error de conexión'
+    //     }
+    //   }
+    // }
+    console.log("#Posteando", data, `a ${endpoint}`)
+    return { "ok": (Math.random() > 0.5) ? true : false }
+  }
 
   static async getMaterialesAceptados() {
     return Api.getData('materiales_aceptados')
@@ -40,19 +65,19 @@ export default class Api {
 
   static async getData(endpoint) {
     let json;
-    try {
-      json = await Api.fetchHerokuAPI(endpoint)
-    }
-    catch (e) {
-      try {
-        console.log(e, '#Obteniendo datos de API local...')
-        json = await Api.fetchLocalAPI(endpoint)
-      }
-      catch (e2) {
-        console.log(e2, '#Obteniendo datos de json local...')
+    // try {
+    //   json = await Api.fetchHerokuAPI(endpoint)
+    // }
+    // catch (e) {
+    //   try {
+    //     console.log(e, '#Obteniendo datos de API local...')
+    //     json = await Api.fetchLocalAPI(endpoint)
+    //   }
+    //   catch (e2) {
+        // console.log(e2, '#Obteniendo datos de json local...')
         json = await Api.fetchLocalJSON(endpoint)
-      }
-    }
+    //   }
+    // }
     return json
   }
 
