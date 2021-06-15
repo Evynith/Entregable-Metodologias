@@ -16,4 +16,20 @@ class AvisoRetiroModel extends Model {
             return null;
         }
     }
+
+    function getAvisosRetiro() {
+        if ($this->db) {
+            $sentencia = $this->db->prepare("SELECT * FROM  unc_249456.aviso_retiro");
+            $sentencia->execute();
+            $avisos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+            return $avisos;
+        }
+        else {
+            (new JSONView())->response([
+                "ok" => false,
+                "mensaje" => "No se ha podido conectar a la base de datos"
+            ], 503);
+            die();
+        }
+    }
 }
