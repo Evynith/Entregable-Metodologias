@@ -6,7 +6,6 @@ select CURRENT_TIMESTAMP;
 --seteo el tipo de fecha como europeo que es dd/mm/aaaa
 SET DATESTYLE TO 'European';
 
-
 -- tables
 -- Table: aviso_retiro
 DROP TABLE IF EXISTS unc_249456.aviso_retiro;
@@ -22,6 +21,34 @@ CREATE TABLE unc_249456.aviso_retiro (
     id_volumen int  NOT NULL,
     CONSTRAINT aviso_retiro_pk PRIMARY KEY (id)
 );
+
+-- Table: volumen_materiales
+DROP TABLE IF EXISTS unc_249456.volumen_materiales;
+CREATE TABLE unc_249456.volumen_materiales (
+    id SERIAL NOT NULL,
+    cod_categoria char(1)  NOT NULL,
+    categoria varchar(20)  NOT NULL,
+    CONSTRAINT volumen_materiales_ak UNIQUE (cod_categoria) NOT DEFERRABLE  INITIALLY IMMEDIATE,
+    CONSTRAINT volumen_materiales_pk PRIMARY KEY (id)
+);
+
+--INSERTS
+INSERT INTO unc_249456.volumen_materiales (cod_categoria, categoria) VALUES ('A','Caja');
+INSERT INTO unc_249456.volumen_materiales (cod_categoria, categoria) VALUES ('B','Baúl de un auto');
+INSERT INTO unc_249456.volumen_materiales (cod_categoria, categoria) VALUES ('C','Camioneta');
+INSERT INTO unc_249456.volumen_materiales (cod_categoria, categoria) VALUES ('D','Camión');
+
+-- Table: franja_horaria
+DROP TABLE IF EXISTS unc_249456.franja_horaria;
+CREATE TABLE unc_249456.franja_horaria (
+    id SERIAL  NOT NULL,
+    nombre varchar(20)  NOT NULL,
+    CONSTRAINT franja_horaria_pk PRIMARY KEY (id)
+);
+
+--INSERTS
+INSERT INTO unc_249456.franja_horaria (nombre) VALUES ('9 a 12hs');
+INSERT INTO unc_249456.franja_horaria (nombre) VALUES ('13 a 17hs');
 
 -- Table: cartonero
 DROP TABLE IF EXISTS unc_249456.cartonero;
@@ -47,18 +74,6 @@ VALUES (22356878, 'Elena', 'Gonzales','Alvarado 1630', '23/06/1905', 3);
 INSERT INTO unc_249456.cartonero (dni,nombre,apellido,direccion,fecha_nacimiento,vehiculo_volumen)
 VALUES (22356879, 'María', 'Martinez','Alem 800', '23/06/1860', 3);
 
--- Table: franja_horaria
-DROP TABLE IF EXISTS unc_249456.franja_horaria;
-CREATE TABLE unc_249456.franja_horaria (
-    id SERIAL  NOT NULL,
-    nombre varchar(20)  NOT NULL,
-    CONSTRAINT franja_horaria_pk PRIMARY KEY (id)
-);
-
---INSERTS
-INSERT INTO unc_249456.franja_horaria (nombre) VALUES ('9 a 12hs');
-INSERT INTO unc_249456.franja_horaria (nombre) VALUES ('13 a 17hs');
-
 -- Table: material
 DROP TABLE IF EXISTS unc_249456.material;
 CREATE TABLE unc_249456.material (
@@ -66,6 +81,7 @@ CREATE TABLE unc_249456.material (
     nombre varchar(20)  NOT NULL,
     imagen bytea  NOT NULL,
     descripcion varchar(200)  NOT NULL,
+    CONSTRAINT nombre_ak UNIQUE (nombre) NOT DEFERRABLE  INITIALLY IMMEDIATE,
     CONSTRAINT material_pk PRIMARY KEY (id)
 );
 
@@ -148,25 +164,9 @@ VALUES (3,3,36.8723);
 INSERT INTO unc_249456.material_cargado (id_registro,id_material,peso)
 VALUES (4,4,39.9067);
 INSERT INTO unc_249456.material_cargado (id_registro,id_material,peso)
-VALUES (7,5,15.9012);
+VALUES (5,5,15.9012);
 INSERT INTO unc_249456.material_cargado (id_registro,id_material,peso)
-VALUES (8,6,12.9098);
-
--- Table: volumen_materiales
-DROP TABLE IF EXISTS unc_249456.volumen_materiales;
-CREATE TABLE unc_249456.volumen_materiales (
-    id SERIAL NOT NULL,
-    cod_categoria char(1)  NOT NULL,
-    categoria varchar(20)  NOT NULL,
-    CONSTRAINT volumen_materiales_ak UNIQUE (cod_categoria) NOT DEFERRABLE  INITIALLY IMMEDIATE,
-    CONSTRAINT volumen_materiales_pk PRIMARY KEY (id)
-);
-
---INSERTS
-INSERT INTO unc_249456.volumen_materiales (cod_categoria, categoria) VALUES ('A','Caja');
-INSERT INTO unc_249456.volumen_materiales (cod_categoria, categoria) VALUES ('B','Baúl de un auto');
-INSERT INTO unc_249456.volumen_materiales (cod_categoria, categoria) VALUES ('C','Camioneta');
-INSERT INTO unc_249456.volumen_materiales (cod_categoria, categoria) VALUES ('D','Camión');
+VALUES (6,6,12.9098);
 
 -- foreign keys
 -- Reference: aviso_retiro_franja_horaria (table: aviso_retiro)
