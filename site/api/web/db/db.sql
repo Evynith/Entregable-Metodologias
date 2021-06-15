@@ -237,5 +237,30 @@ ALTER TABLE unc_249456.registro_ingreso_material ADD CONSTRAINT registro_ingreso
     INITIALLY IMMEDIATE
 ;
 
+--restricciones (Triggers)
+
+CREATE OR REPLACE FUNCTION fn_historico_material() RETURNS Trigger AS $$
+DECLARE
+BEGIN
+  IF TG_OP = 'INSERT' THEN
+      IF (( SELECT count(*) FROM unc_249456.material_historico WHERE nombre = NEW.nombre) = 1) THEN
+        UPDATE unc_249456.material_historico SET material_id = NEW.id WHERE nombre = NEW.nombre;
+        ELSE
+           INSERT INTO unc_249456.material_historico (nombre,material_id) VALUES (NEW.nombre,NEW.id);
+      END IF;
+  END IF;
+    IF TG_OP = 'UPDATE' THEN
+         UPDATE unc_249456.material_historico SET nombre = NEW.nombre WHERE material_id=OLD.id;
+        UPDATE unc_249456.material_historico SET material_id = NEW.id WHERE material_id=OLD.id;
+      END IF;
+RETURN NEW;
+END $$
+LANGUAGE 'plpgsql';
+
+CREATE TRIGGER tr_modificar_material
+AFTER INSERT OR UPDATE OF id,nombre
+ON unc_249456.material
+FOR EACH ROW EXECUTE PROCEDURE fn_historico_material();
+
 -- End of file.
 
