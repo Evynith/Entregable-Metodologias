@@ -21,6 +21,8 @@ $router->addRoute("franjas_horarias", "GET", "AvisoRetiroController", "getFranja
 $router->addRoute("volumenes_materiales", "GET", "AvisoRetiroController", "getVolumenesMateriales");
 $router->addRoute("aviso_retiro","POST","AvisoRetiroController","postAvisoRetiro");
 $router->addRoute("materiales_aceptados", "GET", "MaterialController", "getMateriales");
+$router->addRoute("api/admin/avisos-retiro", "GET", "AvisoRetiroController", "getAvisosRetiro");
+
 
 // rutea
 $router->route($resource, $method);
