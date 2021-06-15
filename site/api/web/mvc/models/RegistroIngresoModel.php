@@ -20,7 +20,7 @@ class RegistroIngresoModel extends Model {
         try {
             $stm = $this->db->prepare("INSERT INTO unc_249456.material_cargado (id_registro, id_material, peso) VALUES(?, ?, ?)");
             $stm->execute([$data->id_registro, $data->id_material, $data->peso]);
-          
+            return true;
         }
         catch (Exception $e) {
             return null;
