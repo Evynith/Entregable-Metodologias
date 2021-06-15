@@ -1,5 +1,6 @@
 // components
 import Nav from './components/Nav.js'
+import Footer from './components/Footer.js'
 import AvisoRetiro from './components/AvisoRetiro.js'
 import MaterialesAceptados from './components/MaterialesAceptados.js'
 
@@ -31,5 +32,6 @@ app.use(router)
 
 // register components
 app.component('app-nav', Nav)
+app.component('app-footer', Footer)
 
 app.mount('#app')

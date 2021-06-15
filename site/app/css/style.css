@@ -1,6 +1,10 @@
 body {
     background-color: #fafafa;
 }
+.container-sm{
+    min-height: 1vh;
+}
+
 button.card.active {
     box-shadow: 0 0 5px 1px #00FF29;
 }
