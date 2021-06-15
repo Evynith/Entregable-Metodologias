@@ -23,6 +23,8 @@ $router->addRoute("aviso_retiro","POST","AvisoRetiroController","postAvisoRetiro
 $router->addRoute("materiales_aceptados", "GET", "MaterialController", "getMateriales");
 $router->addRoute("admin/cartoneros", "GET", "CartoneroController", "getCartoneros");
 $router->addRoute("admin/materiales-historicos", "GET", "MaterialController", "getHistoricos");
+$router->addRoute("admin/material-aceptado", "POST", "MaterialController", "postMaterial");
+$router->addRoute("admin/material-aceptado/:id", "PUT", "MaterialController", "postMaterial");
 
 // rutea
 $router->route($resource, $method);
