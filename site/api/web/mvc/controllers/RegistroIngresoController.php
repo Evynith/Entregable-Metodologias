@@ -16,11 +16,8 @@ class RegistroIngresoController extends ApiController {
     }
 
     public function postRegistroIngreso() {
-        $respuesta = []; 
-        $codigo;
-        $data = $this->getData();
-        var_dump($data);
-        die();
+      
+        
        
     }
 
