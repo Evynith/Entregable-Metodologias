@@ -1,9 +1,9 @@
 // components
 import Nav from './components/Nav.js'
+import Home from './components/Home.js'
 import AvisoRetiro from './components/AvisoRetiro.js'
 import MaterialesAceptados from './components/MaterialesAceptados.js'
 
-const Home     = { template: '<div>Home</div>' }
 const NotFound = { template: '<div>Not found</div>' }
 
 //router
@@ -31,5 +31,6 @@ app.use(router)
 
 // register components
 app.component('app-nav', Nav)
+app.component('app-home', Home)
 
 app.mount('#app')

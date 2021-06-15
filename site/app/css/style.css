@@ -1,6 +1,49 @@
+*{
+    font-family: 'Permanent Marker', cursive;
+    font-family: 'Roboto', sans-serif;
+}
+
 body {
     background-color: #fafafa;
 }
+
+.portada{
+    max-width: 100%; 
+    height: auto;
+    padding: 0;
+    margin-top: 0 !important;
+}
+
+.logo-p{
+    filter : brightness(0) invert(  900% );
+}
+
+.text-coop{
+    color: #fafafa;
+    
+}
+
+.sobre-portada{
+    top: 0;
+    position: relative;
+}
+.dentro-portada{
+
+    top: 0;
+    position: absolute;
+}
+
+.fibron{
+    font-family: 'Permanent Marker', cursive;
+}
+
+.cuadro-dialogo-home{
+    background-color: #00913D;
+    color: #fafafa;
+    padding-top: 6%;
+    padding-bottom: 4%;
+}
+
 button.card.active {
     box-shadow: 0 0 5px 1px #00FF29;
 }
