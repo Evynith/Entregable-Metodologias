@@ -4,6 +4,7 @@ require_once "./mvc/controllers/MaterialController.php";
 require_once "./mvc/controllers/AvisoRetiroController.php";
 require_once "./libs/Router.php";
 require_once "./libs/GeoChe.php";
+require_once "./mvc/controllers/RegistroIngresoController.php";
 
 
 
@@ -26,6 +27,7 @@ $router->addRoute("admin/materiales-historicos", "GET", "MaterialController", "g
 $router->addRoute("admin/material-aceptado", "POST", "MaterialController", "postMaterial");
 $router->addRoute("admin/material-aceptado/:id", "PUT", "MaterialController", "postMaterial");
 
+$router->addRoute("admin/registro-ingreso","POST","RegistroIngresoController","postRegistroIngreso");
 // rutea
 $router->route($resource, $method);
 
