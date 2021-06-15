@@ -38,3 +38,4 @@
 | /admin/material-aceptado/:id          | DELETE | Eliminar el material :id |
 | /admin/registro-ingreso               | POST   | Subir un registro de ingreso |
 | /admin/cartoneros                     | GET    | Array con los cartoneros cargados |
+| /admin/materiales-historicos          | GET    | Array con los materiales historicos cuyo material_id no es null |
