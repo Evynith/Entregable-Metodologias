@@ -19,9 +19,16 @@ class AvisoRetiroModel extends Model {
 
     function getAvisosRetiro() {
         if ($this->db) {
-            $sentencia = $this->db->prepare("SELECT * FROM  unc_249456.aviso_retiro");
+            $sentencia = $this->db->prepare("SELECT * FROM  unc_249456.aviso_retiro av NATURAL JOIN unc_249456.volumen_materiales JOIN unc_249456.franja_horaria fh ON (av.id_horario = fh.id)");
             $sentencia->execute();
             $avisos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+
+            foreach ($avisos as $aviso) {
+                if ( ! empty($aviso->foto)) {
+                    $desempaquetado = stream_get_contents($aviso->foto);
+                    $aviso->foto = $desempaquetado;
+                }
+            }
             return $avisos;
         }
         else {
