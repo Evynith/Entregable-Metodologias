@@ -7,9 +7,22 @@ const AvisoRetiroRow = {
     </template>
     <tr @click="desplegada = !desplegada" :class="[ { 'bg-lg': desplegada } ]">
       <template v-if="!desplegada">
-        <td class="p-3">{{ aviso.direccion }}</td>
-        <td class="p-3">{{ aviso.cod_categoria }}</td>
-        <td class="p-3">{{ aviso.franja_horaria }}</td>
+        
+        <div class="text-center d-none d-md-block">
+          <div class="row">
+            <td class="col p-3">
+                <div style="border-color: forestgreen">
+                  <img class="border rounded border-3" :src="aviso.foto != '' ? aviso.foto : './images/materiales/no-image.png'" alt="" 
+                      width=100 height=100>
+                </div>
+            </td>
+            <td class="col p-3">{{ aviso.nombre + aviso.apellido }}</td>
+            <td class="col p-3">{{ aviso.telefono }}</td>
+          </div>
+        </div>
+        <td class="p-3 text-center">{{ aviso.direccion }}</td>
+        <td class="p-3 text-center">{{ aviso.cod_categoria }}</td>
+        <td class="p-3 text-center">{{ aviso.franja_horaria }}</td>
       </template>
       <template v-else>
         <td colspan="3" class="py-2 px-2">
@@ -73,9 +86,16 @@ const AvisosRetiroTemplate = `
         D. es necesario un camión.
     </caption>
     <thead class="ml-2" style="background-color: forestgreen;">
-      <td class="p-3 fw-bold text-white" @click="ordenarPor('direccion')">Domicilio</td>
-      <td class="p-3 fw-bold text-white" @click="ordenarPor('volumen')">Volumen</td>
-      <td class="p-3 fw-bold text-white" @click="ordenarPor('franja_horaria')">Horario</td>
+      <div class="text-center d-none d-md-block">
+          <div class="row pt-3">
+          <td class="col fw-bold text-white d-none d-md-block">Foto</td>
+          <td class="col fw-bold text-white d-none d-md-block">Nombre</td>
+          <td class="col fw-bold text-white d-none d-md-block">Teléfono</td>
+        </div>
+      </div>
+      <td class="p-3 fw-bold text-white text-center" @click="ordenarPor('direccion')">Domicilio</td>
+      <td class="p-3 fw-bold text-white text-center" @click="ordenarPor('volumen')">Volumen</td>
+      <td class="p-3 fw-bold text-white text-center" @click="ordenarPor('franja_horaria')">Horario</td>
     </thead>
 
     <tbody>
