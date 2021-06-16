@@ -4,6 +4,7 @@ import AvisoRetiro from './components/AvisoRetiro.js'
 import MaterialesAceptados from './components/MaterialesAceptados.js'
 import RegistroIngreso from './components/RegistroIngreso.js'
 import RegistroIngresoMateriales from './components/RegistroIngresoMateriales.js'
+import AvisosRetiro from './components/AvisosRetiro.js'
 
 const Home     = { template: '<div>Home</div>' }
 const NotFound = { template: '<div>Not found</div>' }
@@ -39,7 +40,6 @@ const BsAlert = {
 const routes = [
   { path: '/', component: Home },
   { path: '/ofrecer-materiales', component: AvisoRetiro },
-  { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
   { path: '/materiales-aceptados', component: MaterialesAceptados },
   { 
     path: '/admin/registro-ingreso', 
@@ -50,6 +50,8 @@ const routes = [
       { path: 'materiales', component: RegistroIngresoMateriales, props: true }
     ]
   },
+  { path: '/admin/avisos-retiro', component: AvisosRetiro },
+  { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
   // { path: '*', component: NotFound }
 ]
 // 3. Create the router instance and pass the `routes` option

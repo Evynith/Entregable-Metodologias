@@ -8,11 +8,12 @@ export default class Api {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(a)
     }
-    try {
-      r = await Api.fetchHerokuAPI('aviso_retiro', options)
-    }
-    catch (e) {
-      console.log(e, '#Posteando datos a API local...')
+    // try {
+    //   r = await Api.fetchHerokuAPI('aviso_retiro', options)
+    // }
+    // catch (e) {
+      // console.log(e, '#Posteando datos a API local...')
+      console.log('#Posteando datos a API local...')
       try {
         r = await Api.fetchLocalAPI('aviso_retiro', options)
       }
@@ -22,7 +23,7 @@ export default class Api {
           mensaje: 'Error de conexión'
         }
       }
-    }
+    // }
     // console.log(r)
     return r
   }
@@ -65,7 +66,7 @@ export default class Api {
   }
 
   static async getMaterialesAceptados() {
-    return Api.getData('materiales_aceptados')
+    return Api.getData('materiales-aceptados')
 }
 
   static async getVolumenesMateriales() {
@@ -74,21 +75,25 @@ export default class Api {
   static async getFranjasHorarias() {
     return Api.getData('franjas_horarias')
   }
+  static async getAvisosRetiro() {
+    return Api.getData('admin/avisos-retiro');
+  }
 
   static async getData(endpoint) {
     let json;
     // try {
-    //   json = await Api.fetchHerokuAPI(endpoint)
+    //   // json = await Api.fetchHerokuAPI(endpoint)
     // }
     // catch (e) {
-    //   try {
-    //     console.log(e, '#Obteniendo datos de API local...')
-    //     json = await Api.fetchLocalAPI(endpoint)
-    //   }
-    //   catch (e2) {
-        // console.log(e2, '#Obteniendo datos de json local...')
+      try {
+        // console.log(e, '#Obteniendo datos de API local...')
+        console.log('#Obteniendo datos de API local...')
+        json = await Api.fetchLocalAPI(endpoint)
+      }
+      catch (e2) {
+        console.log(e2, '#Obteniendo datos de json local...')
         json = await Api.fetchLocalJSON(endpoint)
-    //   }
+      }
     // }
     return json
   }
@@ -105,6 +110,7 @@ export default class Api {
 
   static fetchLocalJSON(endpoint) {
     const url = `./api/${endpoint}.json`
+    // console.log(url)
     return fetch(url).then(r => r.json())
   }
 }

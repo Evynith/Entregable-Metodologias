@@ -182,10 +182,20 @@ export default {
         // console.log(this.registro_ingreso)
         const r = await Api.postData('admin/registro-ingreso', this.registro_ingreso)
         this.respuesta = r
+        if (r.ok) 
+          this.resetearRegistro();
+        
         const t = this
         setTimeout(() => {
           t.respuesta = undefined
         }, 1500)
+      }
+    },
+    resetearRegistro() {
+      this.registro_ingreso = {
+        "tipo": undefined,
+        "cartonero_id": null,
+        "materiales_cargados": []
       }
     },
     seleccionarCartonero(e) {
