@@ -16,4 +16,8 @@ class MaterialController extends ApiController {
         $materiales = $this->modelMaterial->getMateriales();
         $this->view->response($materiales, 200);
     }  
+
+    public function deleteMaterial($params = []) {
+        $this->modelMaterial->deleteMaterial($params[':id']);
+    }
 }

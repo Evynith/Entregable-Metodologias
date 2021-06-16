@@ -22,6 +22,7 @@ $router->addRoute("volumenes_materiales", "GET", "AvisoRetiroController", "getVo
 $router->addRoute("aviso_retiro","POST","AvisoRetiroController","postAvisoRetiro");
 $router->addRoute("materiales_aceptados", "GET", "MaterialController", "getMateriales");
 $router->addRoute("api/admin/avisos-retiro", "GET", "AvisoRetiroController", "getAvisosRetiro");
+$router->addRoute("admin/material-aceptado/:id", "DELETE", "MaterialController", "deleteMaterial");
 
 
 // rutea
