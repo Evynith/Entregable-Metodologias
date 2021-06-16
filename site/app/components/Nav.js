@@ -13,9 +13,22 @@ export default {
         <li class="nav-item">
           <router-link to="/ofrecer-materiales" class="nav-link">Ofrecer materiales</router-link>
         </li>
-      <li class="nav-item">
-      <router-link to="/materiales-aceptados" class="nav-link">Materiales aceptados</router-link>
-    </li>
+        <li class="nav-item">
+          <router-link to="/materiales-aceptados" class="nav-link">Materiales aceptados</router-link>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Admin</a>
+          <ul class="dropdown-menu">
+            <li class="nav-item">
+              <router-link to="/admin/registro-ingreso" class="dropdown-item">Registrar ingreso de material</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/admin/avisos-retiro" class="dropdown-item">Avisos de retiro</router-link>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item disabled" href="#">Logout</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>

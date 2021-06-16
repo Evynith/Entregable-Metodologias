@@ -53,7 +53,7 @@ class AvisoRetiroController extends ApiController {
             $respuesta[ 'mensaje' ] = "Faltan ingresar datos";
             $respuesta[ 'direccion' ] = false;
             $codigo = 400;
-         }
+        }
         $this->view->response($respuesta, $codigo);
     }
 
@@ -65,5 +65,10 @@ class AvisoRetiroController extends ApiController {
     public function getVolumenesMateriales() { 
         $volumenes = $this->modelVolumen->getVolumenesMateriales();
         $this->view->response($volumenes, 200);
-   }  
+    }  
+
+   public function getAvisosRetiro() {
+       $avisos = $this->modelAvisoRetiro->getAvisosRetiro();
+       $this->view->response($avisos, 200);
+    }
 }  

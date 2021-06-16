@@ -37,7 +37,7 @@ export default {
         </div>
 
         <div class="d-grid gap-2 col-6 mx-auto">
-            <button type="button" class="btn btn-primary">VER MATERIALES ACEPTADOS</button>
+            <router-link to="/materiales-aceptados" class="btn btn-primary">Ver materiales aceptados</router-link>
         </div>
         
     </div>
@@ -48,7 +48,7 @@ export default {
         </div>
 
         <div class="d-grid gap-2 col-6 mx-auto">
-            <button type="button" class="btn btn-primary">GENERAR AVISO DE RETIRO</button>
+            <router-link to="/ofrecer-materiales" class="btn btn-primary">Generar aviso de retiro</router-link>
         </div>
         
     </div>
