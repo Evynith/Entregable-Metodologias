@@ -87,11 +87,11 @@ export default class Api {
     // catch (e) {
       try {
         // console.log(e, '#Obteniendo datos de API local...')
-        console.log('#Obteniendo datos de API local...')
+        console.log('#Obteniendo datos de API local...', endpoint)
         json = await Api.fetchLocalAPI(endpoint)
       }
       catch (e2) {
-        console.log(e2, '#Obteniendo datos de json local...')
+        console.log(e2, '#Obteniendo datos de json local...', endpoint)
         json = await Api.fetchLocalJSON(endpoint)
       }
     // }
