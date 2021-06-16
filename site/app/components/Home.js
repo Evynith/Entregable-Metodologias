@@ -1,14 +1,13 @@
 export default { 
     template : `
 
-    <div class="sobre-portada portada">
-        <img src="./images/fotos/re-2.jpg" class="img-fluid portada" alt="...">
-        <div class=" d-flex justify-content-center ">
-            <img src="./images/logo.png" class="img-fluid portada dentro-portada logo-p" alt="...">
-            <p class="portada dentro-portada text-coop"> <b>COOPERATIVA DE RECICLAJE</b></p>
+
+    <div class="portada position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+            <img src="./images/logo.png" class="logo-p" alt="...">
+            <p class="text-coop"> <b>COOPERATIVA DE RECICLAJE</b></p>
         </div>
     </div>
-
 
     <div class="text-center">
         <div>
