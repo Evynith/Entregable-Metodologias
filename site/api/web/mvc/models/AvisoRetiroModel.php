@@ -16,4 +16,40 @@ class AvisoRetiroModel extends Model {
             return null;
         }
     }
+
+    function getAvisosRetiro() {
+        if ($this->db) {
+            $sentencia = $this->db->prepare(
+                "SELECT a.id,
+                        fecha_emision,
+                        a.nombre,
+                        apellido,
+                        telefono,
+                        direccion,
+                        foto,
+                        f.nombre AS franja_horaria,
+                        cod_categoria
+                    FROM unc_249456.aviso_retiro a
+                    JOIN unc_249456.franja_horaria f ON (f.id = a.id_horario)
+                    JOIN unc_249456.volumen_materiales m ON (m.id = a.id_volumen)
+                    ORDER BY fecha_emision DESC");
+            $sentencia->execute();
+            $avisos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+
+            foreach ($avisos as $aviso) {
+                if ( ! empty($aviso->foto)) {
+                    $desempaquetado = stream_get_contents($aviso->foto);
+                    $aviso->foto = $desempaquetado;
+                }
+            }
+            return $avisos;
+        }
+        else {
+            (new JSONView())->response([
+                "ok" => false,
+                "mensaje" => "No se ha podido conectar a la base de datos"
+            ], 503);
+            die();
+        }
+    }
 }
