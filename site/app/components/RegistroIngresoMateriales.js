@@ -4,69 +4,77 @@ const RegistroIngresoMaterialesTemplate = `
 <bs-spinner v-if="loading"></bs-spinner>
 <section v-else>
 
-<!--<h4 class="h5">{{ recolectadoPor + (cartoneroId == null) ?  'null' : cartoneroId }}</h4>-->
-  <p class="h6 ms-2">de <span class="fw-light">{{ infoRegistro.recolectadoPor }}</span></p>
+  <div class="row">
+    <div class="col-md d-none d-md-block"></div>
 
-  <div class="card mb-2">
-    <div class="card-header">
-      Nuevo material
-    </div>
-    <div class="card-body">
+    <div class="col-md">
+    <!--<h4 class="h5">{{ recolectadoPor + (cartoneroId == null) ?  'null' : cartoneroId }}</h4>-->
+      <p class="h6 ms-2">de <span class="fw-light">{{ infoRegistro.recolectadoPor }}</span></p>
 
-      <div class="form-group mb-2">
-        <label>Material ingresado</label>
-        <select v-model="nuevoMaterial.id_material" @change="seleccionarMaterial" 
-          class="form-select form-select-sm" aria-label=".form-control-sm example">
-          <option v-for="m of materiales_historicos" :value="m.id">{{ m.nombre }}</option>
-        </select>
-      </div>
-
-      <div class="form-group mb-2">
-        <label>Peso</label>
-        <input v-model="nuevoMaterial.peso" 
-          type="number" step="0.5" class="form-control form-control-sm">
-      </div>
-
-
-      <div class="d-flex justify-content-end">
-        <bs-alert v-if="error != ''"
-          class="py-1 my-1 me-3 w-100 text-center"
-        >{{ error }}</bs-alert>
-        <button @click="agregarMaterial" 
-          type="button" class="btn btn-outline-primary">Add</button>
-      </div>
-    </div>
-  </div>
-
-  <h3 class="h5 my-2">Materiales Cargados</h3>
-
-  <div v-if="materiales_cargados.length == 0" class="alert alert-secondary" role="alert">
-    No hay materiales cargados
-  </div>
-  <div v-for="(material, i) of materiales_cargados" 
-    class="card border border-1 mb-2">
-    <div class="card-body">
-      <blockquote class="blockquote mb-0 d-flex justify-content-between align-items-center">
-        <div>
-          <h3 class="h6 mb-0">{{ material.nombre }} ({{ material.peso }}kg)</h3>
+      <div class="card mb-2">
+        <div class="card-header">
+          Nuevo material
         </div>
-        <a @click="eliminarMaterial(i)" 
-          class="d-flex align-items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-trash-fill"
-            viewBox="0 0 16 16">
-            <path
-              d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-          </svg>
-        </a>
-      </blockquote>
+        <div class="card-body">
+
+          <div class="form-group mb-2">
+            <label>Material ingresado</label>
+            <select v-model="nuevoMaterial.id_material" @change="seleccionarMaterial" 
+              class="form-select form-select-sm" aria-label=".form-control-sm example">
+              <option v-for="m of materiales_historicos" :value="m.id">{{ m.nombre }}</option>
+            </select>
+          </div>
+
+          <div class="form-group mb-2">
+            <label>Peso</label>
+            <input v-model="nuevoMaterial.peso" 
+              type="number" step="0.5" class="form-control form-control-sm">
+          </div>
+
+
+          <div class="d-flex justify-content-end">
+            <bs-alert v-if="error != ''"
+              class="py-1 my-1 me-3 w-100 text-center"
+            >{{ error }}</bs-alert>
+            <button @click="agregarMaterial" 
+              type="button" class="btn btn-outline-primary">Add</button>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="h5 my-2">Materiales Cargados</h3>
+
+      <div v-if="materiales_cargados.length == 0" class="alert alert-secondary" role="alert">
+        No hay materiales cargados
+      </div>
+      <div v-for="(material, i) of materiales_cargados" 
+        class="card border border-1 mb-2">
+        <div class="card-body">
+          <blockquote class="blockquote mb-0 d-flex justify-content-between align-items-center">
+            <div>
+              <h3 class="h6 mb-0">{{ material.nombre }} ({{ material.peso }}kg)</h3>
+            </div>
+            <a @click="eliminarMaterial(i)" 
+              class="d-flex align-items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-trash-fill"
+                viewBox="0 0 16 16">
+                <path
+                  d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+              </svg>
+            </a>
+          </blockquote>
+        </div>
+      </div>
+      
+      <div class="d-grid gap-2">
+        <btn-cancelar  label="Volver" class-list="btn btn-primary py-2"
+        ></btn-cancelar>
+      </div>
+      </form>
     </div>
-  </div>
   
-  <div class="d-grid gap-2">
-    <btn-cancelar  label="Volver" class-list="btn btn-primary py-2"
-    ></btn-cancelar>
+    <div class="col-md d-none d-md-block"></div>
   </div>
-  </form>
 
 </section>
 `

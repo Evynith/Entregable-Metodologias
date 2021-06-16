@@ -3,92 +3,99 @@ import Api from '../api/Api.js'
 const RegistroIngresoTemplate = `
 <bs-spinner v-if="loading"></bs-spinner>
 <section v-else>
-  <h1 class="fs-1">Recepción de materiales</h1>
+  <h1 class="fs-1 text-md-center">Recepción de materiales</h1>
     
-  <form v-if="$router.currentRoute.value.fullPath == '/admin/registro-ingreso'"
-    v-on:submit.prevent="post" class="p-2 form-control-sm" id="form-ar">
-      <div class="form-group mb-2">
-        <label for= "selectUsuario">Tipo de usuario</label>
-        <select v-model="registro_ingreso.tipo" @change="seleccionarTipo"
-          class="form-select form-select-sm" aria-label=".form-control-sm example" id= "selectUsuario">
-            <option selected disabled value>-- seleccionar una opcion --</option>
-            <option v-for="tipo of tipos_usuario" :value="tipo">{{ tipo }}</option>
-        </select>
-      </div>
-      <div v-if="registro_ingreso.tipo == tipoCartonero" class="form-group mb-2">
-        <label>Cartonero a cargo</label>
-        <select v-model="registro_ingreso.cartonero_id" @change="seleccionarCartonero" 
-          class="form-select form-select-sm" aria-label=".form-control-sm example">
-            <option selected disabled value>-- seleccionar una opcion --</option>
-            <option v-for="cartonero of cartoneros" :value="cartonero.id">{{ cartonero.nombre + " " + cartonero.apellido  }}</option>
-        </select>
-      </div>
-  
-        <div @click="ingresarMateriales" class="card border border-1">
-          <div class="card-body">
-            <blockquote class="blockquote mb-0 d-flex justify-content-between">
-            <div>
-                <h2 class="h5">Materiales recolectados</h2>
-                <p class="fs-6 text-muted">{{ registro_ingreso.materiales_cargados.length }} materiales cargados</p>
-                <ul>
-                  <li v-for="m of registro_ingreso.materiales_cargados"
-                    class="fs-6 text-muted"
-                  >{{ m.nombre }}. {{ m.peso }}<small>kg</small></li>
-                </ul>
+  <div class="row">
+    <div class="col-md d-none d-md-block"></div>
+
+    <div class="col-md">
+    <form v-if="$router.currentRoute.value.fullPath == '/admin/registro-ingreso'"
+      v-on:submit.prevent="post" class="p-2 form-control-sm" id="form-ar">
+        <div class="form-group mb-2">
+          <label for= "selectUsuario">Tipo de usuario</label>
+          <select v-model="registro_ingreso.tipo" @change="seleccionarTipo"
+            class="form-select form-select-sm" aria-label=".form-control-sm example" id= "selectUsuario">
+              <option selected disabled value>-- seleccionar una opcion --</option>
+              <option v-for="tipo of tipos_usuario" :value="tipo">{{ tipo }}</option>
+          </select>
+        </div>
+        <div v-if="registro_ingreso.tipo == tipoCartonero" class="form-group mb-2">
+          <label>Cartonero a cargo</label>
+          <select v-model="registro_ingreso.cartonero_id" @change="seleccionarCartonero" 
+            class="form-select form-select-sm" aria-label=".form-control-sm example">
+              <option selected disabled value>-- seleccionar una opcion --</option>
+              <option v-for="cartonero of cartoneros" :value="cartonero.id">{{ cartonero.nombre + " " + cartonero.apellido  }}</option>
+          </select>
+        </div>
+    
+          <div @click="ingresarMateriales" class="card border border-1">
+            <div class="card-body">
+              <blockquote class="blockquote mb-0 d-flex justify-content-between">
+              <div>
+                  <h2 class="h5">Materiales recolectados</h2>
+                  <p class="fs-6 text-muted">{{ registro_ingreso.materiales_cargados.length }} materiales cargados</p>
+                  <ul>
+                    <li v-for="m of registro_ingreso.materiales_cargados"
+                      class="fs-6 text-muted"
+                    >{{ m.nombre }}. {{ m.peso }}<small>kg</small></li>
+                  </ul>
+              </div>
+              
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                </svg>
+              </blockquote>
+              <!--
+              <a  class="d-flex align-items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                  </svg>
+              </a> 
+              </blockquote>-->
             </div>
-            
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-pencil-square" viewBox="0 0 16 16">
-              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-              </svg>
-            </blockquote>
-            <!--
+          </div>
+
+        <!--
+        <div class="card border border-1">
+        <div class="card-body">
+            <blockquote class="blockquote mb-0 d-flex justify-content-between">
+              <div>
+                  <h2 class="h5">Domicilios visitados</h2>
+                  <p class="fs-6 text-muted">(1/9 visitados)</p>
+              </div>
             <a  class="d-flex align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-pencil-square" viewBox="0 0 16 16">
                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                 </svg>
-            </a> 
-            </blockquote>-->
-          </div>
+              </a> 
+            </blockquote>
+        </div>
+        </div>-->
+        <bs-alert v-if="error != ''"
+          class="my-3"
+        >{{ error }}</bs-alert>
+        <div class="d-grid gap-2 mt-3">
+          <button class="btn btn-primary btn-block w-100 py-2">Enviar</button>
+          <btn-cancelar></btn-cancelar>
         </div>
 
-      <!--
-      <div class="card border border-1">
-      <div class="card-body">
-          <blockquote class="blockquote mb-0 d-flex justify-content-between">
-            <div>
-                <h2 class="h5">Domicilios visitados</h2>
-                <p class="fs-6 text-muted">(1/9 visitados)</p>
-            </div>
-          <a  class="d-flex align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-pencil-square" viewBox="0 0 16 16">
-              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-              </svg>
-            </a> 
-          </blockquote>
-      </div>
-      </div>-->
-      <bs-alert v-if="error != ''"
-        class="my-3"
-      >{{ error }}</bs-alert>
-      <div class="d-grid gap-2 mt-3">
-        <button class="btn btn-primary btn-block w-100 py-2">Enviar</button>
-        <btn-cancelar></btn-cancelar>
-      </div>
-
-      <div v-if="respuesta"
-        :class="['alert', { 'alert-danger': !respuesta.ok, 'alert-success': respuesta.ok }]" role="alert">
-        <template v-if="respuesta.ok">
-          Registro cargado con éxito
-        </template>
-        <template v-else>
-          No se pudo cargar el registro
-        </template>
-      </div>
-  </form>
-
+        <div v-if="respuesta"
+          :class="['alert', { 'alert-danger': !respuesta.ok, 'alert-success': respuesta.ok }]" role="alert">
+          <template v-if="respuesta.ok">
+            Registro cargado con éxito
+          </template>
+          <template v-else>
+            No se pudo cargar el registro
+          </template>
+        </div>
+    </form>
+  </div>
+  
+  <div class="col-md d-none d-md-block"></div>
+</div>
   
   <router-view
     v-model="registro_ingreso.materiales_cargados"
