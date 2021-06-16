@@ -5,9 +5,15 @@ export default {
             <div>
                 <h5>Comenzar</h5>
                 <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="./registrarse.html">Ver materiales aceptados</a></li>
-                    <li><a href="#">Crear aviso de retiro de materiales</a></li>
+                    <li>
+                        <router-link to="/" class="btn btn-link">Inicio</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/materiales-aceptados" class="btn btn-link">Ver materiales aceptados</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/ofrecer-materiales" class="btn btn-link">Generar aviso de retiro</router-link>
+                    </li>
                 </ul>
             </div>
 
