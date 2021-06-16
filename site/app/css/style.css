@@ -6,6 +6,7 @@
 body {
     background-color: #fafafa;
 }
+
 .container-sm{
     min-height: 1vh;
 }
@@ -51,3 +52,11 @@ button.card.active {
 }
 
 .bg-lg { background-color: lightgrey;}
+
+@media screen and (min-width: 768px) {
+    .elementos-material{
+        max-height: 100vh;
+        overflow-y: scroll;
+    }
+} 
+

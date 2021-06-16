@@ -12,7 +12,7 @@ const MaterialesAceptadosTemplate = `
 
 <div class="row">
   
-  <div class="col-md-4">
+  <div class="col-md-4 elementos-material">
     <ul class="nav row row-cols-3 row-cols-md-2 me-2 ms-2" id="pills-tab" role="tablist">
       <li v-for="(m, i) of materiales" role="presentation" class="my-1 ps-1 pe-1">
         <button type="button" role="tab" data-bs-toggle="pill"
