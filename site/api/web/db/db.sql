@@ -117,12 +117,15 @@ INSERT INTO unc_249456.material_historico (nombre,material_id)
 VALUES ('Metales',6);
 
 --creo el tipo enum de usuarios con sus valores posibles
-CREATE TYPE usuarios AS ENUM ('vecino buena onda','cartonero');
+-- CREATE TYPE usuarios AS ENUM ('vecino buena onda','cartonero');
 --consulta de los tipos enum
-select enum_range(null::usuarios);
+-- select enum_range(null::usuarios);
 
 -- Table: registro_ingreso_material
+DROP TABLE IF EXISTS unc_249456.material_cargado;
 DROP TABLE IF EXISTS unc_249456.registro_ingreso_material;
+DROP TYPE usuarios;
+CREATE TYPE usuarios AS ENUM ('Vecino buena onda','Cartonero');
 CREATE TABLE unc_249456.registro_ingreso_material (
     id_registro SERIAL NOT NULL,
     fecha timestamptz  NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -133,20 +136,19 @@ CREATE TABLE unc_249456.registro_ingreso_material (
 
 --INSERTS
 INSERT INTO unc_249456.registro_ingreso_material (tipo_usuario,cartonero_id)
-VALUES ('vecino buena onda',null);
+VALUES ('Vecino buena onda',null);
 INSERT INTO unc_249456.registro_ingreso_material (tipo_usuario,cartonero_id)
-VALUES ('cartonero', 1);
+VALUES ('Cartonero', 1);
 INSERT INTO unc_249456.registro_ingreso_material (tipo_usuario,cartonero_id)
-VALUES ('cartonero', 1);
+VALUES ('Cartonero', 1);
 INSERT INTO unc_249456.registro_ingreso_material (tipo_usuario,cartonero_id)
-VALUES ('vecino buena onda',null);
+VALUES ('Vecino buena onda',null);
 INSERT INTO unc_249456.registro_ingreso_material (tipo_usuario,cartonero_id)
-VALUES ('cartonero', 4);
+VALUES ('Cartonero', 4);
 INSERT INTO unc_249456.registro_ingreso_material (tipo_usuario,cartonero_id)
-VALUES ('cartonero', 3);
+VALUES ('Cartonero', 3);
 
 -- Table: material_cargado
-DROP TABLE IF EXISTS unc_249456.material_cargado;
 CREATE TABLE unc_249456.material_cargado (
     id_registro int  NOT NULL,
     id_material int  NOT NULL,
