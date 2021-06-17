@@ -30,6 +30,7 @@ $router->addRoute("admin/avisos-retiro", "GET", "AvisoRetiroController", "getAvi
 
 
 $router->addRoute("admin/registro-ingreso","POST","RegistroIngresoController","postRegistroIngreso");
+$router->addRoute("admin/tipos-usuario","GET","RegistroIngresoController","getTiposUsuario");
 // rutea
 $router->route($resource, $method);
 

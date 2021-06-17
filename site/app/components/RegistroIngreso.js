@@ -12,7 +12,7 @@ const RegistroIngresoTemplate = `
         <select v-model="registro_ingreso.tipo" @change="seleccionarTipo"
           class="form-select form-select-sm" aria-label=".form-control-sm example" id= "selectUsuario">
             <option selected disabled value>-- seleccionar una opcion --</option>
-            <option v-for="tipo of tipos_usuario" :value="tipo">{{ tipo }}</option>
+            <option v-for="t of tiposUsuario" :value="t.tipo">{{ t.tipo }}</option>
         </select>
       </div>
       <div v-if="registro_ingreso.tipo == tipoCartonero" class="form-group mb-2">
@@ -74,7 +74,10 @@ const RegistroIngresoTemplate = `
         class="my-3"
       >{{ error }}</bs-alert>
       <div class="d-grid gap-2 mt-3">
-        <button class="btn btn-primary btn-block w-100 py-2">Enviar</button>
+        <button class="btn btn-primary btn-block w-100 py-2">
+          <bs-spinner v-if="posting"></bs-spinner>
+          <template v-else>Enviar</template>
+        </button>
         <btn-cancelar></btn-cancelar>
       </div>
 
@@ -114,10 +117,10 @@ export default {
         "materiales_cargados": []
       },
       cartoneros: undefined,
-      tipos_usuario: undefined,
-      tipoCartonero: 'Cartonero', // CONSTANTE VALOR ENUM PARA CARTONERO
+      tiposUsuario: undefined,
       cartoneroSeleccionado: null,
       infoRegistro: {},
+      posting: false,
       error: '',
       respuesta: undefined
     }
@@ -162,7 +165,7 @@ export default {
           ) : false
     },
     loading() {
-      return this.cartoneros == undefined || this.tipos_usuario == undefined
+      return this.cartoneros == undefined || this.tiposUsuario == undefined
     },
     totalKg() {
       return this.registro_ingreso.materiales_cargados.reduce((totPeso, material) => totPeso += material.peso, 0)
@@ -171,7 +174,10 @@ export default {
   async created() {
     const t = this
     Api.getData('admin/cartoneros').then(r => t.cartoneros = r)
-    Api.getData('admin/tipos-usuario').then(r => t.tipos_usuario = r)
+    Api.getData('admin/tipos-usuario').then(r =>{
+      t.tiposUsuario = r.tiposUsuario
+      t.tipoCartonero = r["TIPO_CARTONERO"]
+    })
   },
   async mounted() {
     // console.log(this.registro_ingreso)
@@ -180,7 +186,9 @@ export default {
     async post() {
       if (this.posteable) {
         // console.log(this.registro_ingreso)
+        this.posting = true
         const r = await Api.postData('admin/registro-ingreso', this.registro_ingreso)
+        this.posting = false
         this.respuesta = r
         if (r.ok) 
           this.resetearRegistro();
@@ -209,6 +217,7 @@ export default {
     },
     seleccionarTipo(e) {
       const tipo = e.currentTarget.value
+      // console.log(tipo)
       if (tipo != this.tipoCartonero && this.cartoneroSeleccionado !== null) {
         this.cartoneroSeleccionado = null
         this.registro_ingreso.cartonero_id = null

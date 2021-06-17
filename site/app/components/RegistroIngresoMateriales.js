@@ -66,7 +66,6 @@ const RegistroIngresoMaterialesTemplate = `
     <btn-cancelar  label="Volver" class-list="btn btn-primary py-2"
     ></btn-cancelar>
   </div>
-  </form>
 
 </section>
 `
