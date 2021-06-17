@@ -167,7 +167,7 @@ export default {
         "imagen": "./images/materiales/no-image.png",
         "descripcion": ""
       }
-      this.materiales.push(this.selectedItem)
+      this.materiales.unshift(this.selectedItem)
     },
     updateSelectedItem: function updateSelectedItem(material) {
       this.selectedItem = material;

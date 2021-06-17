@@ -41,6 +41,7 @@ const RegistroIngresoTemplate = `
                     </ul>
                 </div>
               </div>
+            </div>
               <!--
               <div class="card border border-1">
               <div class="card-body">

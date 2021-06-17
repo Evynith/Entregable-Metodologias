@@ -72,9 +72,9 @@ export default {
         getPillsId(i)   { return `pills-${i}-tab` },
 
         scrollToTabContent() {
-            document.querySelector('#pills-tabContent').scrollIntoView({
-                behavior: 'smooth'
-            })
+            // document.querySelector('#pills-tabContent').scrollIntoView({
+            //     behavior: 'smooth'
+            // })
         }
     },
     template: MaterialesAceptadosTemplate

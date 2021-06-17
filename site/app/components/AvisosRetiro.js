@@ -16,7 +16,7 @@ const AvisoRetiroRow = {
                       width=100 height=100>
                 </div>
             </td>
-            <td class="col p-3">{{ aviso.nombre + aviso.apellido }}</td>
+            <td class="col p-3">{{ aviso.nombre + ' ' + aviso.apellido }}</td>
             <td class="col p-3">{{ aviso.telefono }}</td>
           </div>
         </div>
