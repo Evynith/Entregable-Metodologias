@@ -60,7 +60,7 @@ class MaterialModel extends Model {
             ( $isEdit ? " WHERE id = ?;" : ") VALUES($str" ); 
 
         if ( ! $isEdit) {
-            $query = substr($query, 0, strlen($query)-1) . ') RETURNING(id);';
+            $query = substr($query, 0, strlen($query)-1) . ') RETURNING id;';
         }
         else {
             $values[] = $id;
@@ -71,13 +71,7 @@ class MaterialModel extends Model {
             if ($this->db) {
                 $q = Database::getConnection()->prepare($query);
                 $q->execute($values);
-                // $e = $q->errorInfo();
-                // post devuelve false si falló, 
-                $resultado = $q->fetch(PDO::FETCH_OBJ);
-                if ($isEdit) {
-                    return [ ! $resultado ? false : true, '' ];
-                }
-                else  return [ true, $resultado->id ];
+                return [ true, $isEdit ? "ok" : $q->fetch(PDO::FETCH_OBJ)->id ];
             }
             else {
                 return [ false, "No se pudo conectar a la db" ];

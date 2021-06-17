@@ -45,7 +45,18 @@ class MaterialController extends ApiController {
         // else {
         //     $respuesta[ 'id' ] = $mensaje;
         // }
-        $respuesta[ isset($params[ ':id' ]) ? 'mensaje' : 'id' ] = $mensaje;
+
+        if (isset($params[ ':id' ])) {
+            $respuesta[ 'mensaje' ] = $mensaje;
+        }
+        elseif ($respuesta[ 'ok' ]) {
+            $respuesta[ 'id' ] = $mensaje;
+            $respuesta[ 'mensaje' ] = 'El material se cargó con éxito';
+        }
+        else {
+            $respuesta[ 'id' ] = null;
+            $respuesta[ 'mensaje' ] = $mensaje;
+        }
         
         $this->view->response($respuesta, $resultado ? 200 : 400);
         
