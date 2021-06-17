@@ -68,7 +68,7 @@ const MaterialesAceptadosTemplate = `
       <material-abm 
         v-model="selectedItem"
         @updated="resync"
-        @cancelar-creacion="materiales.pop()"
+        @cancelar-creacion="materiales.shift()"
         @cancelar-edicion="cancelarEdicion"
         @responded="manejarRespuesta"
       ></material-abm>
