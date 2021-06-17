@@ -4,7 +4,7 @@ export default {
     
         <div class="row row-cols-1 row-cols-md-3 text-center pt-3 m-0" >
 
-            <div class="col">
+            <div class="col pt-3">
                 <h5>Comenzar</h5>
                 <ul class="ps-0">
                     <li>
