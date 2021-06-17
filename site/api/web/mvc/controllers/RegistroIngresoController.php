@@ -15,6 +15,13 @@ class RegistroIngresoController extends ApiController {
        
     }
 
+    public function getTiposUsuario() {
+
+        $respuesta = $this->modelRegistroIngreso->getTiposUsuario();
+        $respuesta[ 'TIPO_CARTONERO' ] = 'Cartonero'; // !¡cuidado!¡ 
+        $this->view->response($respuesta, $respuesta[ 'ok' ] ? 200 : 500);
+    }
+
     public function postRegistroIngreso() {
      
         $respuesta = []; 

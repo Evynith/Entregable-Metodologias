@@ -28,6 +28,7 @@ $router->addRoute("admin/material-aceptado", "POST", "MaterialController", "post
 $router->addRoute("admin/material-aceptado/:id", "PUT", "MaterialController", "postMaterial");
 
 $router->addRoute("admin/registro-ingreso","POST","RegistroIngresoController","postRegistroIngreso");
+$router->addRoute("admin/tipos-usuario","GET","RegistroIngresoController","getTiposUsuario");
 // rutea
 $router->route($resource, $method);
 

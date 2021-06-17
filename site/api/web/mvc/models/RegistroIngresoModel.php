@@ -19,6 +19,21 @@ class RegistroIngresoModel extends Model {
         }
     }
 
+    public function getTiposUsuario() {
+        try {
+            $stm = $this->db->prepare("SELECT * FROM ( SELECT unnest(enum_range(null::usuarios)) as tipo ) as TIPOS");
+            $stm->execute();
+            // $e = $stm->errorInfo(); 
+            // var_dump($e);
+            // die();
+            return [ "ok" => true, "tiposUsuario" => $stm->fetchAll(PDO::FETCH_ASSOC) ];
+        }
+        catch (Exception $e) {
+            return [ "ok" => false, "mensaje" => $e->getMessage() ];
+            // return [ "ok" => false, "mensaje" => "<span hidden>{$e->getMessage()}</span>" ];
+        }
+    }
+
     public function postMaterialCargado($id_registro, $id_material, $peso) {
         try {
             $stm = $this->db->prepare("INSERT INTO unc_249456.material_cargado (id_registro, id_material, peso) VALUES(?, ?, ?)");
