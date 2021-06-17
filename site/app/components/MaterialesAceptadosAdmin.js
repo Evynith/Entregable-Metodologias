@@ -6,7 +6,7 @@ const MaterialesAceptadosTemplate = `
 
 <section>
 
-<header class="d-flex justify-content-center align-items-center mt-2 mb-4">  <!-- class="d-flex justify-content-around" --> <!-- cuando aparece botón se le agrega esas clases a header-->
+<header class="d-flex align-items-center mt-2 mb-4">  <!-- class="d-flex justify-content-around" --> <!-- cuando aparece botón se le agrega esas clases a header-->
   <h1 class="d-flex justify-content-start fs-1 me-4">Materiales aceptados</h1> 
 
   <!-- titulo editar (pantalla editar) -->
@@ -24,17 +24,20 @@ const MaterialesAceptadosTemplate = `
 
   <bs-spinner v-if="loading">
   </bs-spinner>
-  <ul v-else class="nav d-flex justify-content-between mb-3" id="pills-tab" role="tablist">
-    <li v-for="(m, i) of materiales" role="presentation" class="my-1" style="width: 32%;">
-      <button type="button" role="tab" 
-        :class="['card', 'px-0', { 'active': selectedItem && selectedItem.nombre == m.nombre} ]"
-        @click="updateSelectedItem(m)"
-      >
-        <img :src="m.imagen" class="card-img-top">
-        <span v-html="m.nombre" class="w-100 text-center py-1 small"></span>
-      </button>
-    </li>
-  </ul>
+  <div class="row">
+  
+    <div class="col-md-4 elementos-material">
+      <ul v-else class="nav row row-cols-3 row-cols-md-2 me-2 ms-2" id="pills-tab" role="tablist">
+        <li v-for="(m, i) of materiales" role="presentation" class="my-1 ps-1 pe-1">
+          <button type="button" role="tab" 
+            :class="['card', 'px-0', { 'active': selectedItem && selectedItem.nombre == m.nombre} ]"
+            @click="updateSelectedItem(m)"
+          >
+            <img :src="m.imagen" class="card-img-top">
+            <span v-html="m.nombre" class="w-100 text-center py-1 small"></span>
+          </button>
+        </li>
+      </ul>
 
   <!-- titulo editar (pantalla editar) -->
   <!--<h1 class="fs-1 mb-4">Editar {{material}}</h1>--> 
@@ -54,19 +57,25 @@ const MaterialesAceptadosTemplate = `
       :aria-labelledby="getPillsId(i)" role="tabpanel"
     > -->
 
-  <div v-if="respuesta != undefined" 
-    :class="['alert', 'mt-4', { 'alert-danger': ! respuesta.ok, 'alert-success': respuesta.ok }]" role="alert"
-  >
-    {{ mensajeRespuesta }}
+    <div v-if="respuesta != undefined" 
+      :class="['alert', 'mt-4', { 'alert-danger': ! respuesta.ok, 'alert-success': respuesta.ok }]" role="alert"
+    >
+      {{ mensajeRespuesta }}
+    </div>
+      
   </div>
-    
-  <material-abm 
-    v-model="selectedItem"
-    @updated="resync"
-    @cancelar-creacion="materiales.pop()"
-    @cancelar-edicion="cancelarEdicion"
-    @responded="manejarRespuesta"
-  ></material-abm>
+    <div class="col-md-8">
+      <material-abm 
+        v-model="selectedItem"
+        @updated="resync"
+        @cancelar-creacion="materiales.pop()"
+        @cancelar-edicion="cancelarEdicion"
+        @responded="manejarRespuesta"
+      ></material-abm>
+    </div>
+
+
+  </div>
 
 </section>
 `

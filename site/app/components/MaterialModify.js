@@ -28,15 +28,19 @@ const MaterialModifyTemplate = `
     </div>
 
     <template v-if="!posting">
-      <button :disabled="!verificado || posting" 
-        @click.prevent="modifyMaterial"
-        class="btn btn-primary btn-block w-100 py-2 text-uppercase"
-      >
-        Enviar
-      </button>
-      <button @click.prevent="cancelar" 
-        class="btn btn-link btn-block w-100 py-2 text-uppercase"
-      >Cancelar</button>
+      <div class="d-grid gap-2 d-md-flex flex-md-row-reverse justify-content-md-start">
+        <button :disabled="!verificado || posting" 
+          @click.prevent="modifyMaterial"
+          class="btn btn-primary btn-block py-2"
+          type="button"
+        >
+          Guardar
+        </button>
+        <button @click.prevent="cancelar" 
+          class="btn btn-link btn-block py-2 me-md-2"
+          type="button"
+        >Cancelar</button>
+      </div>
     </template>
     <bs-spinner v-else></bs-spinner>
   </form>
