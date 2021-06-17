@@ -28,6 +28,9 @@ Los commits deben referenciar el código de la US o Tarea que estaban implementa
 En el caso de que los commits hayan sido producidos en eventos de Scrum, especificar el nombre del evento de la siguiente manera: `#NOMBRE_EVENTO <mensaje>`, con los códigos de las tareas asociadas.
 - P.ej: `#SPRINT-PLANNING Una nueva promesa #T1 #T2 #T3`
 
+Las acciones se hacen para todas las tareas seguidas (o todas las del commit?)
+- `3d78425 (HEAD -> CR-40) CR-40 CR-167 #done #time 20m` completó las dos
+
 #### Enlazar commits a issues de Jira
 ```
 <ignored text> <ISSUE_KEY> <ignored text> #<COMMAND> <optional COMMAND_ARGUMENTS>`
