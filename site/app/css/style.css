@@ -59,5 +59,8 @@ button.card.active {
         overflow-y: scroll;
         margin-bottom: 15vh;
     }
+    .desplegable-click{
+        pointer-events: none;
+    }
 } 
 

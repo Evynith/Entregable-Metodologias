@@ -5,7 +5,7 @@ const AvisoRetiroRow = {
     <template >
 
     </template>
-    <tr @click="desplegada = !desplegada" :class="[ { 'bg-lg': desplegada } ]">
+    <tr class="desplegable-click" @click="desplegada = !desplegada" :class="[ { 'bg-lg': desplegada } ]">
       <template v-if="!desplegada">
         
         <div class="text-center d-none d-md-block">
