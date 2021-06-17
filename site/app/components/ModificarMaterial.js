@@ -52,7 +52,8 @@ export default {
                 nombre : this.materialNombre,
                 imagen : this.materialImagen,
                 descripcion : this.materialDescripcion
-            }            
+            }   
+            //  state.items.splice(state.items.indexOf(state.selectedItem),1,item);         
         }
     },
 
