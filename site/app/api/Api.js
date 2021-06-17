@@ -18,33 +18,47 @@ export default class Api {
     let options = {
       method: 'DELETE'
     }
-    return {
-      "ok": true
+    // return {
+      //   "ok": true
+      // }
+    let r;
+    console.log('# Api : borrando ', endpoint)
+    try {
+      r = await Api.fetchLocalAPI(endpoint, options)
+      // console.log(url)
+      // r = { "ok": true, "id": m.id }
     }
-    // return fetch(endpoint).then(r => r.json())
+    catch (e2) {
+      console.log(e2)
+      r = {
+        ok: false,
+        mensaje: 'Error de conexión'
+      }
+    }
+    return r
   }
 
-  static async postMaterial(m) {
+  static async postMaterial(m, id = null) {
     let r;
-    const method = m.id == null ? 'POST' : 'PUT'
+    const method = id == null ? 'POST' : 'PUT'
     let options = {
       method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(m)
     }
     let url = 'admin/material-aceptado'
-    if (m.id != null) {
-      url += '/' + m.id
+    if (id != null) {
+      url += '/' + id
     }
     // try {
     //   r = await Api.fetchHerokuAPI(url, options)
     // }
     // catch (e) {
-      console.log('#Posteando datos a API local...', m)
+      console.log('# Api : Posteando datos a API local...', url, m)
       try {
-        // r = await Api.fetchLocalAPI(url, options)
-        // console.log(r)
-        r = { "ok": true, "id": m.id }
+        r = await Api.fetchLocalAPI(url, options)
+        // console.log(url)
+        // r = { "ok": true, "id": m.id }
       }
       catch (e2) {
         console.log(e2)

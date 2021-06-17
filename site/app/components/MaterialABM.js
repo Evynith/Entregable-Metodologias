@@ -84,7 +84,9 @@ export default {
       }
     },
     async post() {
-      const r = await Api.postMaterial(this.material)
+      const posted = { ...this.material }
+      delete posted.id
+      const r = await Api.postMaterial(posted, this.editar ? this.material.id : null)
       if (r.ok) {
         this.$emit('updated', (r.id ? r.id : this.material.id))
       }
