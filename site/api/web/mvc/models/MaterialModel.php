@@ -6,7 +6,7 @@ class MaterialModel extends Model {
 
     public function getMateriales() {
         if ($this->db) {
-            $sentencia = $this->db->prepare("SELECT * FROM  unc_249456.materiales");
+            $sentencia = $this->db->prepare("SELECT * FROM  unc_249456.material");
             $sentencia->execute();
             $materiales = $sentencia->fetchAll(PDO::FETCH_OBJ);
 

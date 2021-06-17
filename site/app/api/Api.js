@@ -1,13 +1,61 @@
 export default class Api {
 
-  static async postMaterial(m) {
-    console.log("#post ", m)
-  }
-  static async putMaterial(m) {
-    console.log("#edit ", m)
-  }
   static async deleteMaterial(m) {
-    console.log("#delete ", m.id)
+    let r
+    try {
+       r = await Api.delete('admin/material-aceptado/' + m.id)
+    }
+    catch (e) {
+      r = {
+        ok: false,
+        mensaje: 'Error de conexión'
+      }
+    }
+    return r
+  }
+
+  static async delete(endpoint) {
+    let options = {
+      method: 'DELETE'
+    }
+    return {
+      "ok": true
+    }
+    // return fetch(endpoint).then(r => r.json())
+  }
+
+  static async postMaterial(m) {
+    let r;
+    const method = m.id == null ? 'POST' : 'PUT'
+    let options = {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(m)
+    }
+    let url = 'admin/material-aceptado'
+    if (m.id != null) {
+      url += '/' + m.id
+    }
+    // try {
+    //   r = await Api.fetchHerokuAPI(url, options)
+    // }
+    // catch (e) {
+      console.log('#Posteando datos a API local...', m)
+      try {
+        // r = await Api.fetchLocalAPI(url, options)
+        // console.log(r)
+        r = { "ok": true, "id": m.id }
+      }
+      catch (e2) {
+        console.log(e2)
+        r = {
+          ok: false,
+          mensaje: 'Error de conexión'
+        }
+      }
+    // }
+    // console.log(r)
+    return r
   }
   
 
@@ -40,7 +88,7 @@ export default class Api {
 
   static async getMaterialesAceptados() {
     return Api.getData('materiales_aceptados')
-}
+  }
 
   static async getVolumenesMateriales() {
     return Api.getData('volumenes_materiales')
@@ -54,19 +102,19 @@ export default class Api {
 
   static async getData(endpoint) {
     let json;
-    try {
-      json = await Api.fetchHerokuAPI(endpoint)
-    }
-    catch (e) {
+    // try {
+    //   json = await Api.fetchHerokuAPI(endpoint)
+    // }
+    // catch (e) {
       try {
-        console.log(e, '#Obteniendo datos de API local...')
+        console.log('#Obteniendo datos de API local...')
         json = await Api.fetchLocalAPI(endpoint)
       }
       catch (e2) {
-        console.log(e2, '#Obteniendo datos de json local...')
+        console.log('#Obteniendo datos de json local...')
         json = await Api.fetchLocalJSON(endpoint)
       }
-    }
+    // }
     return json
   }
 

@@ -2,7 +2,7 @@
 import Nav from './components/Nav.js'
 import AvisoRetiro from './components/AvisoRetiro.js'
 import MaterialesAceptados from './components/MaterialesAceptados.js'
-import ABMmateriales from './components/ABMmateriales.js'
+import MaterialesAceptadosAdmin from './components/MaterialesAceptadosAdmin.js'
 import AvisosRetiro from './components/AvisosRetiro.js'
 
 const Home     = { template: '<div>Home</div>' }
@@ -13,7 +13,15 @@ const routes = [
   { path: '/', component: Home },
   { path: '/ofrecer-materiales', component: AvisoRetiro },
   { path: '/materiales-aceptados', component: MaterialesAceptados },
-  { path: '/admin/materiales-aceptados', component : ABMmateriales},
+  { 
+    path: '/admin/administrar-materiales', 
+    component: MaterialesAceptadosAdmin,
+    children: [
+      // UserHome will be rendered inside User's <router-view>
+      // when /user/:id is matched
+      // { path: '/:id', component: MaterialesABM, props: true },
+    ]
+  },
   { path: '/admin/avisos-retiro', component: AvisosRetiro },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
   // { path: '*', component: NotFound }

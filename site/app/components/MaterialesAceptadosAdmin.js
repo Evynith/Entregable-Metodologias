@@ -1,10 +1,8 @@
 import Api from '../api/Api.js'
-import AgregarMateriales from './AgregarMateriales.js'
 import InputFile from './InputFile.js'
-import ModificarMaterial from './ModificarMaterial.js'
-import MostrarMaterial from './MostrarMaterial.js'
+import MaterialABM from './MaterialABM.js'
 
-const ABMmaterialesTemplate = `
+const MaterialesAceptadosTemplate = `
 
 <div v-if="loading" class="d-flex justify-content-center">
   <div class="spinner-border text-success" role="status">
@@ -13,16 +11,16 @@ const ABMmaterialesTemplate = `
 </div>
 <section v-else>
 
-<header>  <!-- class="d-flex justify-content-around" --> <!-- cuando aparece botón se le agrega esas clases a header-->
-  <h1 class="d-flex justify-content-start fs-1 mb-4">Materiales aceptados</h1> 
+<header class="d-flex justify-content-center align-items-center mt-2 mb-4">  <!-- class="d-flex justify-content-around" --> <!-- cuando aparece botón se le agrega esas clases a header-->
+  <h1 class="d-flex justify-content-start fs-1 me-4">Materiales aceptados</h1> 
 
   <!-- titulo editar (pantalla editar) -->
   <!-- <h1 class="d-flex justify-content-start fs-1 mb-4">Mofificar material</h1>  -->
   <!-- fin titulo editar (pantalla editar) -->
 
   <!-- boton de agregar (pantalla gral.) -->
-   <a @click="state = 'agregar'"> 
-    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#2196F3" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+   <a @click="addMaterial" > 
+    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#2196F3" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
       <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
     </svg>
   </a> 
@@ -32,7 +30,7 @@ const ABMmaterialesTemplate = `
   <ul class="nav d-flex justify-content-between mb-3" id="pills-tab" role="tablist">
     <li v-for="(m, i) of materiales" role="presentation" class="my-1" style="width: 32%;">
       <button type="button" role="tab" 
-        :class="['card', 'px-0', { 'active': selectedItem.nombre == m.nombre} ]"
+        :class="['card', 'px-0', { 'active': selectedItem && selectedItem.nombre == m.nombre} ]"
         @click="updateSelectedItem(m)"
       >
         <img :src="m.imagen" class="card-img-top">
@@ -59,22 +57,13 @@ const ABMmaterialesTemplate = `
       :aria-labelledby="getPillsId(i)" role="tabpanel"
     > -->
     
-  <mostrar-material
-    v-if="state === 'mostrar'"
-    v-bind:material="selectedItem"
-    v-model="state"
-  ></mostrar-material>
+  <material-abm 
+    v-model="selectedItem"
+    @updated="resync"
+    @cancelar-creacion="materiales.pop()"
+    @cancelar-edicion="cancelarEdicion"
+  ></material-abm>
 
-    <!-- Componente que renderiza el form de agregado de materiales -->
-    <add-material
-      v-if="state === 'agregar'"
-    ></add-material>
-    <!-- Componente que renderiza el form de modificacion de materiales -->
-    <modify-material
-      v-if="state === 'modificar'"
-      v-bind:selectedItem="selectedItem"
-      v-bind:materiales="materiales"
-    ></modify-material>
 
   <div id="modal-respuesta" class="modal modal-fullscreen-sm-down" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -109,8 +98,9 @@ export default {
     return {
       materiales: undefined,
       posting: false,
-      selectedItem : '',
-      state : '',
+      selectedItem: undefined,
+      state: '',
+      respuesta: undefined
       // ar2: {
       //   nombre: '',
       //   texto: '',
@@ -124,32 +114,57 @@ export default {
     },
     loading() {
       return this.materiales == undefined
-    }    
+    }
   },
   async mounted() {
     // console.log(MostrarMaterial, ModificarMaterial)
-    this.materiales = await Api.getMaterialesAceptados()    
-     console.log('pude obtener datos', this.materiales)
+    this.getMateriales()
   },
   methods: {
-      updateSelectedItem: function updateSelectedItem(material){
-        this.selectedItem = material;
-        this.updateState('mostrar')
+    cancelarEdicion() {
+      this.materiales[this.materiales.findIndex((m)=>m.id == this.selectedItem.id)] = this.selectedItem
     },
-      updateState: function updateState(state){
-        this.state = state;
-      },
-    scrollToTabContent() {
-      document.querySelector('#pills-tabContent').scrollIntoView({
-        behavior: 'smooth'
-      })
+    async resync(id = null) {
+      this.materiales = undefined
+      const t = this
+      setTimeout(async () => {
+        await t.getMateriales()
+        if (id != null) { // si es put o delete
+          let index = t.materiales.findIndex((m)=>m.id == id)
+          if (index != -1) { // si no fue borrado
+            this.selectedItem = this.materiales[index]
+          }
+          else {
+            console.log(`# No existe el material ${id} : MaterialesAceptadosAdmin`)
+          }
+        }
+        else { // si es delete
+          this.selectedItem = undefined
+          console.log(`# Material eliminado (o post) : MaterialesAceptadosAdmin`)
+        }
+      }, 500)
+    },
+    async getMateriales() {
+      this.materiales = await Api.getMaterialesAceptados()
+      console.log('pude obtener datos', this.materiales)
+    },
+    addMaterial() {
+      // site\app\images\materiales\no-image.png
+      this.selectedItem = {
+        "id": null,
+        "nombre": "",
+        "imagen": "./images/materiales/no-image.png",
+        "descripcion": ""
+      }
+      this.materiales.push(this.selectedItem)
+    },
+    updateSelectedItem: function updateSelectedItem(material) {
+      this.selectedItem = material;
     }
   },
-  template: ABMmaterialesTemplate,
+  template: MaterialesAceptadosTemplate,
   components: {
     'input-file': InputFile,
-    'add-material' : AgregarMateriales,
-    'modify-material' : ModificarMaterial,
-    'mostrar-material' : MostrarMaterial
+    'material-abm': MaterialABM
   }
 }

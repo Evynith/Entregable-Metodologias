@@ -23,7 +23,7 @@ export default {
               <router-link to="/admin/avisos-retiro" class="dropdown-item">Avisos de retiro</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/admin/materiales-aceptados" class="dropdown-item">Materiales aceptados</router-link>
+              <router-link to="/admin/administrar-materiales" class="dropdown-item">Administrar materiales</router-link>
             </li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item disabled" href="#">Logout</a></li>
