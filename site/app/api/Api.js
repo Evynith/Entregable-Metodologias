@@ -1,5 +1,16 @@
 export default class Api {
 
+  static async postMaterial(m) {
+    console.log("#post ", m)
+  }
+  static async putMaterial(m) {
+    console.log("#edit ", m)
+  }
+  static async deleteMaterial(m) {
+    console.log("#delete ", m.id)
+  }
+  
+
   static async postAvisoRetiro(a) {
     // const r = await Api.fetchLocalAPI('aviso_retiro', {
     let r;

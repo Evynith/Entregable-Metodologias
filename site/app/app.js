@@ -2,11 +2,8 @@
 import Nav from './components/Nav.js'
 import AvisoRetiro from './components/AvisoRetiro.js'
 import MaterialesAceptados from './components/MaterialesAceptados.js'
-<<<<<<< HEAD
 import ABMmateriales from './components/ABMmateriales.js'
-=======
 import AvisosRetiro from './components/AvisosRetiro.js'
->>>>>>> CR-98-APP
 
 const Home     = { template: '<div>Home</div>' }
 const NotFound = { template: '<div>Not found</div>' }
@@ -16,12 +13,9 @@ const routes = [
   { path: '/', component: Home },
   { path: '/ofrecer-materiales', component: AvisoRetiro },
   { path: '/materiales-aceptados', component: MaterialesAceptados },
-<<<<<<< HEAD
-  { path: '/admin/materiales-aceptados', component : ABMmateriales}
-=======
+  { path: '/admin/materiales-aceptados', component : ABMmateriales},
   { path: '/admin/avisos-retiro', component: AvisosRetiro },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
->>>>>>> CR-98-APP
   // { path: '*', component: NotFound }
 ]
 // 3. Create the router instance and pass the `routes` option
