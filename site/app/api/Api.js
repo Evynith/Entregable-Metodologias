@@ -1,17 +1,18 @@
 export default class Api {
 
   static async deleteMaterial(m) {
-    let r
-    try {
-       r = await Api.delete('admin/material-aceptado/' + m.id)
-    }
-    catch (e) {
-      r = {
-        ok: false,
-        mensaje: 'Error de conexión'
-      }
-    }
-    return r
+    return Api.delete('admin/material-aceptado/' + m.id)
+    // let r
+    // try {
+    //    r = await Api.delete('admin/material-aceptado/' + m.id)
+    // }
+    // catch (e) {
+    //   r = {
+    //     ok: false,
+    //     mensaje: 'Error de conexión'
+    //   }
+    // }
+    // return r
   }
 
   static async delete(endpoint) {
@@ -24,39 +25,11 @@ export default class Api {
     let r;
     console.log('# Api : borrando ', endpoint)
     try {
-      r = await Api.fetchLocalAPI(endpoint, options)
-      // console.log(url)
-      // r = { "ok": true, "id": m.id }
+      r = await Api.fetchHerokuAPI(endpoint, options)
     }
-    catch (e2) {
-      console.log(e2)
-      r = {
-        ok: false,
-        mensaje: 'Error de conexión'
-      }
-    }
-    return r
-  }
-
-  static async postMaterial(m, id = null) {
-    let r;
-    const method = id == null ? 'POST' : 'PUT'
-    let options = {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(m)
-    }
-    let url = 'admin/material-aceptado'
-    if (id != null) {
-      url += '/' + id
-    }
-    // try {
-    //   r = await Api.fetchHerokuAPI(url, options)
-    // }
-    // catch (e) {
-      console.log('# Api : Posteando datos a API local...', url, m)
+    catch (e) {
       try {
-        r = await Api.fetchLocalAPI(url, options)
+        r = await Api.fetchLocalAPI(endpoint, options)
         // console.log(url)
         // r = { "ok": true, "id": m.id }
       }
@@ -67,53 +40,69 @@ export default class Api {
           mensaje: 'Error de conexión'
         }
       }
-    // }
-    // console.log(r)
+    }
+
     return r
+  }
+
+  static async postMaterial(m, id = null) {
+    // let r;
+    let url = 'admin/material-aceptado'
+    const method = id == null ? 'POST' : 'PUT'
+    if (id != null) {
+      url += '/' + id
+    }
+    return Api.postData(url, m, method)
+    // let options = {
+    //   method,
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(m)
+    // }
+    // let url = 'admin/material-aceptado'
+    // if (id != null) {
+    //   url += '/' + id
+    // }
+    // try {
+    //   r = await Api.fetchHerokuAPI(url, options)
+    // }
+    // catch (e) {
+    //   console.log('# Api : Posteando datos a API local...', url, m)
+    //   try {
+    //     r = await Api.fetchLocalAPI(url, options)
+    //     // console.log(url)
+    //     // r = { "ok": true, "id": m.id }
+    //   }
+    //   catch (e2) {
+    //     console.log(e2)
+    //     r = {
+    //       ok: false,
+    //       mensaje: 'Error de conexión'
+    //     }
+    //   }
+    // }
+    // // console.log(r)
+    // return r
   }
   
 
   static async postAvisoRetiro(a) {
+    return Api.postData('aviso_retiro', a)
     // const r = await Api.fetchLocalAPI('aviso_retiro', {
-    let r;
-    let options = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(a)
-    }
+    // let r;
+    // let options = {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(a)
+    // }
     // try {
+    //   console.log('#Posteando datos a API heroku...')
     //   r = await Api.fetchHerokuAPI('aviso_retiro', options)
     // }
     // catch (e) {
-      // console.log(e, '#Posteando datos a API local...')
-      console.log('#Posteando datos a API local...')
-      try {
-        r = await Api.fetchLocalAPI('aviso_retiro', options)
-      }
-      catch (e2) {
-        r = {
-          ok: false,
-          mensaje: 'Error de conexión'
-        }
-      }
-    // }
-    // console.log(r)
-    return r
-  }
-  static async postData(endpoint, data, method = 'POST') {
-    let options = {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    }
-    // let r;
-    // try {
-    //   r = await Api.fetchHerokuAPI(endpoint, options)
-    // }
-    // catch (e) {
-    //   console.log(e, '#Posteando datos a API local...')
+    //   // console.log(e, '#Posteando datos a API local...')
+    //   console.log('#Posteando datos a API local...')
     //   try {
-    //     r = await Api.fetchLocalAPI(endpoint, options)
+    //     r = await Api.fetchLocalAPI('aviso_retiro', options)
     //   }
     //   catch (e2) {
     //     r = {
@@ -122,20 +111,34 @@ export default class Api {
     //     }
     //   }
     // }
-    // local
-    // console.log("#Posteando", data, `a ${endpoint}`)
-    // return { "ok": (Math.random() > 0.5) ? true : false }
-    try {
-      // console.log(endpoint, options)
-      // console.log(JSON.stringify(data))
-      return Api.fetchLocalAPI(endpoint, options)
+    // // console.log(r)
+    // return r
+  }
+  static async postData(endpoint, data, method = 'POST') {
+    let options = {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
     }
-    catch (e2) {
-      return {
-        ok: false,
-        mensaje: 'Error de conexión'
+    let r;
+    try {
+      console.log('#Posteando datos a API heroku...')
+      r = await Api.fetchHerokuAPI(endpoint, options)
+    }
+    catch (e) {
+    // local
+    // console.log("Error", e, " # Posteando", data, `a ${endpoint}`)
+      try {
+        r = await Api.fetchLocalAPI(endpoint, options)
+      }
+      catch (e2) {
+        r = {
+          ok: false,
+          mensaje: 'Error de conexión'
+        }
       }
     }
+    return r
   }
 
   static async getMaterialesAceptados() {
@@ -154,10 +157,11 @@ export default class Api {
 
   static async getData(endpoint) {
     let json;
-    // try {
-    //   // json = await Api.fetchHerokuAPI(endpoint)
-    // }
-    // catch (e) {
+    try {
+      console.log('#Obteniendo datos de API heroku...', endpoint)
+      json = await Api.fetchHerokuAPI(endpoint)
+    }
+    catch (e) {
       try {
         // console.log(e, '#Obteniendo datos de API local...')
         console.log('#Obteniendo datos de API local...', endpoint)
@@ -167,7 +171,7 @@ export default class Api {
         console.log(e2, '#Obteniendo datos de json local...', endpoint)
         json = await Api.fetchLocalJSON(endpoint)
       }
-    // }
+    }
     return json
   }
 
