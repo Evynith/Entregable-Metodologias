@@ -27,7 +27,10 @@ class RegistroIngresoController extends ApiController {
         $respuesta = []; 
         $codigo = 400;
         $data = $this->getData();
-        $respuesta = $this->modelRegistroIngreso->postRegistroIngreso($data->tipo, $data->cartonero_id);
+        $respuesta = $this->modelRegistroIngreso->postRegistroIngreso(
+            filter_var($data->tipo ?? null, FILTER_SANITIZE_STRING), 
+            filter_var($data->cartonero_id ?? null, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE)
+        );
 
         if ($respuesta[ 'ok' ]) {
 
