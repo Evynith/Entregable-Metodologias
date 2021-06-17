@@ -26,6 +26,7 @@ $router->addRoute("admin/cartoneros", "GET", "CartoneroController", "getCartoner
 $router->addRoute("admin/materiales-historicos", "GET", "MaterialController", "getHistoricos");
 $router->addRoute("admin/material-aceptado", "POST", "MaterialController", "postMaterial");
 $router->addRoute("admin/material-aceptado/:id", "PUT", "MaterialController", "postMaterial");
+$router->addRoute("admin/material-aceptado/:id", "DELETE", "MaterialController", "deleteMaterial");
 $router->addRoute("admin/avisos-retiro", "GET", "AvisoRetiroController", "getAvisosRetiro");
 
 

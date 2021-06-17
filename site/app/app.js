@@ -6,6 +6,7 @@ import AvisoRetiro from './components/AvisoRetiro.js'
 import MaterialesAceptados from './components/MaterialesAceptados.js'
 import RegistroIngreso from './components/RegistroIngreso.js'
 import RegistroIngresoMateriales from './components/RegistroIngresoMateriales.js'
+import MaterialesAceptadosAdmin from './components/MaterialesAceptadosAdmin.js'
 import AvisosRetiro from './components/AvisosRetiro.js'
 
 const NotFound = { template: '<div>Not found</div>' }
@@ -49,6 +50,15 @@ const routes = [
       // UserHome will be rendered inside User's <router-view>
       // when /user/:id is matched
       { path: 'materiales', component: RegistroIngresoMateriales, props: true }
+    ]
+  },
+  {
+    path: '/admin/administrar-materiales', 
+    component: MaterialesAceptadosAdmin,
+    children: [
+      // UserHome will be rendered inside User's <router-view>
+      // when /user/:id is matched
+      // { path: '/:id', component: MaterialesABM, props: true },
     ]
   },
   { path: '/admin/avisos-retiro', component: AvisosRetiro },
