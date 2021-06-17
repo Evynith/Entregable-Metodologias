@@ -1,0 +1,36 @@
+.contenedor-general-footer a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.contenedor-general-footer{
+    background-color: #00913D;
+    color: #fff;
+    /* position: fixed;
+    bottom: 0; */
+}
+
+.contenedor-general-footer div{
+    border-bottom: solid 2px #fff;
+}
+
+.contenedor-general-footer li{
+    list-style: none;
+}
+
+.social-icons img {
+    width: 30px;
+    height: 30px;  
+}
+
+.social-icons{
+    /* width: 100%; */
+    background-color: #fff;
+    padding: 0;
+    margin: 0;
+    /* padding-bottom: 3%; */
+}
+
+.social-icons a{
+    margin: 1%;
+}
