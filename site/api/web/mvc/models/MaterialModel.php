@@ -6,7 +6,7 @@ class MaterialModel extends Model {
 
     public function getMateriales() {
         if ($this->db) {
-            $sentencia = $this->db->prepare("SELECT * FROM  unc_249456.materiales");
+            $sentencia = $this->db->prepare("SELECT *  FROM  unc_249456.material");
             $sentencia->execute();
             $materiales = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
@@ -35,6 +35,18 @@ class MaterialModel extends Model {
             // stream_get_contents() : https://www.php.net/manual/es/function.stream-get-contents.php
             return $materiales;
         }
+    }	
+    
+    public function deleteMaterial($id) {
+        if ($this->db) {
+            $sentencia = $this->db->prepare("DELETE FROM unc_249456.material WHERE id = ?");
+            $sentencia->execute([$id]);
+
+            (new JSONView())->response([
+                "ok" => true,
+            ], 200);
+            die();
+        }
         else {
             (new JSONView())->response([
                 "ok" => false,
@@ -58,7 +70,7 @@ class MaterialModel extends Model {
             ( $isEdit ? " WHERE id = ?;" : ") VALUES($str" ); 
 
         if ( ! $isEdit) {
-            $query = substr($query, 0, strlen($query)-1) . ');';
+            $query = substr($query, 0, strlen($query)-1) . ') RETURNING id;';
         }
         else {
             $values[] = $id;
@@ -69,7 +81,7 @@ class MaterialModel extends Model {
             if ($this->db) {
                 $q = Database::getConnection()->prepare($query);
                 $q->execute($values);
-                return [ true, $isEdit ? "ok" : $this->db->lastInsertId() ];
+                return [ true, $isEdit ? "Material modificado con éxito" : $q->fetch(PDO::FETCH_OBJ)->id ];
             }
             else {
                 return [ false, "No se pudo conectar a la db" ];

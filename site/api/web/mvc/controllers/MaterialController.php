@@ -21,6 +21,10 @@ class MaterialController extends ApiController {
         $this->view->response($materiales, 200);
     }  
 
+    public function deleteMaterial($params = []) {
+        $this->modelMaterial->deleteMaterial($params[':id']);
+    }
+
     public function postMaterial($params) {
         $data = $this->getData();
         $data->nombre = filter_var($data->nombre ?? null, FILTER_SANITIZE_STRING);
@@ -45,7 +49,18 @@ class MaterialController extends ApiController {
         // else {
         //     $respuesta[ 'id' ] = $mensaje;
         // }
-        $respuesta[ isset($params[ ':id' ]) ? 'mensaje' : 'id' ] = $mensaje;
+
+        if (isset($params[ ':id' ])) {
+            $respuesta[ 'mensaje' ] = $mensaje;
+        }
+        elseif ($respuesta[ 'ok' ]) {
+            $respuesta[ 'id' ] = $mensaje;
+            $respuesta[ 'mensaje' ] = 'El material se cargó con éxito';
+        }
+        else {
+            $respuesta[ 'id' ] = null;
+            $respuesta[ 'mensaje' ] = $mensaje;
+        }
         
         $this->view->response($respuesta, $resultado ? 200 : 400);
         
