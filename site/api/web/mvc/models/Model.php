@@ -27,7 +27,7 @@ class Database {
                     "mbjldpmoeapiwl",
                     "5dffad59dade13ca1e67efdbbe94233662694126388f0ee60f1d4f3b960887b8",
                     array(
-                        PDO::ATTR_TIMEOUT => 3,
+                        PDO::ATTR_TIMEOUT => 5,
                         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
                     ));
                 return self::$db;

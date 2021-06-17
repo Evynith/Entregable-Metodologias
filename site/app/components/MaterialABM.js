@@ -4,7 +4,7 @@ import MaterialModify from './MaterialModify.js'
 
 
 const MaterialABMTemplate = `
-<template v-if="material != undefined">
+<template v-if="material != undefined && !deleting">
   <div v-if="! (material.id == null || editar)" class="card" id="material-abm">
     <div class="row card-header">
       <h5 class="col-8" v-html="material.nombre"></h5>
@@ -39,9 +39,11 @@ const MaterialABMTemplate = `
     v-model="material"
     @cancelar="cancelarPost"
     @guardar="post"
+    :posting="posting"
   ></material-modify>
 
 </template>
+<bs-spinner v-else-if="deleting"></bs-spinner>
 `
 
 
@@ -50,18 +52,23 @@ export default {
     return {
       state: 'mostrar',
       editar: false,
-      backup: undefined
+      backup: undefined,
+      posting: false,
+      deleting: false
     }
   },
   props: ['modelValue'],
   methods: {
-    updateState(state) {
-      this.state = state;
+    informarRespuesta(r) {
+      this.$emit('responded', r)
       // this.$emit('update:modelValue', state)
     },
     async eliminar() {
       console.log('# MaterialABM : eliminando', this.material)
+      this.deleting = true
       const r = await Api.deleteMaterial(this.material)
+      this.informarRespuesta(r)
+      this.deleting = false
       console.log('# Eliminado material : MaterialABM', r)
       this.$emit('updated')
     },
@@ -84,9 +91,13 @@ export default {
       }
     },
     async post() {
+      this.posting = true
       const posted = { ...this.material }
       delete posted.id
       const r = await Api.postMaterial(posted, this.editar ? this.material.id : null)
+      this.editar = false
+      this.posting = false
+      this.informarRespuesta(r)
       if (r.ok) {
         this.$emit('updated', (r.id ? r.id : this.material.id))
       }
@@ -106,7 +117,7 @@ export default {
       }
     }
   },
-  emits: ['update:modelValue', 'updated', 'cancelarCreacion', 'cancelarEdicion'],
+  emits: ['update:modelValue', 'updated', 'cancelarCreacion', 'cancelarEdicion', 'responded'],
 
   template: MaterialABMTemplate,
   components: {

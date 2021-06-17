@@ -4,12 +4,7 @@ import MaterialABM from './MaterialABM.js'
 
 const MaterialesAceptadosTemplate = `
 
-<div v-if="loading" class="d-flex justify-content-center">
-  <div class="spinner-border text-success" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-</div>
-<section v-else>
+<section>
 
 <header class="d-flex justify-content-center align-items-center mt-2 mb-4">  <!-- class="d-flex justify-content-around" --> <!-- cuando aparece botón se le agrega esas clases a header-->
   <h1 class="d-flex justify-content-start fs-1 me-4">Materiales aceptados</h1> 
@@ -27,7 +22,9 @@ const MaterialesAceptadosTemplate = `
   <!--fin boton de agregar (pantalla gral.) -->
 </header>
 
-  <ul class="nav d-flex justify-content-between mb-3" id="pills-tab" role="tablist">
+  <bs-spinner v-if="loading">
+  </bs-spinner>
+  <ul v-else class="nav d-flex justify-content-between mb-3" id="pills-tab" role="tablist">
     <li v-for="(m, i) of materiales" role="presentation" class="my-1" style="width: 32%;">
       <button type="button" role="tab" 
         :class="['card', 'px-0', { 'active': selectedItem && selectedItem.nombre == m.nombre} ]"
@@ -56,39 +53,20 @@ const MaterialesAceptadosTemplate = `
       :id="getTabId(i)" 
       :aria-labelledby="getPillsId(i)" role="tabpanel"
     > -->
+
+  <div v-if="respuesta != undefined" 
+    :class="['alert', 'mt-4', { 'alert-danger': ! respuesta.ok, 'alert-success': respuesta.ok }]" role="alert"
+  >
+    {{ mensajeRespuesta }}
+  </div>
     
   <material-abm 
     v-model="selectedItem"
     @updated="resync"
     @cancelar-creacion="materiales.pop()"
     @cancelar-edicion="cancelarEdicion"
+    @responded="manejarRespuesta"
   ></material-abm>
-
-
-  <div id="modal-respuesta" class="modal modal-fullscreen-sm-down" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <template v-if="respuesta">
-            <h5 v-if="respuesta.ok == true" class="modal-title">Aviso cargado con éxito</h5>
-            <h5 v-else class="modal-title">No se pudo cargar su aviso</h5>
-          </template>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p v-if="respuesta" v-html="respuesta.mensaje"></p>
-        </div>
-        <div class="modal-footer">
-          <template v-if="respuesta">
-            <template v-if="respuesta.ok == true">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Borrar</button>
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            </template>
-          </template>
-        </div>
-      </div>
-    </div>
-  </div>
 
 </section>
 `
@@ -109,6 +87,16 @@ export default {
     }
   },
   computed: {
+    mensajeRespuesta() {
+      if (this.respuesta != undefined) {
+        if (this.respuesta.mensaje != undefined || ! this.respuesta.ok) {
+          return this.respuesta.mensaje
+        }
+        else {
+          return `Operación realizada con éxito`
+        }
+      }
+    },
     verificado() {
       return true
     },
@@ -121,6 +109,13 @@ export default {
     this.getMateriales()
   },
   methods: {
+    manejarRespuesta(r) {
+      this.respuesta = r
+      const t = this
+      setTimeout(() => {
+        t.respuesta = undefined
+      }, 5000)
+    },
     cancelarEdicion() {
       this.materiales[this.materiales.findIndex((m)=>m.id == this.selectedItem.id)] = this.selectedItem
     },
@@ -145,8 +140,15 @@ export default {
       }, 500)
     },
     async getMateriales() {
-      this.materiales = await Api.getMaterialesAceptados()
-      console.log('pude obtener datos', this.materiales)
+
+        this.materiales = await Api.getMaterialesAceptados()
+        if (this.materiales.ok != undefined) {
+          console.log('# error get Materiales : MaterialesAceptadosAdmin ', this.materiales.mensaje)
+          this.materiales = []
+          setTimeout(this.getMateriales, 1000)
+        }
+        console.log('pude obtener datos', this.materiales)
+      
     },
     addMaterial() {
       // site\app\images\materiales\no-image.png

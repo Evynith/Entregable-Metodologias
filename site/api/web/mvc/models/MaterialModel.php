@@ -81,7 +81,7 @@ class MaterialModel extends Model {
             if ($this->db) {
                 $q = Database::getConnection()->prepare($query);
                 $q->execute($values);
-                return [ true, $isEdit ? "ok" : $q->fetch(PDO::FETCH_OBJ)->id ];
+                return [ true, $isEdit ? "Material modificado con éxito" : $q->fetch(PDO::FETCH_OBJ)->id ];
             }
             else {
                 return [ false, "No se pudo conectar a la db" ];

@@ -27,25 +27,25 @@ const MaterialModifyTemplate = `
     > {{ this.error }}
     </div>
 
-    <button :disabled="!verificado || posting" 
-      @click.prevent="modifyMaterial"
-      class="btn btn-primary btn-block w-100 py-2 text-uppercase"
-    >
-      <template v-if="!posting">Enviar</template>
-      <div v-else class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-    </button>
-    <button @click.prevent="cancelar" 
-      class="btn btn-link btn-block w-100 py-2 text-uppercase"
-    >Cancelar</button>
+    <template v-if="!posting">
+      <button :disabled="!verificado || posting" 
+        @click.prevent="modifyMaterial"
+        class="btn btn-primary btn-block w-100 py-2 text-uppercase"
+      >
+        Enviar
+      </button>
+      <button @click.prevent="cancelar" 
+        class="btn btn-link btn-block w-100 py-2 text-uppercase"
+      >Cancelar</button>
+    </template>
+    <bs-spinner v-else></bs-spinner>
   </form>
 </template>
     
 `
 
 export default {
-    props : ['modelValue'],
+    props : ['modelValue', 'posting'],
     data() {
         return {
           backup: undefined,
@@ -67,9 +67,6 @@ export default {
       },
       verificado: function () {
         return true
-      },
-      posting: function () {
-        return false
       }
     },
     methods : {
