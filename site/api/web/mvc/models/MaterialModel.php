@@ -6,7 +6,7 @@ class MaterialModel extends Model {
 
     public function getMateriales() {
         if ($this->db) {
-            $sentencia = $this->db->prepare("SELECT *  FROM  unc_249456.material");
+            $sentencia = $this->db->prepare("SELECT *  FROM  material");
             $sentencia->execute();
             $materiales = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
@@ -28,7 +28,7 @@ class MaterialModel extends Model {
     }	 
     public function getHistoricos() {
         if ($this->db) {
-            $q = $this->db->query('select id,nombre from unc_249456.material_historico where material_id is not null');
+            $q = $this->db->query('select id,nombre from material_historico where material_id is not null');
             $q->execute();
             $materiales = $q->fetchAll(PDO::FETCH_OBJ);
             // var_dump(json_encode(stream_get_contents($materiales[0]->imagen))); // materiales[0].imagen
@@ -39,7 +39,7 @@ class MaterialModel extends Model {
     
     public function deleteMaterial($id) {
         if ($this->db) {
-            $sentencia = $this->db->prepare("DELETE FROM unc_249456.material WHERE id = ?");
+            $sentencia = $this->db->prepare("DELETE FROM material WHERE id = ?");
             $sentencia->execute([$id]);
 
             (new JSONView())->response([
@@ -57,7 +57,7 @@ class MaterialModel extends Model {
     }
     
     public function postMaterial(StdClass $data, int $id = null): array {
-        $table = 'unc_249456.material';
+        $table = 'material';
         $isEdit = is_numeric($id);
         $values = [];
         $str = "";

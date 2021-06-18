@@ -6,7 +6,7 @@ class AvisoRetiroModel extends Model {
 
     public function saveAvisoRetiro($data) {
         try {
-            $stm = $this->db->prepare("INSERT INTO unc_249456.aviso_retiro (nombre, apellido, telefono, direccion, foto, id_horario, id_volumen) VALUES(?, ?, ?, ?, ?, ?, ?)");
+            $stm = $this->db->prepare("INSERT INTO aviso_retiro (nombre, apellido, telefono, direccion, foto, id_horario, id_volumen) VALUES(?, ?, ?, ?, ?, ?, ?)");
             $stm->execute([$data->nombre, $data->apellido, $data->telefono, $data->direccion, $data->foto, 
                         $data->id_horario, $data->id_volumen]);
             //$stm->errorInfo());
@@ -29,9 +29,9 @@ class AvisoRetiroModel extends Model {
                         foto,
                         f.nombre AS franja_horaria,
                         cod_categoria
-                    FROM unc_249456.aviso_retiro a
-                    JOIN unc_249456.franja_horaria f ON (f.id = a.id_horario)
-                    JOIN unc_249456.volumen_materiales m ON (m.id = a.id_volumen)
+                    FROM aviso_retiro a
+                    JOIN franja_horaria f ON (f.id = a.id_horario)
+                    JOIN volumen_materiales m ON (m.id = a.id_volumen)
                     ORDER BY fecha_emision DESC");
             $sentencia->execute();
             $avisos = $sentencia->fetchAll(PDO::FETCH_OBJ);
