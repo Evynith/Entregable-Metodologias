@@ -6,7 +6,7 @@ class FranjaHorariaModel extends Model{
 
 public function getFranjasHorarias(){
     if ($this->db) {
-        $sentencia = $this->db->prepare("SELECT * FROM  unc_249456.franja_horaria");
+        $sentencia = $this->db->prepare("SELECT * FROM  franja_horaria");
         $sentencia->execute();
         $franjas = $sentencia->fetchAll(PDO::FETCH_OBJ);
         return $franjas;

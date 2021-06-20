@@ -1,6 +1,66 @@
+*{
+    font-family: 'Permanent Marker', cursive;
+    font-family: 'Roboto', sans-serif;
+}
+
 body {
     background-color: #fafafa;
 }
+
+.container-sm{
+    min-height: 1vh;
+}
+.portada{
+    background-image: url("../images/fotos/re-2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* filter: opacity(50%) ; */
+    padding: 0;
+    margin: 0 !important;
+    z-index: 1;
+}
+
+.portada > div {
+    width: 100%;
+    height: 100%;
+    background-position: center center;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.952), rgba(255, 255, 255, 0));
+}
+
+.logo-p{
+    filter : brightness(0) invert(  900% );
+}
+
+.text-coop{
+    color: #fafafa;
+    
+}
+
+.fibron{
+    font-family: 'Permanent Marker', cursive;
+}
+
+.cuadro-dialogo-home{
+    background-color: #00913D;
+    color: #fafafa;
+    padding-top: 6%;
+    padding-bottom: 4%;
+}
+
 button.card.active {
     box-shadow: 0 0 5px 1px #00FF29;
 }
+
+.bg-lg { background-color: lightgrey;}
+
+@media screen and (min-width: 768px) {
+    .elementos-material{
+        max-height: 60vh;
+        overflow-y: scroll;
+        margin-bottom: 15vh;
+    }
+    .desplegable-click{
+        pointer-events: none;
+    }
+} 
+
