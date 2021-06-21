@@ -18,31 +18,6 @@ module.exports = {
      * @param {string} direccion 
      * @returns {Promise} una promesa de ingresar dato de direccion
      */
-    // enviar: function (direccion) {
- 
-    //     var selector = page.avisoEnvio.elements.addressInput;
-
-    //     // devuelve una promesa para que la función que la llama sepa que la tarea se ha completado
-    //     return driver.findElement(selector).sendKeys(direccion, selenium.Key.ENTER);
-    // }
-
-    // enviar: function (nombre, apellido, direccion, telefono) {
- 
-    //     var nombreInput = page.avisoEnvio.elements.nameInput;
-    //     var apellidoInput = page.avisoEnvio.elements.surnameInput;
-    //     var direccionInput = page.avisoEnvio.elements.addressInput;
-    //     var telefonoInput = page.avisoEnvio.elements.phoneInput;
-
-    //     () => driver.findElement(nombreInput).sendKeys(nombre)
-    //     .then(
-    //         () => driver.findElement(apellidoInput).sendKeys(apellido)
-    //     ).then(
-    //         () => driver.findElement(direccionInput).sendKeys(direccion)
-    //     ).then(
-    //         () => driver.findElement(telefonoInput).sendKeys(telefono, selenium.Key.ENTER)
-    //     )
-    // }
-
     enviarNombre: function (nombre) {
         var nombreInput = page.avisoEnvio.elements.nameInput;
         return driver.findElement(nombreInput).sendKeys(nombre) 
@@ -62,23 +37,24 @@ module.exports = {
     enviarHorario: function (horario) {
         var hourInput = page.avisoEnvio.elements.hourInput;
         return driver.findElement(hourInput).click().then (
-
-        ()=> helpers.getFirstElementContainingText('#form-ar > div:nth-child(5) > select option',horario)
-       
+            ()=> helpers.getFirstElementContainingText('#form-ar > div:nth-child(5) > select option',horario)
         ).then(
             (elem) => elem.click()
         )
     },
     enviarVolumen: function (volumen) {
         var volumeInput = page.avisoEnvio.elements.volumeInput;
-
         return driver.findElement(volumeInput).click().then (
-  
-        ()=> helpers.getFirstElementContainingText('#form-ar > div:nth-child(6)  > select option',volumen)
-       
+            ()=> helpers.getFirstElementContainingText('#form-ar > div:nth-child(6)  > select option',volumen)
         ).then (
             (elem) => elem.click()
         )
+    },
+    enviarImagen: function (url) {
+        if (url){
+            var imageInput = page.avisoEnvio.elements.imageInput;
+            return driver.findElement(imageInput).sendKeys(url)
+        }
     },
     enviar: function () {
         var btnEnviar = page.avisoEnvio.elements.sendButton;
