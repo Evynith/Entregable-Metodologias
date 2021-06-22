@@ -40,5 +40,5 @@ _Entrega Sprint #3 con diagrama de clases actualizado._
 * **Federico De Muguruza** [FedericoDeMuguruza](https://github.com/Federico-de-Muguruza)
 * **Federico Franchini** [FedericoFranchini](https://github.com/franf16)
 * **Francisco Vaninetti** [FranciscoVaninetti](https://github.com/FrankZappato)
-* **Evelyn Vega** [EvelynVega](https://github.com/evelyn-c-vega)
+* **Evelyn Vega** [EvelynVega](https://github.com/Evynith)
 * **Nicolas Contreras** [NicolasContreras](https://github.com/nicocontreras5)
