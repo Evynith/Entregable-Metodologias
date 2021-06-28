@@ -24,7 +24,8 @@ _Entrega Sprint #2 con diagrama de clases de lo implementado hasta el momento. <
 https://docs.google.com/presentation/d/1oe8ByqSlHGPNsQpx2kAObGb3VYnZf93XehX0hg-5x5c/edit?usp=sharing
 
 ### Cuarta entrega 08-07 :
-_Entrega Sprint #3 con diagrama de clases actualizado._
+_Entrega Sprint #3 con diagrama de clases actualizado.
+Se deberán realizar las funcionalidades referidas a Log-in secretaria, registro de secretaria(preguntado al PO), listar materiales acopiados por cartonero y de Alta, baja y modificación de cartonero._
 
 ## Construido con 🛠️
 
