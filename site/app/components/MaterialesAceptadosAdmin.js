@@ -4,7 +4,7 @@ import MaterialABM from './MaterialABM.js'
 
 const MaterialesAceptadosTemplate = `
 
-<section>
+<section class="container-sm mt-4">
 
 <header class="d-flex align-items-center mt-2 mb-4">  <!-- class="d-flex justify-content-around" --> <!-- cuando aparece botón se le agrega esas clases a header-->
   <h1 class="d-flex justify-content-start fs-1 me-4">Materiales aceptados</h1> 

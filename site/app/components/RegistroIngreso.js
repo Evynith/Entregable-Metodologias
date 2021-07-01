@@ -2,7 +2,7 @@ import Api from '../api/Api.js'
 
 const RegistroIngresoTemplate = `
 <bs-spinner v-if="loading"></bs-spinner>
-<section v-else>
+<section v-else class="container-sm mt-4">
   <h1 class="fs-1 text-md-center">Recepción de materiales</h1>
     
   <div class="row">

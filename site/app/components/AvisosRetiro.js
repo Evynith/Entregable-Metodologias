@@ -74,7 +74,7 @@ const AvisosRetiroTemplate = `
     <span class="visually-hidden">Loading...</span>
   </div>
 </div>
-<section v-else>
+<section v-else class="container-sm mt-4">
   <h1 class="fs-1">Avisos de retiro</h1>
   <p class="text-muted mb-0"> ({{ avisosRetiro.length }} avisos) </p>
   <table class="table table-striped border border-3">
