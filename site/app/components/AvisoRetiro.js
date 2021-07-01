@@ -68,6 +68,8 @@ const AvisoRetiroTemplate = `
   <div class="col-md d-none d-md-block"></div>
 </div>
 
+<respuesta-modal v-model="respuesta" r-id="respuesta-avisoRetiro"></respuesta-modal>
+<!--
   <div id="modal-respuesta" class="modal modal-fullscreen-sm-down" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -99,6 +101,7 @@ const AvisoRetiroTemplate = `
       </div>
     </div>
   </div>
+-->
 </section>`
 
 export default {
@@ -140,14 +143,14 @@ export default {
     },
     methods: {
         async post() {
-          console.log('# Post: ', JSON.stringify(this.ar))
+          console.log('# AvisoRetiro.js - Post: ', JSON.stringify(this.ar))
           this.posting = true
           const r = await Api.postAvisoRetiro(this.ar)
           this.respuesta = r 
           this.posting = false
-          new bootstrap.Modal(document.querySelector('#modal-respuesta'), { // launch modal
-                  keyboard: false
-              }).show()
+          // new bootstrap.Modal(document.querySelector('#modal-respuesta'), { // launch modal
+          //         keyboard: false
+          //     }).show()
         }
     },
     template: AvisoRetiroTemplate,

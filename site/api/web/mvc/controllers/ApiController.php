@@ -3,7 +3,7 @@ require_once ('./mvc/view/JSONView.php');
 
 require_once "./mvc/view/JSONView.php";
 
-abstract class ApiController {
+class ApiController {
 
     protected $view;
     private $data; 
@@ -16,8 +16,13 @@ abstract class ApiController {
 
     protected function getData(){ 
         return json_decode($this->data); 
-    }  
+    }
 
+    public function mostrar404() {
+        $this->view->response(new Respuesta([
+            'error' => new Exception("Ruta no reconocida: {$_GET[ 'action' ]}", 404)
+        ]));
+    }
 }
 
 ?>
