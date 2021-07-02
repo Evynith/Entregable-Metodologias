@@ -8,6 +8,7 @@ import RegistroIngreso from './components/RegistroIngreso.js'
 import RegistroIngresoMateriales from './components/RegistroIngresoMateriales.js'
 import MaterialesAceptadosAdmin from './components/MaterialesAceptadosAdmin.js'
 import AvisosRetiro from './components/AvisosRetiro.js'
+import Cartoneros from './components/Cartoneros.js'
 
 const NotFound = { template: '<div>Not found</div>' }
 const BtnCancelar = {
@@ -42,6 +43,7 @@ const BsAlert = {
 const routes = [
   { path: '/', component: Home },
   { path: '/ofrecer-materiales', component: AvisoRetiro },
+  { path: '/admin/cartoneros', component: Cartoneros },
   { path: '/materiales-aceptados', component: MaterialesAceptados },
   { 
     path: '/admin/registro-ingreso', 
