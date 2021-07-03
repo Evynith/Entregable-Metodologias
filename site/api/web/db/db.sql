@@ -12,11 +12,11 @@ SET DATESTYLE TO 'European';
 DROP TABLE IF EXISTS registro;
 CREATE TABLE registro (
     id int  NOT NULL,
+    nombre_usuario varchar(100)  NOT NULL,
     mail varchar(100)  NOT NULL,
-    nombre varchar(100)  NOT NULL,
     clave varchar(256)  NOT NULL,
-    CONSTRAINT registro_ak_1 UNIQUE (nombre) NOT DEFERRABLE  INITIALLY IMMEDIATE,
-    CONSTRAINT registro_pk PRIMARY KEY (id,mail)
+    CONSTRAINT registro_ak_1 UNIQUE (nombre_usuario, mail) NOT DEFERRABLE  INITIALLY IMMEDIATE,
+    CONSTRAINT registro_pk PRIMARY KEY (id)
 );
 
 -- Table: aviso_retiro
