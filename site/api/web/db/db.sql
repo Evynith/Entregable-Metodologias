@@ -7,6 +7,18 @@ select CURRENT_TIMESTAMP;
 SET DATESTYLE TO 'European';
 
 -- tables
+
+-- Table: registro
+DROP TABLE IF EXISTS registro;
+CREATE TABLE registro (
+    id int  NOT NULL,
+    mail varchar(100)  NOT NULL,
+    nombre varchar(100)  NOT NULL,
+    clave varchar(256)  NOT NULL,
+    CONSTRAINT registro_ak_1 UNIQUE (nombre) NOT DEFERRABLE  INITIALLY IMMEDIATE,
+    CONSTRAINT registro_pk PRIMARY KEY (id,mail)
+);
+
 -- Table: aviso_retiro
 DROP TABLE IF EXISTS aviso_retiro;
 CREATE TABLE aviso_retiro (
