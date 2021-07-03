@@ -224,7 +224,8 @@
     }
 }
 ```
-### POST|PUT /admin/material-aceptado
+### POST /admin/material-aceptado
+### PUT /admin/material-aceptado/:id
 - reciben
 ```JSON
 {
@@ -286,7 +287,7 @@
 }
 ```
 
-# Sprint 3
+## Sprint 3
 
 ### GET /admin/material-aceptado/:id
 - devuelve
@@ -311,6 +312,181 @@
     "data": {
         "material": false,
         "id": 65
+    }
+}
+```
+### GET /admin/materiales-recolectados/:cartonero_id
+- devuelve
+```JSON
+{
+    "ok": true,
+    "data": {
+        "cartonero_id": 1,
+        "materialesRecolectados": [
+            {
+                "nombre": "Tapitas",
+                "pesoTotal": 10
+            },
+            {
+                "nombre": "Botellas",
+                "pesoTotal": 20
+            }
+        ]
+    }
+}
+```
+### GET /admin/cartonero/:id
+- devuelve
+```JSON
+{
+    "ok": true,
+    "data": {
+        "cartonero": {
+            "id": 1,
+            "dni": 33222111,
+            "nombre": "Jacinto",
+            "apellido": "Martinez",
+            "direccion": "los sauces 2200",
+            "fecha_nacimiento": "23/06/1900",
+            "vehiculo_volumen": "C" // __no el id__
+        }
+    }
+}
+```
+- error
+```JSON
+{
+    "ok": false,
+    "error": "no existe el id 1",
+    "data": {
+        "cartonero": false,
+        "id": 1
+    }
+}
+```
+### POST /admin/cartonero
+### PUT  /admin/cartonero/:id
+- reciben
+```JSON
+{
+    "dni": 33222111,
+    "nombre": "Jacinto",
+    "apellido": "Martinez",
+    "direccion": "los sauces 2200",
+    "fecha_nacimiento": "23/06/1900",
+    "vehiculo_volumen": 1 // __el id__
+}
+```
+- devuelven
+```JSON
+{ // POST
+    "ok": true,
+    "mensaje": "65 agregado",
+    "data": {
+        "id": 65
+    }
+}
+{ // PUT
+    "ok": true,
+    "mensaje": "65 modificado",
+    "data": {
+        "id": 65
+    }
+}
+```
+- error
+```JSON
+{ // POST
+    "ok": false,
+    "error": "SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint \"dni_ak\"\nDETAIL:  Key (dni)=(33222111) already exists."
+}
+{ // PUT
+    "ok": false,
+    "error": "no existe el id 65",
+    "data": {
+        "id": 65
+    }
+}
+```
+### DELETE /admin/cartonero/:id
+- devuelve
+```JSON
+{
+    "ok": true,
+    "mensaje": "65 eliminado",
+    "data": {
+        "id": 65
+    }
+}
+```
+- error
+```JSON
+{
+    "ok": false,
+    "error": "no existe el id 65",
+    "data": {
+        "id": 65
+    }
+}
+```
+### POST /admin/registro
+-recibe
+```JSON
+ {
+    "usuario": "admin",
+    "contrasenia": "admin",
+    "email": "admin@admin",
+}
+```
+- devuelve
+```JSON
+{ // POST
+    "ok": true,
+    "mensaje": "1 agregado",
+    "data": {
+        "id": 1
+    }
+}
+```
+- error
+```JSON
+{ // POST
+    "ok": false,
+    "error": "SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint \"usuario_ak\"\nDETAIL:  Key (usuario)=(admin) already exists."
+}
+{ // POST
+    "ok": false,
+    "error": "SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint \"email_ak\"\nDETAIL:  Key (email)=(admin@admin) already exists."
+}
+```
+### POST /admin/login
+```JSON
+ {
+    "usuario": "admin",
+    "contrasenia": "admin"
+}
+```
+- devuelve
+```JSON
+{ // POST
+    "ok": true,
+    "mensaje": "Logeado con éxito",
+    "data": {
+        "usuario": {
+            "usuario": "admin",
+            "email": "admin@admin",
+            "contrasenia": "$2y$10$zv0dhP9RM4VFCmz3VIuQQuSSWR6/y50ltcUVwpe4oq1r6oDtN1T4u"
+        }
+    }
+}
+```
+- error
+```JSON
+{
+    "ok": false,
+    "error": "no existe el usuario admin",
+    "data": {
+        "usuario": "admin"
     }
 }
 ```
