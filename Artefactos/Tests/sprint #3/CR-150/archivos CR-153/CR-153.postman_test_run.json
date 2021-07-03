@@ -1,0 +1,427 @@
+{
+	"id": "ff16b0ac-2dd5-4912-9a3a-471ec020b06e",
+	"name": "coop-rec-api (tpe metodologias)",
+	"timestamp": "2021-07-01T23:14:03.824Z",
+	"collection_id": "f7d39998-3b98-4f47-9fbe-d7bb3beba716",
+	"folder_id": 0,
+	"environment_id": "9ab13fd6-0fe4-4d04-99a9-669341e78a5d",
+	"totalPass": 14,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "42295b72-eaf2-44c8-b6dd-5bb058cef551",
+			"name": "/franjas_horarias",
+			"url": "http://localhost/tpe_metodologias/site/api/web/franjas_horarias",
+			"time": 1697,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"get franjas horarias": true
+			},
+			"testPassFailCounts": {
+				"get franjas horarias": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1697
+			],
+			"allTests": [
+				{
+					"get franjas horarias": true
+				}
+			]
+		},
+		{
+			"id": "d5420b3e-efd4-4478-901c-1d5644337546",
+			"name": "/volumenes_materiales",
+			"url": "http://localhost/tpe_metodologias/site/api/web/volumenes_materiales",
+			"time": 1962,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"get volumenes materiales": true
+			},
+			"testPassFailCounts": {
+				"get volumenes materiales": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1962
+			],
+			"allTests": [
+				{
+					"get volumenes materiales": true
+				}
+			]
+		},
+		{
+			"id": "54e62122-5e48-4af1-aa48-897544009c89",
+			"name": "/aviso_retiro",
+			"url": "http://localhost/tpe_metodologias/site/api/web/aviso_retiro",
+			"time": 2984,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"post aviso retiro": true
+			},
+			"testPassFailCounts": {
+				"post aviso retiro": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2984
+			],
+			"allTests": [
+				{
+					"post aviso retiro": true
+				}
+			]
+		},
+		{
+			"id": "4eb17f88-2b83-4ca7-b10a-523ac94a2d5e",
+			"name": "/materiales-aceptados",
+			"url": "http://localhost/tpe_metodologias/site/api/web/materiales-aceptados",
+			"time": 2262,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"get materiales aceptados": true
+			},
+			"testPassFailCounts": {
+				"get materiales aceptados": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2262
+			],
+			"allTests": [
+				{
+					"get materiales aceptados": true
+				}
+			]
+		},
+		{
+			"id": "ace4ecf5-680c-4561-9a15-b8eaa6303b5b",
+			"name": "/admin/avisos-retiro",
+			"url": "http://localhost/tpe_metodologias/site/api/web/admin/avisos-retiro",
+			"time": 4880,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"get avisos retiro": true
+			},
+			"testPassFailCounts": {
+				"get avisos retiro": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				4880
+			],
+			"allTests": [
+				{
+					"get avisos retiro": true
+				}
+			]
+		},
+		{
+			"id": "e72336ca-be59-4d84-8da8-77d6af964412",
+			"name": "/admin/material-aceptado",
+			"url": "http://localhost/tpe_metodologias/site/api/web/admin/material-aceptado",
+			"time": 1831,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"post material": true
+			},
+			"testPassFailCounts": {
+				"post material": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1831
+			],
+			"allTests": [
+				{
+					"post material": true
+				}
+			]
+		},
+		{
+			"id": "241e6595-10d4-451c-bb06-ff8f739b8af1",
+			"name": "/admin/material-aceptado/:id",
+			"url": "http://localhost/tpe_metodologias/site/api/web/admin/material-aceptado/72",
+			"time": 1980,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"get material - 200": true,
+				"get material - igual al recien posteado": true
+			},
+			"testPassFailCounts": {
+				"get material - 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"get material - igual al recien posteado": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1980
+			],
+			"allTests": [
+				{
+					"get material - 200": true,
+					"get material - igual al recien posteado": true
+				}
+			]
+		},
+		{
+			"id": "bd527a44-ebc9-4462-bc00-a950f2a69518",
+			"name": "/admin/material-aceptado/:id",
+			"url": "http://localhost/tpe_metodologias/site/api/web/admin/material-aceptado/72",
+			"time": 1771,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"put material - 200": true
+			},
+			"testPassFailCounts": {
+				"put material - 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1771
+			],
+			"allTests": [
+				{
+					"put material - 200": true
+				}
+			]
+		},
+		{
+			"id": "a58480ed-4c71-4003-b4ce-09a9d6df127f",
+			"name": "/admin/material-aceptado/:id",
+			"url": "http://localhost/tpe_metodologias/site/api/web/admin/material-aceptado/72",
+			"time": 1675,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"delete material": true
+			},
+			"testPassFailCounts": {
+				"delete material": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1675
+			],
+			"allTests": [
+				{
+					"delete material": true
+				}
+			]
+		},
+		{
+			"id": "8a7ff568-da06-498a-96fc-9a79865f8fc2",
+			"name": "/admin/registro-ingreso",
+			"url": "http://localhost/tpe_metodologias/site/api/web/admin/registro-ingreso",
+			"time": 2836,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"post registro ingreso": true
+			},
+			"testPassFailCounts": {
+				"post registro ingreso": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2836
+			],
+			"allTests": [
+				{
+					"post registro ingreso": true
+				}
+			]
+		},
+		{
+			"id": "c4c2ab33-228e-4b14-98cc-0abd908e6696",
+			"name": "/admin/tipos-usuario",
+			"url": "http://localhost/tpe_metodologias/site/api/web/admin/tipos-usuario",
+			"time": 1806,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"get tipos usuario": true
+			},
+			"testPassFailCounts": {
+				"get tipos usuario": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1806
+			],
+			"allTests": [
+				{
+					"get tipos usuario": true
+				}
+			]
+		},
+		{
+			"id": "03c01906-ff28-4452-8c87-aec65151df07",
+			"name": "/admin/cartoneros",
+			"url": "http://localhost/tpe_metodologias/site/api/web/admin/cartoneros",
+			"time": 1695,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"get cartoneros": true
+			},
+			"testPassFailCounts": {
+				"get cartoneros": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1695
+			],
+			"allTests": [
+				{
+					"get cartoneros": true
+				}
+			]
+		},
+		{
+			"id": "cc39901c-a763-4be9-80da-35b77df9264a",
+			"name": "/admin/materiales-historicos",
+			"url": "http://localhost/tpe_metodologias/site/api/web/admin/materiales-historicos",
+			"time": 1829,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"get materiales historicos - 200": true
+			},
+			"testPassFailCounts": {
+				"get materiales historicos - 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1829
+			],
+			"allTests": [
+				{
+					"get materiales historicos - 200": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 29208,
+	"collection": {
+		"requests": [
+			{
+				"id": "42295b72-eaf2-44c8-b6dd-5bb058cef551",
+				"method": "GET"
+			},
+			{
+				"id": "d5420b3e-efd4-4478-901c-1d5644337546",
+				"method": "GET"
+			},
+			{
+				"id": "54e62122-5e48-4af1-aa48-897544009c89",
+				"method": "POST"
+			},
+			{
+				"id": "4eb17f88-2b83-4ca7-b10a-523ac94a2d5e",
+				"method": "GET"
+			},
+			{
+				"id": "ace4ecf5-680c-4561-9a15-b8eaa6303b5b",
+				"method": "GET"
+			},
+			{
+				"id": "e72336ca-be59-4d84-8da8-77d6af964412",
+				"method": "POST"
+			},
+			{
+				"id": "241e6595-10d4-451c-bb06-ff8f739b8af1",
+				"method": "GET"
+			},
+			{
+				"id": "bd527a44-ebc9-4462-bc00-a950f2a69518",
+				"method": "PUT"
+			},
+			{
+				"id": "a58480ed-4c71-4003-b4ce-09a9d6df127f",
+				"method": "DELETE"
+			},
+			{
+				"id": "8a7ff568-da06-498a-96fc-9a79865f8fc2",
+				"method": "POST"
+			},
+			{
+				"id": "c4c2ab33-228e-4b14-98cc-0abd908e6696",
+				"method": "GET"
+			},
+			{
+				"id": "03c01906-ff28-4452-8c87-aec65151df07",
+				"method": "GET"
+			},
+			{
+				"id": "cc39901c-a763-4be9-80da-35b77df9264a",
+				"method": "GET"
+			}
+		]
+	}
+}

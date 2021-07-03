@@ -15,6 +15,7 @@ $method = $_SERVER["REQUEST_METHOD"];
 
 // instancia el router
 $router = new Router();
+$router->setDefaultRoute('ApiController', 'mostrar404');
 
 // arma la tabla de ruteo
 
@@ -25,6 +26,7 @@ $router->addRoute("materiales-aceptados", "GET", "MaterialController", "getMater
 $router->addRoute("admin/cartoneros", "GET", "CartoneroController", "getCartoneros");
 $router->addRoute("admin/materiales-historicos", "GET", "MaterialController", "getHistoricos");
 $router->addRoute("admin/material-aceptado", "POST", "MaterialController", "postMaterial");
+$router->addRoute("admin/material-aceptado/:id", "GET", "MaterialController", "getMaterial");
 $router->addRoute("admin/material-aceptado/:id", "PUT", "MaterialController", "postMaterial");
 $router->addRoute("admin/material-aceptado/:id", "DELETE", "MaterialController", "deleteMaterial");
 $router->addRoute("admin/avisos-retiro", "GET", "AvisoRetiroController", "getAvisosRetiro");

@@ -1,0 +1,617 @@
+{
+	"info": {
+		"_postman_id": "f7d39998-3b98-4f47-9fbe-d7bb3beba716",
+		"name": "coop-rec-api (tpe metodologias)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "sprint 1",
+			"item": [
+				{
+					"name": "/franjas_horarias",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"get franjas horarias\", function () {",
+									"",
+									"    var jsonData = pm.response.json();",
+									"    console.log(jsonData);",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/franjas_horarias",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"franjas_horarias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/volumenes_materiales",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"get volumenes materiales\", function () {",
+									"",
+									"    var jsonData = pm.response.json();",
+									"    console.log(jsonData);",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/volumenes_materiales",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"volumenes_materiales"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/aviso_retiro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"post aviso retiro\", function () {",
+									"",
+									"    var jsonData = pm.response.json();",
+									"    console.log(jsonData);",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Hugo\",\r\n    \"apellido\": \"Uganda\",\r\n    \"direccion\": \"centro\",\r\n    \"telefono\": \"249499999\",\r\n    \"id_horario\": 1,\r\n    \"id_volumen\": 1,\r\n    \"foto\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/aviso_retiro",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"aviso_retiro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/materiales-aceptados",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"get materiales aceptados\", function () {",
+									"",
+									"    var jsonData = pm.response.json();",
+									"    console.log(jsonData);",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/materiales-aceptados",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"materiales-aceptados"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sprint 2",
+			"item": [
+				{
+					"name": "/admin/avisos-retiro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"get avisos retiro\", function () {",
+									"",
+									"    var jsonData = pm.response.json();",
+									"    console.log(jsonData);",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin/avisos-retiro",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"avisos-retiro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/admin/material-aceptado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"post material\", function () {",
+									"    var r = pm.response.json();",
+									"    if (r.ok != true) {",
+									"        // pq falta get material by id",
+									"        pm.sendRequest(\"localhost/tpe_metodologias/site/api/web/materiales-aceptados\", function (err, response) {",
+									"            var material_posteado = pm.collectionVariables.get(\"material_posteado\");",
+									"            var materiales = response.json().data.materialesAceptados;",
+									"            var material_duplicado = materiales.find(function (x) {",
+									"                return x.nombre == material_posteado.nombre;",
+									"            })",
+									"            pm.collectionVariables.set(\"material_posteado_id\", material_duplicado.data.id);",
+									"        });",
+									"    }",
+									"    else {",
+									"        pm.collectionVariables.set(\"material_posteado_id\", r.data.id);",
+									"    }",
+									"    //pm.expect(r.ok).to.eql(true);",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+									"    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"material_posteado\", JSON.parse(pm.request.body));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"123\",\r\n    \"imagen\": \"123\",\r\n    \"descripcion\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/material-aceptado",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"material-aceptado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/admin/material-aceptado/:id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.request.url += pm.collectionVariables.get(\"material_posteado_id\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.test(\"get material - 200\", function () {",
+									"",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+									"});",
+									"",
+									"pm.test(\"get material - igual al recien posteado\", function () {",
+									"",
+									"    var material_posteado = pm.collectionVariables.get(\"material_posteado\");",
+									"    material_posteado.id = pm.collectionVariables.get(\"material_posteado_id\");",
+									"    var material_get = { ...jsonData.data.material };",
+									"    pm.expect(material_get).to.eql(material_posteado);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/material-aceptado/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"material-aceptado",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/admin/material-aceptado/:id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.variables.set(\"material_edit\", JSON.parse(pm.request.body));",
+									"pm.request.url += pm.collectionVariables.get(\"material_posteado_id\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.test(\"put material - 200\", function () {",
+									"",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+									"    var material_posteado = pm.variables.get(\"material_edit\");",
+									"    pm.collectionVariables.set(\"material_posteado\", material_posteado);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"123\",\r\n    \"imagen\": \"123\",\r\n    \"descripcion\": \"mod descripcion\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/material-aceptado/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"material-aceptado",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/admin/material-aceptado/:id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.request.url += pm.collectionVariables.get(\"material_posteado_id\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"delete material\", function () {",
+									"",
+									"    var jsonData = pm.response.json();",
+									"    console.log(jsonData);",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/material-aceptado/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"material-aceptado",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/admin/registro-ingreso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"post registro ingreso\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"tipo\": \"Vecino buena onda\",\r\n  \"cartonero_id\": null,\r\n  \"materiales_cargados\": [\r\n    {\r\n      \"id_material\": 5,\r\n      \"nombre\": \"Tapitas\",\r\n      \"peso\": 3\r\n    },\r\n    {\r\n      \"id_material\": 3,\r\n      \"nombre\": \"Papel\",\r\n      \"peso\": 2\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/registro-ingreso",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"registro-ingreso"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/admin/tipos-usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"get tipos usuario\", function () {",
+									"",
+									"    var jsonData = pm.response.json();",
+									"    console.log(jsonData);",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin/tipos-usuario",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"tipos-usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/admin/cartoneros",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"get cartoneros\", function () {",
+									"",
+									"    var jsonData = pm.response.json();",
+									"    console.log(jsonData);",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin/cartoneros",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"cartoneros"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/admin/materiales-historicos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.test(\"get materiales historicos - 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+									"});",
+									"",
+									"// no devuelve material_id",
+									"// pm.test(\"get materiales historicos - ningun id null\", function () {",
+									"//     let materialesHistoricos = jsonData.data.materialesHistoricos;",
+									"//     let materialConIdNull = materialesHistoricos.find((m) => m.material_id == null)",
+									"//     pm.expect(materialConIdNull).to.eql(undefined);",
+									"// });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin/materiales-historicos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"materiales-historicos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"//pm.sendRequest(\"https://localhost/tpe_metodologias/site/api/web/admin/cartoneros\", function (err, response) {",
+					"//    console.log(response.json());",
+					"//});",
+					"",
+					"//console.log(pm.variables.get(\"ruta\"));"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "material_posteado",
+			"value": ""
+		},
+		{
+			"key": "material_posteado_id",
+			"value": ""
+		}
+	]
+}

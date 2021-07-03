@@ -8,6 +8,7 @@ import RegistroIngreso from './components/RegistroIngreso.js'
 import RegistroIngresoMateriales from './components/RegistroIngresoMateriales.js'
 import MaterialesAceptadosAdmin from './components/MaterialesAceptadosAdmin.js'
 import AvisosRetiro from './components/AvisosRetiro.js'
+import RespuestaModal from './components/RespuestaModal.js'
 
 const NotFound = { template: '<div>Not found</div>' }
 const BtnCancelar = {
@@ -87,5 +88,6 @@ app.component('app-home', Home)
 app.component('btn-cancelar', BtnCancelar)
 app.component('bs-spinner', BsSpinner)
 app.component('bs-alert', BsAlert)
+app.component('respuesta-modal', RespuestaModal)
 
 app.mount('#app')

@@ -18,6 +18,6 @@ public function getCartoneros(){
         ], 503);
         die();
     }
-}	 
+}	
 
 }
