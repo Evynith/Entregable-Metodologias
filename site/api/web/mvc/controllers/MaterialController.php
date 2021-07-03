@@ -1,6 +1,5 @@
 <?php
 
-// require_once('./mvc/models/MaterialModel.php');
 require_once('./mvc/controllers/ApiController.php');
 
 class MaterialController extends ApiController {
@@ -9,9 +8,7 @@ class MaterialController extends ApiController {
 
     public function __construct() {
         parent::__construct();
-        // $this->modelMaterialViejo = new MaterialModel();
         $this->modelMaterial = new Model('material');
-        // $this->modelHistorico = new Model('material_historico');
     }
     
     public function getMateriales() { 
@@ -23,9 +20,6 @@ class MaterialController extends ApiController {
         }
         $this->view->response($r);
         // $r->throw();
-            
-        // $materiales = $this->modelMaterialViejo->getMateriales();
-        // $this->view->response($materiales, 200);
     }  
     public function getMaterial($params) {
         $id = filter_var($params[ ':id' ], FILTER_VALIDATE_INT);
@@ -45,25 +39,11 @@ class MaterialController extends ApiController {
                  'fetchType' => 'fetchAll',
                  'recurso' => 'materialesHistoricos'
              ]);
-        
-        // $materiales = $this->modelMaterial->getHistoricos();
-        // $r = $this->modelHistorico->getAll('materialesHistoricos', [
-        //     'where' => [ 'material_id', 'IS NOT', 'NULL' ]
-        // ]);
-        // $r = $this->modelHistorico->getAll(
-        //     'materialesHistoricos',
-        //     "SELECT * 
-        //      FROM material_historico
-        //      WHERE material_id IS NOT NULL"
-        // );
         // $r->throw();
         $this->view->response($r);
-        // $this->view->response($materiales, 200);
     }  
 
     public function deleteMaterial($params = []) {
-        // $this->modelMaterial->deleteMaterial($params[':id']);
-        // $this->view->response($this->modelMaterial->delete($params[':id']), 200);
         $r = $this->modelMaterial->delete($params[':id']);
         $this->view->response($r);
         // $r->throw();
@@ -85,35 +65,12 @@ class MaterialController extends ApiController {
             ];
             $r = $this->modelMaterial->post($data, $opciones);
 
-            // [ $resultado, $mensaje ] = $this->modelMaterial->post($data, filter_var($params[ ':id' ] ?? null, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE));
-            // [ $resultado, $mensaje ] = isset($params[ ':id' ]) ? 
-            //     $this->modelMaterial->postMaterial($data, filter_var($params[ ':id' ], FILTER_VALIDATE_INT)) : 
-            //     $this->modelMaterial->postMaterial($data);
         }
         else {
             $r->setError(new Exception('Ingresar los datos requeridos', 400));
-            // $resultado = false;
-            // $mensaje = 'Ingresar los datos requeridos';
         }
         
         // $r->throw();
         $this->view->response($r);
-
-
-        // $respuesta = [ 'ok' => $resultado ];
-        // if (isset($params[ ':id' ])) {
-        //     $respuesta[ 'mensaje' ] = $mensaje;
-        // }
-        // elseif ($respuesta[ 'ok' ]) {
-        //     $respuesta[ 'id' ] = $mensaje;
-        //     $respuesta[ 'mensaje' ] = 'El material se cargó con éxito';
-        // }
-        // else {
-        //     $respuesta[ 'id' ] = null;
-        //     $respuesta[ 'mensaje' ] = $mensaje;
-        // }
-        
-        // $this->view->response($respuesta, $resultado ? 200 : 400);
-        
     }
 }

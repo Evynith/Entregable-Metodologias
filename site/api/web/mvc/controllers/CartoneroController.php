@@ -1,6 +1,5 @@
 <?php
 
-// require_once('./mvc/models/CartoneroModel.php');
 require_once('./mvc/controllers/ApiController.php');
 
 class CartoneroController extends ApiController {
@@ -9,7 +8,6 @@ class CartoneroController extends ApiController {
 
     public function __construct() {
         parent::__construct();
-        // $this->modelCartonero = new CartoneroModel();
         $this->modelCartonero = new Model('cartonero');
     }
     
@@ -23,9 +21,6 @@ class CartoneroController extends ApiController {
         );
         // $r->throw();
         $this->view->response($r);
-        
-        // $cartoneros = $this->modelCartonero->getAll();
-        // $this->view->response($cartoneros, 200);
     }  
 
     // public function postCartonero($params) {

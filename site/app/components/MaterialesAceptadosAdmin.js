@@ -35,13 +35,6 @@ const MaterialesAceptadosTemplate = `
         </li>
       </ul>
 
-      <!--
-      <div v-if="respuesta != undefined" 
-        :class="['alert', 'mt-4', { 'alert-danger': ! respuesta.ok, 'alert-success': respuesta.ok }]" role="alert"
-      >
-        {{ mensajeRespuesta }}
-      </div>-->
-
     </div>
 
     <div class="col-md-8">

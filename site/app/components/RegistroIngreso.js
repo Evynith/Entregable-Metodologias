@@ -72,15 +72,6 @@ const RegistroIngresoTemplate = `
               </div>
         
               <respuesta-modal v-model="respuesta" r-id="respuesta-registroIngreso"></respuesta-modal>
-              <!--<div v-if="respuesta"
-                :class="['alert', { 'alert-danger': !respuesta.ok, 'alert-success': respuesta.ok }]" role="alert">
-                <template v-if="respuesta.ok">
-                  Registro cargado con éxito
-                </template>
-                <template v-else>
-                  No se pudo cargar el registro
-                </template>
-              </div>-->
           </form>
         </div>
   

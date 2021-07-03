@@ -1,6 +1,6 @@
 <?php
-require_once ('./mvc/view/JSONView.php');
 
+require_once './mvc/models/Model.php';
 require_once "./mvc/view/JSONView.php";
 
 class ApiController {
