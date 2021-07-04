@@ -45,9 +45,7 @@ const MaterialABMTemplate = `
 
   </template>
   <bs-spinner v-else-if="deleting"></bs-spinner>
-
 `
-
 
 export default {
   data() {
@@ -63,15 +61,16 @@ export default {
   methods: {
     informarRespuesta(r) {
       this.$emit('responded', r)
+      // this.respuesta = r
       // this.$emit('update:modelValue', state)
     },
     async eliminar() {
-      console.log('# MaterialABM : eliminando', this.material)
+      // console.log('# MaterialABM : eliminando', this.material)
       this.deleting = true
-      const r = await Api.deleteMaterial(this.material)
+      const r = await Api.deleteMaterial(this.material.id)
       this.informarRespuesta(r)
       this.deleting = false
-      console.log('# Eliminado material : MaterialABM', r)
+      // console.log('# Eliminado material : MaterialABM', r)
       this.$emit('updated')
     },
     iniciarEdicion() {
@@ -105,7 +104,7 @@ export default {
       }
       else {
         this.error = r.mensaje
-        console.log(this.error)
+        // console.log(this.error)
       }
     }
   },

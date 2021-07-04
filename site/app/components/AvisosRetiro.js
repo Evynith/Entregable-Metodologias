@@ -2,9 +2,6 @@ import Api from '../api/Api.js'
 
 const AvisoRetiroRow = {
   template: `
-    <template >
-
-    </template>
     <tr class="desplegable-click" @click="desplegada = !desplegada" :class="[ { 'bg-lg': desplegada } ]">
       <template v-if="!desplegada">
         
@@ -51,9 +48,6 @@ const AvisoRetiroRow = {
               <p class="fw-light mb-0">{{aviso.nombre + aviso.apellido}}</p>
             </div>
           </div>
-          <div class="row align-bottom">
-          <div class="col">
-          </div>
         </td>
       </template>
     </tr>
@@ -99,8 +93,8 @@ const AvisosRetiroTemplate = `
     </thead>
 
     <tbody>
-      <aviso-retiro-row v-for="aviso of avisosRetiro" :aviso="aviso">
-      </aviso-retiro-row>
+      <aviso-retiro-row v-for="aviso of avisosRetiro" :aviso="aviso"></aviso-retiro-row>
+    </tbody>
   </table>
   
 </section>
@@ -118,7 +112,7 @@ export default {
         return this.avisosRetiro == undefined
       }
     },
-    async created() {
+    async mounted() {
         this.avisosRetiro = await Api.getAvisosRetiro()
         // console.log('pude obtener datos', this.materiales)
     },
