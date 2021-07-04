@@ -68,37 +68,8 @@ const AvisoRetiroTemplate = `
   <div class="col-md d-none d-md-block"></div>
 </div>
 
-  <div id="modal-respuesta" class="modal modal-fullscreen-sm-down" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <template v-if="respuesta">
-            <h5 v-if="respuesta.ok == true" class="modal-title">Aviso cargado con éxito</h5>
-            <h5 v-else class="modal-title">No se pudo cargar su aviso</h5>
-          </template>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p v-if="respuesta" v-html="respuesta.mensaje"></p>
-        </div>
-        <div class="modal-footer">
-          <template v-if="respuesta">
-            <template v-if="respuesta.ok == true">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Eliminar aviso</button>
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
-            </template>
-            <template v-else-if="respuesta.direccion">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Visitar cartelera</button>
-            </template>
-            <template v-else>
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-            </template>
-          </template>
-        </div>
-      </div>
-    </div>
-  </div>
+<respuesta-modal v-model="respuesta" r-id="respuesta-avisoRetiro"></respuesta-modal>
+
 </section>`
 
 export default {
@@ -140,14 +111,14 @@ export default {
     },
     methods: {
         async post() {
-          console.log('# Post: ', JSON.stringify(this.ar))
+          console.log('# AvisoRetiro.js - Post: ', JSON.stringify(this.ar))
           this.posting = true
           const r = await Api.postAvisoRetiro(this.ar)
           this.respuesta = r 
           this.posting = false
-          new bootstrap.Modal(document.querySelector('#modal-respuesta'), { // launch modal
-                  keyboard: false
-              }).show()
+          // new bootstrap.Modal(document.querySelector('#modal-respuesta'), { // launch modal
+          //         keyboard: false
+          //     }).show()
         }
     },
     template: AvisoRetiroTemplate,
