@@ -8,15 +8,15 @@ SET DATESTYLE TO 'European';
 
 -- tables
 
--- Table: registro
-DROP TABLE IF EXISTS registro;
-CREATE TABLE registro (
+-- Table: usuario
+DROP TABLE IF EXISTS usuario;
+CREATE TABLE usuario (
     id int  NOT NULL,
-    nombre_usuario varchar(100)  NOT NULL,
-    mail varchar(100)  NOT NULL,
-    clave varchar(256)  NOT NULL,
-    CONSTRAINT registro_ak_1 UNIQUE (nombre_usuario, mail) NOT DEFERRABLE  INITIALLY IMMEDIATE,
-    CONSTRAINT registro_pk PRIMARY KEY (id)
+    usuario varchar(100)  NOT NULL,
+    email varchar(100)  NOT NULL,
+    contrasenia varchar(256)  NOT NULL,
+    CONSTRAINT registro_ak_1 UNIQUE (usuario, email) NOT DEFERRABLE  INITIALLY IMMEDIATE,
+    CONSTRAINT usuario_pk PRIMARY KEY (id)
 );
 
 -- Table: aviso_retiro
