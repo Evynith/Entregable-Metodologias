@@ -70,7 +70,6 @@ const RegistroIngresoMaterialesTemplate = `
         <btn-cancelar  label="Volver" class-list="btn btn-primary py-2"
         ></btn-cancelar>
       </div>
-      </form>
     </div>
   
     <div class="col-md d-none d-md-block"></div>
@@ -107,7 +106,7 @@ export default {
     // console.log('#id: ', this.recolectado, this.cartonero)
     // console.log('#id: ', this.$route.params)
     const t = this
-    Api.getData('admin/materiales-historicos').then(r => t.materiales_historicos = r)
+    Api.getData('admin/materiales-historicos').then(r => t.materiales_historicos = r.data.materialesHistoricos)
   },
   mounted() {
     this.materiales_cargados = this.modelValue
