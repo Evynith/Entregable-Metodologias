@@ -11,11 +11,12 @@ SET DATESTYLE TO 'European';
 -- Table: usuario
 DROP TABLE IF EXISTS usuario;
 CREATE TABLE usuario (
-    id int  NOT NULL,
+    id SERIAL NOT NULL,
     usuario varchar(100)  NOT NULL,
     email varchar(100)  NOT NULL,
     contrasenia varchar(256)  NOT NULL,
-    CONSTRAINT registro_ak_1 UNIQUE (usuario, email) NOT DEFERRABLE  INITIALLY IMMEDIATE,
+    CONSTRAINT usuario_ak_usuario UNIQUE (usuario) NOT DEFERRABLE  INITIALLY IMMEDIATE,
+    CONSTRAINT usuario_ak_email UNIQUE (email) NOT DEFERRABLE  INITIALLY IMMEDIATE,
     CONSTRAINT usuario_pk PRIMARY KEY (id)
 );
 
