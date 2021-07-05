@@ -1,7 +1,7 @@
 import Api from '../api/Api.js'
 const CartoneroModifyTemplate = `
 
-<bs-spinner v-if="loading"></bs-spinner>
+<bs-spinner v-if="fetching"></bs-spinner>
 <template v-else-if="cartonero != undefined">
   <form class="p-2 form-control-sm" id="form-cartonero">
 
@@ -87,20 +87,9 @@ export default {
         }
     },
     computed : {
-      loading() {
+      fetching() {
         return this.volumenesMateriales == undefined
       },
-      
-      // cartonero: {
-        // get() {
-        //     // return this.convertirAPosteable(this.modelValue)
-        //     return this.modelValue
-        // },
-        // set(val) { // como se modifican propiedades del objeto, nunca se ejecutaba
-        //   console.log(val)
-        //   this.$emit('update:modelValue', val);
-        // }
-      // },
       verificado() {
         return true
       }
@@ -113,14 +102,15 @@ export default {
             this.$emit('update:modelValue', val)
           }
           else if (val.id) { // solo si es edit notifica los cambios
-            this.$emit('update:modelValue', this.convertirAVisible(val)) // desestructura pq si se pasa asi nomas (por referencia), modelValue pasa a ser el mismo objeto 
+            this.$emit('update:modelValue', this.formatView(val)) // desestructura pq si se pasa asi nomas (por referencia), modelValue pasa a ser el mismo objeto 
           }
         },
         deep: true // pra que detecte cambios en propiedades y no solo cuando se reasigna (cartonero = otraCosa),
       },
     },
     methods : {
-      convertirAPosteable(cartoneroVisible) {
+      formatPost(cartoneroVisible) {
+        console.log('#CartoneroModify - recibiendo ', JSON.parse(JSON.stringify(cartoneroVisible)))
         const posteable = { ...cartoneroVisible }
         if (posteable.id) { // si es editar hay que convertir los datos para que se carguen bien los inputs
           let [ dia, mes, anio ] = cartoneroVisible.fecha_nacimiento.split('/')
@@ -131,7 +121,7 @@ export default {
         }
         return posteable;
       },
-      convertirAVisible(cartoneroPosteable) {
+      formatView(cartoneroPosteable) {
         const visible = { ...cartoneroPosteable }
         let [ anio, mes, dia ] = cartoneroPosteable.fecha_nacimiento.split('-')
         // if (mes.length == 1) mes = 0 + mes
@@ -168,7 +158,7 @@ export default {
     },
     async mounted() {
       this.volumenesMateriales = await Api.getVolumenesMateriales()
-      this.cartonero = this.convertirAPosteable(this.modelValue)
+      this.cartonero = this.formatPost(this.modelValue)
     },
     template: CartoneroModifyTemplate,
     emits: ['update:modelValue', 'guardar', 'cancelar'],

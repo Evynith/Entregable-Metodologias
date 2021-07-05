@@ -78,7 +78,7 @@ const CartoneroABMTemplate = `
     ></cartonero-modify>
 
   </template>
-  <bs-spinner v-else-if="deleting"></bs-spinner>
+  <bs-spinner v-else-if="deleting || actualizando"></bs-spinner>
 
 `
 
@@ -93,7 +93,7 @@ export default {
       deleting: false
     }
   },
-  props: ['modelValue'],
+  props: ['modelValue', 'actualizando'],
   methods: {
     informarRespuesta(r) {
       this.$emit('responded', r)
@@ -131,7 +131,7 @@ export default {
 
       const posted = { ...cartonero }
       delete posted.id
-      console.log('#CartoneroABM.js - posteando', posted)
+      // console.log('#CartoneroABM.js - posteando', posted)
       const r = await Api.postCartonero(posted, this.editar ? this.cartonero.id : null)
       this.editar = false
       this.posting = false
