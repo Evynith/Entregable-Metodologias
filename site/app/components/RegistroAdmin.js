@@ -36,7 +36,12 @@ const RegistroAdminTemplate =`
                     </div>
         
                     <div class="d-grid gap-2">
-                        <button class="btn btn-primary">Registrarse</button>
+                        <button :disabled="!verificado || posting" class="btn btn-primary">
+                            <template v-if="!posting">Registrarse</template>
+                            <div v-else class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </button>
                         <button class="btn btn-link">Cancelar</button>
                     </div>
 
@@ -62,7 +67,8 @@ export default {
             mensajeError: "",
             contraseniaReingreso: "",
             emailReingreso: "",
-            respuesta: undefined
+            respuesta: undefined,
+            posting: false
         }
     },
     computed: {
@@ -88,6 +94,7 @@ export default {
         async post() {
             if(this.verificado){
                 console.log("posteando", JSON.parse(JSON.stringify(this.datosRegistro)));
+                this.posting = true;
                 let r = await Api.postUsuario(this.datosRegistro)
                 console.log("recibido ", this.respuesta)
                 let errorRegistro = r.error;
@@ -97,6 +104,7 @@ export default {
                 } else {
                     this.respuesta = r;
                 }
+                this.posting = false;
             }
         }
     },

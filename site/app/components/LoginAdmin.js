@@ -24,7 +24,12 @@ const LoginAdminTemplate =`
                     </div>
         
                     <div class="d-grid gap-2">
-                        <button class="btn btn-primary">Ingresar</button>
+                        <button :disabled="!verificado || posting" class="btn btn-primary">
+                            <template v-if="!posting">Ingresar</template>
+                            <div v-else class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </button>
                     </div>
                     <p v-if="mensajeError != ''" class="alert alert-danger mt-4">{{ mensajeError }}</p>
                 </form>
@@ -45,7 +50,8 @@ export default {
                     contrasenia: ""
                 },
                 mensajeError: '',
-                respuesta: undefined
+                respuesta: undefined,
+                posting: false
         }
     },
     computed: {
@@ -58,6 +64,7 @@ export default {
             if(this.verificado){
                 console.log("posteando", this.datosLogin);
                 // this.respuesta = await Api.login(this.datosLogin);
+                this.posting = true;
                 let r = await Api.login(this.datosLogin);
                 let errorLogin = r.error;
                 // console.log(r.error);
@@ -66,6 +73,7 @@ export default {
                 } else {
                     this.mensajeError = "";
                 }
+                this.posting = false;
             } else {
                 this.mensajeError = "Faltan ingresar datos";
             }

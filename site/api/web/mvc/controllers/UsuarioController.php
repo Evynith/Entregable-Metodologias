@@ -27,7 +27,7 @@ class UsuarioController extends ApiController {
                 ",
                 [
                     'values'    => [$data->usuario],
-                    'fetchType' => 'fetchAll',
+                    'fetchType' => 'fetch',
                     'recurso'   => 'usuario'
                 ]
             );
@@ -36,7 +36,8 @@ class UsuarioController extends ApiController {
 
                 // var_dump($usuario[0]->contrasenia);
 
-                $coincidenContrasenias = password_verify($data->contrasenia, $usuario[0]->contrasenia);
+                // $coincidenContrasenias = password_verify($data->contrasenia, $usuario[0]->contrasenia);
+                $coincidenContrasenias = password_verify($data->contrasenia, $usuario->contrasenia);
                 if($coincidenContrasenias) {
                     // Auth::login($usuario);
                 } else {
