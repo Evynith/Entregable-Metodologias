@@ -134,6 +134,7 @@ export default class Api {
     // // console.log(r)
     // return r
   }
+
   static async postData(endpoint, data, method = 'POST') {
     let options = {
       method,
@@ -166,6 +167,81 @@ export default class Api {
     // }
     // return r
   }
+
+  static async postCartonero(c, id = null) {
+    console.log(`#Api - ${id == null ? 'post' : `id(${id})` } cartonero `, c)
+    let url = 'admin/cartonero'
+    const method = id == null ? 'POST' : 'PUT'
+    if (id != null) {
+      url += '/' + id
+    }
+    // console.log('#Api posting ', c)
+    return Api.postData(url, c, method)
+    // const cartonero_id = id != null ? id : 1 // para que no tire error el create con id null
+    // console.log('#Api - posting cartonero ', JSON.stringify(c))
+    // return new Promise(r => {
+    //   let ok = {
+    //     ok: true,
+    //     data: {
+    //       id: cartonero_id 
+    //     }
+    //   }
+    //   let err = {
+    //     ok: false,
+    //     error: "no existe el id 8",
+    //     data: {
+    //       id: 8
+    //     }
+    //   }
+    //   setTimeout(r(ok), 500)
+    // })
+  }
+
+  // static async deleteCartonero(id) {
+  //   return new Promise(r => {
+  //     let ok = {
+  //       ok: true,
+  //       data: {
+  //         id 
+  //       }
+  //     }
+  //     setTimeout(r(ok), 500)
+  //   })
+  // }
+
+  static async deleteCartonero(id) {
+    return Api.delete('admin/cartonero/' + id)
+  }
+  
+  static async getCartoneros() {
+    return Api.getData('admin/cartoneros').then(json => json.data.cartoneros)
+  }
+  static async getCartonero(id) {
+    return Api.getData('admin/cartonero/' + id).then(json => json.data.cartonero);
+    // const cartoneros = await Api.getLocalJSON('admin/cartoneros_full')
+    // let cartonero;
+    // for (const c of cartoneros) {
+    //   if (c.id == id) {
+    //     cartonero = c
+    //     break
+    //   }
+    // }
+    // // console.log('Api.js - get cartonero id', id, cartonero)
+
+    // return cartonero != undefined ? cartonero : 
+    //   await Api.getCartoneros().then(arr => arr.find((c) => c.id = id)) 
+    // {
+    //   "id": id,
+    //   "dni": 0,
+    //   "nombre": "no existe en json local",
+    //   "apellido": "",
+    //   "direccion": "",
+    //   "fecha_nacimiento": "0000-1-1",
+    //   "vehiculo_volumen": 0
+    // }
+  
+  }
+  
 
   static async getMaterialesAceptados() {
     return Api.getData('materiales-aceptados').then(json => json.data.materialesAceptados)

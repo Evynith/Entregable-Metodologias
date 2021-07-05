@@ -10,6 +10,7 @@ import MaterialesAceptadosAdmin from './components/MaterialesAceptadosAdmin.js'
 import AvisosRetiro from './components/AvisosRetiro.js'
 import LoginAdmin from './components/LoginAdmin.js'
 import RegistroAdmin from './components/RegistroAdmin.js'
+import CartonerosAdmin from './components/CartonerosAdmin.js'
 import RespuestaModal from './components/RespuestaModal.js'
 
 const NotFound = { template: '<div>Not found</div>' }
@@ -45,6 +46,7 @@ const BsAlert = {
 const routes = [
   { path: '/', component: Home },
   { path: '/ofrecer-materiales', component: AvisoRetiro },
+  { path: '/admin/administrar-cartoneros', component: CartonerosAdmin },
   { path: '/materiales-aceptados', component: MaterialesAceptados },
   { path: '/admin/login', component: LoginAdmin },
   { path: '/admin/registro', component: RegistroAdmin },

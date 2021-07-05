@@ -28,6 +28,9 @@ export default {
             <li class="nav-item">
               <router-link to="/admin/administrar-materiales" class="dropdown-item">Administrar materiales</router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/admin/administrar-cartoneros" class="dropdown-item">Administrar cartoneros</router-link>
+            </li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item disabled" href="#">Logout</a></li>
           </ul>

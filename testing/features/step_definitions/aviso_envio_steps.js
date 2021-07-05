@@ -18,7 +18,7 @@ module.exports = function () {
 
     this.When(/^Escribo el nombre ([^"]*)$/, function(nombre) {
 
-        return helpers.loadPage('https://federico-de-muguruza.github.io/tpe_metodologias/#/ofrecer-materiales')
+        return helpers.loadPage(page.avisoEnvio.url)
            
         .then(function(){
             return shared.ayudante.esperarCarga(page.avisoEnvio.enviarNombre, nombre);
