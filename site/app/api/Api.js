@@ -155,6 +155,54 @@ export default class Api {
     // return r
   }
 
+  static async postCartonero(c, id = null) {
+    const cartonero_id = id != null ? id : 1 // para que no tire error el create con id null
+    return new Promise(r => {
+      let ok = {
+        ok: true,
+        data: {
+          id: cartonero_id 
+        }
+      }
+      let err = {
+        ok: false,
+        error: "no existe el id 8",
+        data: {
+          id: 8
+        }
+      }
+      setTimeout(r(ok), 500)
+    })
+  }
+
+  static async deleteCartonero(id) {
+    return new Promise(r => {
+      let ok = {
+        ok: true,
+        data: {
+          id 
+        }
+      }
+      setTimeout(r(ok), 500)
+    })
+  }
+  
+  static async getCartoneros() {
+    return Api.getData('admin/cartoneros').then(json => json.data.cartoneros)
+  }
+  static async getCartonero(id) {
+    const cartoneros = await Api.getLocalJSON('admin/cartoneros_full')
+    let cartonero;
+    for (const c of cartoneros) {
+      if (c.id == id) {
+        cartonero = c
+        break
+      }
+    }
+    return cartonero
+  }
+  
+
   static async getMaterialesAceptados() {
     return Api.getData('materiales-aceptados').then(json => json.data.materialesAceptados)
   }

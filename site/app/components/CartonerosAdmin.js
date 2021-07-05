@@ -1,7 +1,7 @@
+import Api from '../api/Api.js'
 import CartoneroABM from './CartoneroABM.js'
 
 const CartonerosTemplate = `
-
 <section>
   <header class="d-flex align-items-center mt-2 mb-4">  <!-- class="d-flex justify-content-around" --> <!-- cuando aparece botón se le agrega esas clases a header-->
     <h1 class="d-flex justify-content-start fs-1 me-4">Listado de cartoneros</h1> 
@@ -13,11 +13,10 @@ const CartonerosTemplate = `
     </a> 
   </header>
 
-  <!-- <bs-spinner v-if="loading">
-  </bs-spinner> -->
-
-  <div class="row">
-    <div class="col-md-5">
+  <bs-spinner v-if="loading">
+  </bs-spinner> 
+  <div v-else class="row">
+    <div class="col-md-4">
       <div class="input-group pe-md-4">
         <input class="form-control " type="search" placeholder="Buscar por nombre o apellido" aria-describedby="btn-buscar">
         <button class="btn  btn-outline-success" id="btn-buscar" type="submit">
@@ -26,46 +25,33 @@ const CartonerosTemplate = `
           </svg>
         </button>
       </div>
-      <p class="text-muted small mb-0 mt-2">(3 cartoneros)</p>
-      <ul class="nav d-flex flex-column justify-content-center pe-md-1 elementos-material" id="pills-tab" role="tablist">
-        <li role="presentation" class="my-1 ps-1 pe-1 d-grid gap-2">
-          <button type="button" role="tab" data-bs-toggle="pill" class="btn btn-success"
-            @click="scrollToTabContent"
-          >
-          Guillermina MENENDEZ
-          </button>
-          <button type="button" role="tab" data-bs-toggle="pill" class="btn btn-success"
-            @click="scrollToTabContent"
-          >
-          Hernesto GUTIERRES
-          </button>
-          <button type="button" role="tab" data-bs-toggle="pill" class="btn btn-success"
-            @click="scrollToTabContent"
-          >
-          Hernesto GUTIERRES
+      <p class="text-muted small mb-0 mt-2">({{ cartoneros.length }} cartoneros)</p>
+      <ul class="nav d-flex flex-column justify-content-center pe-md-1 elementos-material">
+        <li v-for="(c, i) of cartoneros"
+          role="presentation" class="my-1 ps-1 pe-1 d-grid gap-2"
+        >
+          <button type="button" class="btn btn-success"
+            @click="updateSelectedItem(c.id)"
+          > {{ c.nombre + " " + c.apellido }}
           </button>
         </li>
       </ul>
     </div>
 
-    <!-- <div v-if="respuesta != undefined" 
-      :class="['alert', 'mt-4', { 'alert-danger': ! respuesta.ok, 'alert-success': respuesta.ok }]" role="alert"
-    >
-      {{ mensajeRespuesta }}
-    </div> -->
 
     <div class="col-md-8">
       <cartonero-abm 
         v-model="selectedItem"
         @updated="resync"
-        @cancelar-creacion="cartoneros.shift()"
+        @cancelar-creacion="cancelarCreacion"
         @cancelar-edicion="cancelarEdicion"
         @responded="manejarRespuesta"
       ></cartonero-abm>
     </div>
+  </div>
 
+  <respuesta-modal v-model="respuesta" r-id="respuesta-abmCartoneros"></respuesta-modal>
 </section>
-<!-- </section> -->
 `
 
 export default {
@@ -87,21 +73,29 @@ export default {
         }
     },
     computed: {
-      mensajeRespuesta() {
-        if (this.respuesta != undefined) {
-          if (this.respuesta.mensaje != undefined || ! this.respuesta.ok) {
-            return this.respuesta.mensaje
-          }
-          else {
-            return `Operación realizada con éxito`
-          }
-        }
-      },
       verificado() {
         return true
       },
       loading() {
         return this.cartoneros == undefined
+      }
+    },
+    watch: {
+      selectedItem: {
+        handler: function (val, oldVal) { // si modifica nombre o apellido lo actualiza en el array
+          // console.log('#CartneroAdmin - updated selectedValue desde', oldVal, ' a ', val)
+          if (val != undefined && val.id) { // solo si es editar el cartonero esta en el array
+            let itemIndex = this.cartoneros.findIndex((c) => c.id == val.id)
+            const arrayItem = this.cartoneros[itemIndex]
+            const { id, nombre, apellido } = val
+            if (arrayItem.nombre != nombre || arrayItem.apellido != apellido) {
+              const itemUpdated = { id, nombre, apellido }
+              this.cartoneros[itemIndex] = itemUpdated
+              console.log('#CartneroAdmin - updated arrayItem ', this.cartoneros[itemIndex], ' a ', itemUpdated )
+            }
+          }
+        },
+        deep: true
       }
     },
     async mounted() {
@@ -111,13 +105,17 @@ export default {
     methods: {
       manejarRespuesta(r) {
         this.respuesta = r
-        const t = this
-        setTimeout(() => {
-          t.respuesta = undefined
-        }, 5000)
+        // const t = this
+        // setTimeout(() => {
+        //   t.respuesta = undefined
+        // }, 5000)
       },
       cancelarEdicion() {
-        this.cartoneross[this.cartoneros.findIndex((m)=>m.id == this.selectedItem.id)] = this.selectedItem
+        const { id, nombre, apellido } = this.selectedItem // solo guarda los datos minimos
+        this.cartoneros[this.cartoneros.findIndex((c)=> c.id == this.selectedItem.id)] = { id, nombre, apellido }
+      },
+      cancelarCreacion() { // se deberia cancelar solo (Modify lo hace undefined)
+        // this.cartoneros.shift()
       },
       async resync(id = null) {
         this.cartoneros = undefined
@@ -127,7 +125,7 @@ export default {
           if (id != null) { // si es put o delete
             let index = t.cartoneros.findIndex((m)=>m.id == id)
             if (index != -1) { // si no fue borrado
-              this.selectedItem = this.cartoneros[index]
+              this.updateSelectedItem(id)
             }
             else {
               console.log(`# No existe el cartonero ${id} : Cartoneros`)
@@ -141,29 +139,36 @@ export default {
       },
       async getCartoneros() {
 
-        this.cartoneros = await Api.getCartonerosAceptados()
-        if (this.cartoneros.ok != undefined) {
-          console.log('# error get Cartoneros : Cartoneros ', this.cartoneros.mensaje)
-          this.cartoneros = []
-          setTimeout(this.getCartoneros, 1000)
-        }
-        console.log('pude obtener datos', this.cartoneros)
+        this.cartoneros = await Api.getCartoneros()
+        // this.updateSelectedItem(1)
+        // if (this.cartoneros.ok != undefined) {
+        //   console.log('# error get Cartoneros : Cartoneros ', this.cartoneros.mensaje)
+        //   this.cartoneros = []
+        //   setTimeout(this.getCartoneros, 1000)
+        // }
+        // console.log('pude obtener datos', this.cartoneros)
       
     },
     addCartonero() {
       this.selectedItem = {
         "id": null,
+        "dni": undefined,
         "nombre": "",
         "apellido": "",
-        "DNI": "",
         "direccion": "",
-        "nacimiento": "",
-        "vehiculo": ""
+        "fecha_nacimiento": undefined,
+        "vehiculo_volumen": undefined // el id
       }
-      this.cartoneros.unshift(this.selectedItem)
+      // this.cartoneros.unshift(this.selectedItem)
     },
-    updateSelectedItem: function updateSelectedItem(cartonero) {
-      this.selectedItem = cartonero;
+    updateSelectedItem: async function (id) {
+      const cartoneroRecibido = await Api.getCartonero(id);
+      let cartoneroMostrado = { ...cartoneroRecibido }
+      const fecha = new Date(cartoneroRecibido.fecha_nacimiento)
+      // cartoneroMostrado.fecha_nacimiento = `${fecha.getFullYear()}-${fecha.getMonth()}-${fecha.getDate()}`
+      cartoneroMostrado.fecha_nacimiento = `${fecha.getDate()}/${fecha.getMonth()}/${fecha.getFullYear()}`
+      // cartoneroMostrado.fecha_nacimiento = fecha.toLocaleString() // tiene tmb la hora del dia
+      this.selectedItem = cartoneroMostrado
     }
   },
     template: CartonerosTemplate,
