@@ -24,16 +24,28 @@ class Model {
         $recurso    = $opciones[ 'recurso' ]    ?? null; // el nombre con el que guarda la respuesta de la db 
 
         $r = new Respuesta();
+        // $r->setData($opciones);
+        // $r->throw();
+        // die();
         try {
             $stm = Database::query($query, $values);
             // return [ true, $stm->fetchAll(PDO::FETCH_OBJ) ];
             if ( ! empty($fetchType) ) {
                 $data = $stm->$fetchType(PDO::FETCH_OBJ);
+                // $r->setData($data);
+                // $r->throw();
+                // die();
                 if ( empty($recurso) ) {
                     $r->setData($data);
                 }
                 else {
+                    // $r->setData($data);
+                    // $r->throw();
+                    // die();
                     $r->set($recurso, $data);
+                    if ( ! $r->tiene($recurso) ) {
+                        $r->setError(new Exception('No se pudo', 404));
+                    }
                 }
             }
         }
