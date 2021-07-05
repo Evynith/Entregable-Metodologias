@@ -72,7 +72,7 @@ class UsuarioController extends ApiController {
                 ]
             );
             if ($respuesta->ok()) {
-                $respuesta->setMensaje( "El registro de ingreso fue cargado con exito." );
+                $respuesta->setMensaje( "Su usuario ha sido registrado con éxito." );
             } else {
                 $respuesta->setMensaje( 'Error en la carga del registro.' );
             }
