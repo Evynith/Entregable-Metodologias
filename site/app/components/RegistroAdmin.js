@@ -83,9 +83,10 @@ export default {
     methods: {
         async post() {
             if(this.verificado){
-                console.log("posteando", this.datosRegistro);
+                console.log("posteando", JSON.parse(JSON.stringify(this.datosRegistro)));
                 const r = await Api.postUsuario(this.datosRegistro)
-                this.respuesta = r
+                console.log("recibido ", r)
+                // this.respuesta = r
             }
         }
     },

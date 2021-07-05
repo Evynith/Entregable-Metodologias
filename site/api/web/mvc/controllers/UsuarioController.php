@@ -62,7 +62,7 @@ class UsuarioController extends ApiController {
 
         if (!empty($data->usuario) && !empty($data->contrasenia) && !empty($data->email)){
 
-            var_dump(password_hash('admin', PASSWORD_DEFAULT));
+            // var_dump(password_hash('admin', PASSWORD_DEFAULT));
 
             $data->contrasenia = password_hash($data->contrasenia, PASSWORD_DEFAULT);
             $respuesta = $this->modelUsuario->post($data,
