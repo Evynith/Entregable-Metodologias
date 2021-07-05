@@ -32,6 +32,9 @@ const LoginAdminTemplate =`
         </div>
         
     </div>
+
+    <respuesta-modal v-model="respuesta" r-id="respuesta-loginAdmin"></respuesta-modal>
+
 </section>
     `
 export default {
@@ -54,8 +57,7 @@ export default {
         async post() {
             if(this.verificado){
                 console.log("posteando", this.datosLogin);
-                const r = await Api.login(this.datosLogin)
-                this.respuesta = r
+                this.respuesta = await Api.login(this.datosLogin);
                 this.mensajeError = "";
             } else {
                 this.mensajeError = "Faltan ingresar datos";

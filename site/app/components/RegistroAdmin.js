@@ -46,6 +46,9 @@ const RegistroAdminTemplate =`
         </div>
         
     </div>
+
+    <respuesta-modal v-model="respuesta" r-id="respuesta-registroAdmin"></respuesta-modal>
+
 </section>
     `
 export default {
@@ -58,7 +61,8 @@ export default {
             },
             mensajeError: "",
             contraseniaReingreso: "",
-            emailReingreso: ""
+            emailReingreso: "",
+            respuesta: undefined
         }
     },
     computed: {
@@ -84,8 +88,8 @@ export default {
         async post() {
             if(this.verificado){
                 console.log("posteando", JSON.parse(JSON.stringify(this.datosRegistro)));
-                const r = await Api.postUsuario(this.datosRegistro)
-                console.log("recibido ", r)
+                this.respuesta = await Api.postUsuario(this.datosRegistro)
+                console.log("recibido ", this.respuesta)
                 // this.respuesta = r
             }
         }
