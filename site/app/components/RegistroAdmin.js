@@ -88,9 +88,15 @@ export default {
         async post() {
             if(this.verificado){
                 console.log("posteando", JSON.parse(JSON.stringify(this.datosRegistro)));
-                this.respuesta = await Api.postUsuario(this.datosRegistro)
+                let r = await Api.postUsuario(this.datosRegistro)
                 console.log("recibido ", this.respuesta)
-                // this.respuesta = r
+                let errorRegistro = r.error;
+                // console.log(r.error);
+                if(errorRegistro){
+                    this.mensajeError = errorRegistro ;
+                } else {
+                    this.respuesta = r;
+                }
             }
         }
     },

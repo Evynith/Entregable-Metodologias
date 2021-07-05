@@ -57,8 +57,15 @@ export default {
         async post() {
             if(this.verificado){
                 console.log("posteando", this.datosLogin);
-                this.respuesta = await Api.login(this.datosLogin);
-                this.mensajeError = "";
+                // this.respuesta = await Api.login(this.datosLogin);
+                let r = await Api.login(this.datosLogin);
+                let errorLogin = r.error;
+                // console.log(r.error);
+                if(errorLogin){
+                    this.mensajeError = errorLogin ;
+                } else {
+                    this.mensajeError = "";
+                }
             } else {
                 this.mensajeError = "Faltan ingresar datos";
             }
