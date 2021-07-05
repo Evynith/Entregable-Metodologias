@@ -1,0 +1,52 @@
+<?php
+require_once('./mvc/controllers/ApiController.php');
+
+class UsuarioController extends ApiController {
+
+    private $modelUsuario;
+
+    public function __construct() {
+        parent::__construct();
+        $this->modelUsuario = new Model('usuario');
+    }
+    
+    public function login() {
+
+        $respuesta = new Respuesta; 
+        $data = $this->getData();
+
+        if (!empty($data->usuario) && !empty($data->contrasenia)){
+
+            $respuesta = $this->modelUsuario->query(
+                "SELECT *
+                 FROM usuario
+                 WHERE usuario = ?
+                ",
+                [
+                    'values'    => [$data->usuario]
+                    'fetchType' => 'fetchAll',
+                    'recurso'   => 'usuario'
+                ]
+            );
+            if ($respuesta->ok()) {
+                $usuario = $respuesta->get('usuario');
+                $coincidenContrasenias = password_verify($data->contrasenia, $usuario->contrasenia);
+                if($coincidenContrasenias) {
+                    Auth::login($usuario);
+                } else {
+                    $respuesta->setError(new Exception("La contraseña no coincide", 400));
+                }
+            } else {
+                $respuesta->setError(new Exception("No existe el usuario", 400));
+            }
+        } else {
+            $respuesta->setError(new Exception("Ingresar los datos requeridos", 400));
+        }
+        $this->view->response($respuesta);
+    }
+
+    public function postUsuario() {
+
+    }
+
+}
