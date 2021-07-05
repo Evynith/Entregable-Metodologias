@@ -8,6 +8,9 @@ import RegistroIngreso from './components/RegistroIngreso.js'
 import RegistroIngresoMateriales from './components/RegistroIngresoMateriales.js'
 import MaterialesAceptadosAdmin from './components/MaterialesAceptadosAdmin.js'
 import AvisosRetiro from './components/AvisosRetiro.js'
+import LoginAdmin from './components/LoginAdmin.js'
+import RegistroAdmin from './components/RegistroAdmin.js'
+import RespuestaModal from './components/RespuestaModal.js'
 
 const NotFound = { template: '<div>Not found</div>' }
 const BtnCancelar = {
@@ -43,6 +46,8 @@ const routes = [
   { path: '/', component: Home },
   { path: '/ofrecer-materiales', component: AvisoRetiro },
   { path: '/materiales-aceptados', component: MaterialesAceptados },
+  { path: '/admin/login', component: LoginAdmin },
+  { path: '/admin/registro', component: RegistroAdmin },
   { 
     path: '/admin/registro-ingreso', 
     component: RegistroIngreso,
@@ -87,5 +92,6 @@ app.component('app-home', Home)
 app.component('btn-cancelar', BtnCancelar)
 app.component('bs-spinner', BsSpinner)
 app.component('bs-alert', BsAlert)
+app.component('respuesta-modal', RespuestaModal)
 
 app.mount('#app')
