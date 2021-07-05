@@ -14,6 +14,9 @@ class UsuarioController extends ApiController {
 
         $respuesta = new Respuesta; 
         $data = $this->getData();
+        // $respuesta->setData($data);
+        // $respuesta->throw();
+        // die();
 
         if (!empty($data->usuario) && !empty($data->contrasenia)){
 
@@ -53,7 +56,9 @@ class UsuarioController extends ApiController {
         $respuesta = new Respuesta; 
         $data = $this->getData();
 
-        // var_dump($data);
+        // $respuesta->setData($data);
+        // $respuesta->throw();
+        // die();
 
         if (!empty($data->usuario) && !empty($data->contrasenia) && !empty($data->email)){
 
