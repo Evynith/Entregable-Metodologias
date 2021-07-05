@@ -7,6 +7,7 @@ import MaterialesAceptados from './components/MaterialesAceptados.js'
 import RegistroIngreso from './components/RegistroIngreso.js'
 import RegistroIngresoMateriales from './components/RegistroIngresoMateriales.js'
 import MaterialesAceptadosAdmin from './components/MaterialesAceptadosAdmin.js'
+import MaterialesRecolectados from './components/MaterialesRecolectados.js'
 import AvisosRetiro from './components/AvisosRetiro.js'
 import LoginAdmin from './components/LoginAdmin.js'
 import RegistroAdmin from './components/RegistroAdmin.js'
@@ -50,6 +51,7 @@ const routes = [
   { path: '/materiales-aceptados', component: MaterialesAceptados },
   { path: '/admin/login', component: LoginAdmin },
   { path: '/admin/registro', component: RegistroAdmin },
+  { path: '/materiales-recolectados', component: MaterialesRecolectados },
   { 
     path: '/admin/registro-ingreso', 
     component: RegistroIngreso,
