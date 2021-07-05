@@ -175,16 +175,20 @@ export default class Api {
     })
   }
 
+  // static async deleteCartonero(id) {
+  //   return new Promise(r => {
+  //     let ok = {
+  //       ok: true,
+  //       data: {
+  //         id 
+  //       }
+  //     }
+  //     setTimeout(r(ok), 500)
+  //   })
+  // }
+
   static async deleteCartonero(id) {
-    return new Promise(r => {
-      let ok = {
-        ok: true,
-        data: {
-          id 
-        }
-      }
-      setTimeout(r(ok), 500)
-    })
+    return Api.delete('admin/cartonero/' + id)
   }
   
   static async getCartoneros() {

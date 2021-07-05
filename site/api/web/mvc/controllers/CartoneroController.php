@@ -48,7 +48,7 @@ class CartoneroController extends ApiController {
         }
         else {
             $respuesta = new Respuesta([
-                'error' => new Exception('400', 'Ingresar todos los dtaods')
+                'error' => new Exception('400', 'Ingresar todos los datos')
             ]);    
         }
         
@@ -80,5 +80,10 @@ class CartoneroController extends ApiController {
         // }
         $this->view->response($r);
         // $r->throw();
+    }
+
+    public function deleteCartonero($params = []){
+        $r = $this->modelCartonero->delete($params[':id']);
+        $this->view->response($r);
     }
 }
