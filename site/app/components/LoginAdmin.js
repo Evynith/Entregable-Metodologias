@@ -54,7 +54,7 @@ export default {
         async post() {
             if(this.verificado){
                 console.log("posteando", this.datosLogin);
-                const r = await Api.postUsuario(this.datosLogin)
+                const r = await Api.login(this.datosLogin)
                 this.respuesta = r
                 this.mensajeError = "";
             } else {

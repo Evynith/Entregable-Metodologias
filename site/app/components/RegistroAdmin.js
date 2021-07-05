@@ -1,3 +1,4 @@
+import Api from '../api/Api.js'
 const RegistroAdminTemplate =`
 <section class="m-0 container-fluid">
     <div class="row">
@@ -80,9 +81,11 @@ export default {
         }
     },
     methods: {
-        post() {
+        async post() {
             if(this.verificado){
                 console.log("posteando", this.datosRegistro);
+                const r = await Api.postUsuario(this.datosRegistro)
+                this.respuesta = r
             }
         }
     },

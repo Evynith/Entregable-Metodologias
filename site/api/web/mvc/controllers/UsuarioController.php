@@ -50,15 +50,12 @@ class UsuarioController extends ApiController {
         $respuesta = new Respuesta; 
         $data = $this->getData();
 
+        // console.log($data);
+
         if (!empty($data->usuario) && !empty($data->contrasenia) && !empty($data->email)){
 
-            $contrasenia = password_hash($data->contrasenia, PASSWORD_DEFAULT);
-            $respuesta = $this->modelUsuario->post(
-                [
-                    'usuario' => $data->usuario,
-                    'email' => $data->email,
-                    'contrasenia' =>  $contrasenia
-                ],
+            $data->contrasenia = password_hash($data->contrasenia, PASSWORD_DEFAULT);
+            $respuesta = $this->modelUsuario->post($data,
                 [
                     'returning' => 'id'
                 ]
@@ -72,7 +69,6 @@ class UsuarioController extends ApiController {
             $respuesta->setError(new Exception("Ingresar los datos requeridos", 400));
         }
         $this->view->response($respuesta);
-
     }
 
 }

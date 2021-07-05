@@ -31,6 +31,7 @@ $router->addRoute("admin/material-aceptado/:id", "PUT", "MaterialController", "p
 $router->addRoute("admin/material-aceptado/:id", "DELETE", "MaterialController", "deleteMaterial");
 $router->addRoute("admin/avisos-retiro", "GET", "AvisoRetiroController", "getAvisosRetiro");
 $router->addRoute("admin/login", "POST", "UsuarioController", "login");
+$router->addRoute("admin/registro", "POST", "UsuarioController", "postUsuario");
 
 $router->addRoute("admin/registro-ingreso","POST","RegistroIngresoController","postRegistroIngreso");
 $router->addRoute("admin/tipos-usuario","GET","RegistroIngresoController","getTiposUsuario");
