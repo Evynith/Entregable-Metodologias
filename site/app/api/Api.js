@@ -55,6 +55,17 @@ export default class Api {
     // return r
   }
 
+  
+  static async postUsuario(m, id = null) {
+    // let r;
+    let url = 'admin/login'
+    const method = id == null ? 'POST' : 'PUT'
+    if (id != null) {
+      url += '/' + id
+    }
+    return Api.postData(url, m, method)
+  }
+
   static async postMaterial(m, id = null) {
     // let r;
     let url = 'admin/material-aceptado'
@@ -229,8 +240,7 @@ export default class Api {
             "error": "No se pudo obtener datos locales"
           }
         }
-      }
-      else {
+      } else {
         console.log('#Api.js - Error', e)
         json = {
           "ok": false,

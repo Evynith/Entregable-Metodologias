@@ -62,14 +62,12 @@ class UsuarioController extends ApiController {
                 [
                     'returning' => 'id'
                 ]
-            )
-            $mensaje = '';
+            );
             if ($respuesta->ok()) {
-                $mensaje .= "El registro de ingreso fue cargado con exito.";
+                $respuesta->setMensaje( "El registro de ingreso fue cargado con exito." );
             } else {
-                $mensaje .= 'Error en la carga del registro.';
+                $respuesta->setMensaje( 'Error en la carga del registro.' );
             }
-            $respuesta->setMensaje($mensaje);
         } else {
             $respuesta->setError(new Exception("Ingresar los datos requeridos", 400));
         }

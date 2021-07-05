@@ -5,7 +5,7 @@ require_once "./mvc/controllers/AvisoRetiroController.php";
 require_once "./libs/Router.php";
 require_once "./libs/GeoChe.php";
 require_once "./mvc/controllers/RegistroIngresoController.php";
-
+require_once "./mvc/controllers/UsuarioController.php";
 
 
 $resource = $_GET["action"];
@@ -30,7 +30,7 @@ $router->addRoute("admin/material-aceptado/:id", "GET", "MaterialController", "g
 $router->addRoute("admin/material-aceptado/:id", "PUT", "MaterialController", "postMaterial");
 $router->addRoute("admin/material-aceptado/:id", "DELETE", "MaterialController", "deleteMaterial");
 $router->addRoute("admin/avisos-retiro", "GET", "AvisoRetiroController", "getAvisosRetiro");
-
+$router->addRoute("admin/login", "POST", "UsuarioController", "login");
 
 $router->addRoute("admin/registro-ingreso","POST","RegistroIngresoController","postRegistroIngreso");
 $router->addRoute("admin/tipos-usuario","GET","RegistroIngresoController","getTiposUsuario");

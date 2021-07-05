@@ -1,3 +1,4 @@
+import Api from '../api/Api.js'
 const LoginAdminTemplate =`
 <section class="m-0 container-fluid">
     <div class="row">
@@ -40,7 +41,8 @@ export default {
                     usuario: "",
                     contrasenia: ""
                 },
-                mensajeError: ''
+                mensajeError: '',
+                respuesta: undefined
         }
     },
     computed: {
@@ -49,9 +51,11 @@ export default {
         }
     },
     methods: {
-        post() {
+        async post() {
             if(this.verificado){
                 console.log("posteando", this.datosLogin);
+                const r = await Api.postUsuario(this.datosLogin)
+                this.respuesta = r
                 this.mensajeError = "";
             } else {
                 this.mensajeError = "Faltan ingresar datos";
