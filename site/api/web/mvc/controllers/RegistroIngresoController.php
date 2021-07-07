@@ -49,7 +49,7 @@ class RegistroIngresoController extends ApiController {
         $r = Model::query(
             $query, [
                 'fetchType' => 'fetchAll',
-                // 'recurso' => 'materialesRecolectados',
+                'recurso' => 'materialesRecolectados',
                 'values' => [$id],
             ]);  
             // var_dump($r);
