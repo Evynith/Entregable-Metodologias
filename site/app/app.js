@@ -9,6 +9,8 @@ import RegistroIngresoMateriales from './components/RegistroIngresoMateriales.js
 import MaterialesAceptadosAdmin from './components/MaterialesAceptadosAdmin.js'
 import MaterialesRecolectados from './components/MaterialesRecolectados.js'
 import AvisosRetiro from './components/AvisosRetiro.js'
+import LoginAdmin from './components/LoginAdmin.js'
+import RegistroAdmin from './components/RegistroAdmin.js'
 import RespuestaModal from './components/RespuestaModal.js'
 
 const NotFound = { template: '<div>Not found</div>' }
@@ -46,6 +48,8 @@ const routes = [
   { path: '/ofrecer-materiales', component: AvisoRetiro },
   { path: '/materiales-aceptados', component: MaterialesAceptados },
   { path: '/admin/materiales-recolectados', component: MaterialesRecolectados },
+  { path: '/admin/login', component: LoginAdmin },
+  { path: '/admin/registro', component: RegistroAdmin },
   { 
     path: '/admin/registro-ingreso', 
     component: RegistroIngreso,

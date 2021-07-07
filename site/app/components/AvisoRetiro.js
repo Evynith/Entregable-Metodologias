@@ -7,7 +7,7 @@ const AvisoRetiroTemplate = `
     <span class="visually-hidden">Loading...</span>
   </div>
 </div>
-<section v-else>
+<section v-else class="container-sm mt-4">
   <h1 class="fs-1 text-center"> Crear aviso de retiro de materiales</h1>
 
   <div class="row">
