@@ -19,16 +19,18 @@ module.exports = function () {
     this.When(/^Selecciono un tipo de usuario ([^"]*)$/, function(tipo) {
 
         return helpers.loadPage(page.recepcionMateriales.url)
-           
         .then(function(){
-            return shared.ayudante.esperarCarga(page.recepcionMateriales.seleccionarTipoUsuario, tipo);
+            return shared.ayudante.esperarCarga(page.recepcionMateriales.seleccionarTipoUsuario, tipo)
         })
+        // .then (
+        //     ()=> helpers.waitUntilAttributeEquals('#selectUsuario', 'value', tipo, 10000)
+        // )
     });
     this.When(/^Si puedo, selecciono a la persona ([^"]*)$/, function(cartonero) { 
         return page.recepcionMateriales.seleccionarCartonero(cartonero);
     });
-    this.When(/^Cargo los materiales$/, function() { 
-        return page.recepcionMateriales.irAMateriales();
+    this.When(/^Cargo los materiales del ([^"]*)$/, function(tipo) { 
+        return page.recepcionMateriales.irAMateriales(tipo);
     });
     this.When(/^Selecciono el material ([^"]*)$/, function(material) {
         return page.recepcionMateriales.seleccionarMaterial(material);

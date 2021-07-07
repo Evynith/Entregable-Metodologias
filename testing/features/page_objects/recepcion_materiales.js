@@ -1,14 +1,17 @@
 module.exports = {
  
-    url: 'https://federico-de-muguruza.github.io/tpe_metodologias/#/admin/registro-ingreso',
-    url2: 'https://federico-de-muguruza.github.io/tpe_metodologias/#/admin/registro-ingreso/materiales',
+    // url: 'https://federico-de-muguruza.github.io/tpe_metodologias/#/admin/registro-ingreso',
+    // url2: 'https://federico-de-muguruza.github.io/tpe_metodologias/#/admin/registro-ingreso/materiales',
+
+    url: 'http://localhost/tpe_metodologias/site/app/#/admin/registro-ingreso',
+    url2: 'http://localhost/tpe_metodologias/site/app/#/admin/registro-ingreso/materiales',
  
     elements: {
         tipoUsuarioSelect: by.css('#form-ar > div:nth-child(1) > select'),
         cartoneroSelect: by.css('#form-ar > div:nth-child(2) > select'),
-        materialesButton: by.css('#form-ar > div.card'),
-        materialSelect: by.css('div.card-body > div:nth-child(1) > select'),
-        pesoInput: by.css('div.card-body > div:nth-child(2) > input'),
+        materialesButton: by.id('btn-addMateriales'),
+        materialSelect: by.css('#selectMaterialUnidad'),
+        pesoInput: by.css('#inputMaterialUnidad'),
         addButton: by.css('button.btn-outline-primary'),
         volverButton: by.css('button.btn-primary'),
         sendButton: by.css('.btn-primary')
@@ -21,32 +24,67 @@ module.exports = {
         ).then(
             (elem) => elem.click()
         )
+        // .then(
+        //     // ()=> shared.ayudante.esperarValor('#selectTipoUsuario', tipo)
+        //     ()=> driver.wait(helpers.waitUntilAttributeEquals('#selectTipoUsuario', 'value', tipo, 10000))
+        // )
     },
     seleccionarCartonero: function (cartonero) {
         if (cartonero) {
             var  cartoneroSelect = page.recepcionMateriales.elements. cartoneroSelect;
-            return driver.findElement( cartoneroSelect).click().then (
+            return driver.findElement(cartoneroSelect).click().then (
                 ()=> helpers.getFirstElementContainingText('#form-ar > div:nth-child(2) > select option',cartonero)
             ).then(
                 (elem) => elem.click()
             )
+            // .then(
+            //     // function() {
+            //     //     if(cartonero) {
+            //     //         return helpers.waitUntilAttributeEquals('#selectCartonero', 'value', cartonero, 10000)
+            //     //     } 
+            //     //     // else {
+            //     //     //     return helpers.waitUntilAttributeEquals('#selectCartonero', 'value', "", 10000)
+            //     //     // }
+            //     // } 
+            //     ()=> driver.wait( helpers.waitUntilAttributeEquals('#selectCartonero', 'value', cartonero, 10000))
+            // )
         }
     },
-    irAMateriales: function () {
+    irAMateriales: function (tipo) {
         var materialesButton = page.recepcionMateriales.elements.materialesButton;
-        return driver.findElement(materialesButton).sendKeys(selenium.Key.ENTER).then(
-            ()=> helpers.loadPage(page.recepcionMateriales.url2)
-        ). then (
-            ()=> driver.wait(until.elementsLocated(by.css('#form-ar')), 10000)
+        // var materialSelect = page.recepcionMateriales.elements.materialSelect;
+
+        return helpers.waitUntilAttributeEquals('#selectTipoUsuario', 'value', tipo, 10000)
+        .then (
+                ()=> driver.findElement(materialesButton)
         )
+        .then(
+            (elem) => elem.click()
+        ).then(
+            ()=> driver.wait(until.urlContains( page.recepcionMateriales.elements.url2 ) )
+        )
+        //loadpage carga la pagina que se le indica
+        // .then(
+        //     ()=> helpers.loadPage(page.recepcionMateriales.url2)
+        // )
+        // .then(
+        //     ()=> until.elementsLocated(by.css(materialSelect))
+        //     // ()=> driver.wait(until.elementLocated(By.id('selectMaterialUnidad')))
+        // )
     },
     seleccionarMaterial: function (material) {
         var materialSelect = page.recepcionMateriales.elements.materialSelect;
-        return driver.findElement(materialSelect).click().then (
-            ()=> helpers.getFirstElementContainingText('#form-ar > div:nth-child(1) > select option',material)
-        ).then(
-            (elem) => elem.click()
+        return driver.wait(until.elementLocated('#selectMaterialUnidad'))
+        .then (
+            ()=> driver.findElement(materialSelect).click()
         )
+        .then (
+            // ()=> helpers.selectByVisibleText('#form-ar > div:nth-child(1) > select option',material).click()
+            ()=> helpers.getFirstElementContainingText('#form-ar > div:nth-child(1) > select option',material)
+        )
+            // ).then(
+        //     (elem) => elem.click()
+        // )
     },
     enviarPeso: function (peso) {
         var pesoInput = page.recepcionMateriales.elements.pesoInput;

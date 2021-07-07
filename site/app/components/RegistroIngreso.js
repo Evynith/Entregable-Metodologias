@@ -13,7 +13,7 @@ const RegistroIngresoTemplate = `
         v-on:submit.prevent="post" class="p-2 form-control-sm" id="form-ar">
           <div class="form-group mb-2">
             <label for= "selectUsuario">Tipo de usuario</label>
-            <select v-model="registro_ingreso.tipo" @change="seleccionarTipo"
+            <select id="selectTipoUsuario" v-model="registro_ingreso.tipo" @change="seleccionarTipo"
               class="form-select form-select-sm" aria-label=".form-control-sm example" id= "selectUsuario">
                 <option selected disabled value>-- seleccionar una opcion --</option>
                 <option v-for="t of tiposUsuario" :value="t.tipo">{{ t.tipo }}</option>
@@ -21,14 +21,15 @@ const RegistroIngresoTemplate = `
           </div>
           <div v-if="registro_ingreso.tipo == tipoCartonero" class="form-group mb-2">
             <label>Cartonero a cargo</label>
-            <select v-model="registro_ingreso.cartonero_id" @change="seleccionarCartonero" 
+            <select id="selectCartonero" v-model="registro_ingreso.cartonero_id" @change="seleccionarCartonero" 
               class="form-select form-select-sm" aria-label=".form-control-sm example">
                 <option selected disabled value>-- seleccionar una opcion --</option>
                 <option v-for="cartonero of cartoneros" :value="cartonero.id">{{ cartonero.nombre + " " + cartonero.apellido  }}</option>
             </select>
           </div>
       
-            <div @click="ingresarMateriales" class="card border border-1">
+          <a @click="ingresarMateriales" id= "btn-addMateriales">
+            <div class="card border border-1">
               <div class="card-body">
                 <blockquote class="blockquote mb-0 d-flex justify-content-between">
                   <div>
@@ -43,6 +44,7 @@ const RegistroIngresoTemplate = `
                 </blockquote>
               </div>
             </div>
+          </a>
               <!--
               <div class="card border border-1">
               <div class="card-body">

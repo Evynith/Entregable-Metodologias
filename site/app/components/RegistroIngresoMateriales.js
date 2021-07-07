@@ -19,7 +19,7 @@ const RegistroIngresoMaterialesTemplate = `
 
           <div class="form-group mb-2">
             <label>Material ingresado</label>
-            <select v-model="nuevoMaterial.id_material" @change="seleccionarMaterial" 
+            <select id="selectMaterialUnidad" v-model="nuevoMaterial.id_material" @change="seleccionarMaterial" 
               class="form-select form-select-sm" aria-label=".form-control-sm example">
               <option v-for="m of materiales_historicos" :value="m.id">{{ m.nombre }}</option>
             </select>
@@ -27,7 +27,7 @@ const RegistroIngresoMaterialesTemplate = `
 
           <div class="form-group mb-2">
             <label>Peso</label>
-            <input v-model="nuevoMaterial.peso" 
+            <input id="inputMaterialUnidad" v-model="nuevoMaterial.peso" 
               type="number" step="0.5" class="form-control form-control-sm">
           </div>
 

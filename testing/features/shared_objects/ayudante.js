@@ -20,12 +20,12 @@ module.exports = {
                                 setTimeout(buscarSpinner, ESPERA_ENTRE_CHEQUEOS)
                                 contadorTiempo += ESPERA_ENTRE_CHEQUEOS
                                 if (contadorTiempo > ESPERA_LIMITE) {
-                                    reject(`aydante.esperarCarga: ERROR : Superó el tiempo limite de ${ESPERA_LIMITE} ms`)
+                                    reject(`ayudante.esperarCarga: ERROR : Superó el tiempo limite de ${ESPERA_LIMITE} ms`)
                                 }
                             }
                             catch (e) { // tiró error, no encontró el elemento del spinner. Se resuelve la promesa
                                 // console.log(`# ${contadorTiempo}ms - Se fue el spinner `)
-                                resolve(`# aydante.esperarCarga: EXITO : Se fue el spinner en ${contadorTiempo}ms`)
+                                resolve(`# ayudante.esperarCarga: EXITO : Se fue el spinner en ${contadorTiempo}ms`)
                             }
                         }
                         buscarSpinner()
@@ -33,8 +33,7 @@ module.exports = {
                 , 10000) 
         // console.log(r) // el mensaje que devuelve la promesa cuando resuelve (resolve()) o rechaza (reject())
         callback(...params) //spredOperator
-    }
-
+    },
 
 
 

@@ -1,6 +1,7 @@
 module.exports = {
  
-    url: 'https://federico-de-muguruza.github.io/tpe_metodologias/#/ofrecer-materiales',
+    // url: 'https://federico-de-muguruza.github.io/tpe_metodologias/#/ofrecer-materiales',
+    url: 'http://localhost/tpe_metodologias/site/app/#/ofrecer-materiales',
  
     elements: {
         nameInput: by.css('#form-ar > div:nth-child(1) > input'),
