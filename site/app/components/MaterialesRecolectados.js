@@ -21,11 +21,14 @@ const MaterialesRecolectadosTemplate = `
         <h5 class="card-header"
         >{{ getNombreCartonero(cartonero.cartonero_id) }}</h5>
         <div class="card-body">
+          <template v-if="cartonero.materialesRecolectados.length > 0">
           <p class="card-text"> Los materiales recolectados son: </p>
           <ul>
             <li v-for="m of cartonero.materialesRecolectados"
             >{{ m.nombre }}: {{ m.pesoTotal }}kg</li>
           </ul>
+          </template>
+          <p v-else>No tiene materiales recolectados</p>
         </div>
       </div>
   </div>

@@ -186,8 +186,8 @@ export default class Api {
   }
 
   static async getMaterialesRecolectados(id) {
-    return Api.getLocalJSON(`admin/materiales-recolectados/1`)
-    // return Api.getData(`admin/materiales-recolectados/${id}`)
+    // return Api.getLocalJSON(`admin/materiales-recolectados/1`)
+    return Api.getData(`admin/materiales-recolectados/${id}`)
   }
   static async getCartoneros() {
     return Api
