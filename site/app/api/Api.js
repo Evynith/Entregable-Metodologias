@@ -169,6 +169,17 @@ export default class Api {
     return Api.getData('admin/avisos-retiro').then(json => json.data.avisosRetiro);
   }
 
+  static async getMaterialesRecolectados(id) {
+    return Api.getLocalJSON(`admin/materiales-recolectados/1`)
+    // return Api.getData(`admin/materiales-recolectados/${id}`)
+  }
+  static async getCartoneros() {
+    return Api
+      .getData('admin/cartoneros', { "getLocal": true })
+      .then(r => r.data.cartoneros)
+
+  }
+
   static async getData(endpoint) {
     return Api.fetch(endpoint, { "getLocal": true })
     // let json

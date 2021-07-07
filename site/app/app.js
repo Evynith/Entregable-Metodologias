@@ -45,7 +45,7 @@ const routes = [
   { path: '/', component: Home },
   { path: '/ofrecer-materiales', component: AvisoRetiro },
   { path: '/materiales-aceptados', component: MaterialesAceptados },
-  { path: '/materiales-recolectados', component: MaterialesRecolectados },
+  { path: '/admin/materiales-recolectados', component: MaterialesRecolectados },
   { 
     path: '/admin/registro-ingreso', 
     component: RegistroIngreso,

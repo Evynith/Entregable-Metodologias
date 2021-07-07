@@ -23,6 +23,9 @@ export default {
               <router-link to="/admin/registro-ingreso" class="dropdown-item">Registrar ingreso de material</router-link>
             </li>
             <li class="nav-item">
+              <router-link to="/admin/materiales-recolectados" class="dropdown-item">Materiales recolectados</router-link>
+            </li>
+            <li class="nav-item">
               <router-link to="/admin/avisos-retiro" class="dropdown-item">Avisos de retiro</router-link>
             </li>
             <li class="nav-item">
