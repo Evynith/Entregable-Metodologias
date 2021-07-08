@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "dni": 22356876,
+        "nombre": "Jacinto", 
+        "apellido": "Martinez",
+        "direccion": "Alvarado 1600",
+        "fecha_nacimiento": "1900-06-23 03:00:00+00",
+        "vehiculo_volumen": "A"
+    },
+    {
+        "id": 2,
+        "dni": 22356877,
+        "nombre": "Guillermo",
+        "apellido": "Equis"   ,
+        "direccion": "España 450"   ,
+        "fecha_nacimiento": "1902-06-23 03:00:00+00",
+        "vehiculo_volumen": "B"
+    },
+    {
+        "id": 3,
+        "dni": 22356878,
+        "nombre": "Elena",    
+        "apellido": "Gonzales",
+        "direccion": "Alvarado 1630",
+        "fecha_nacimiento": "1905-06-23 03:00:00+00",
+        "vehiculo_volumen": "C"
+    },
+    {
+        "id": 4,
+        "dni": 22356879,
+        "nombre": "María",  
+        "apellido": "Martinez",
+        "direccion": "Alem 800",
+        "fecha_nacimiento": "1860-06-23 03:00:00+00",
+        "vehiculo_volumen": "C"
+    }
+]

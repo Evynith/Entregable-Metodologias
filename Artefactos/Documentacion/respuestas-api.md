@@ -370,12 +370,13 @@
 ```JSON
 {
     "dni": 33222111,
-    "nombre": "Jacinto",
-    "apellido": "Martinez",
+    "nombre": "_Jacinto",
+    "apellido": "_Martinez",
     "direccion": "los sauces 2200",
-    "fecha_nacimiento": "23/06/1900",
-    "vehiculo_volumen": 1 // __el id__
+    "fecha_nacimiento": "2021-07-12",
+    "vehiculo_volumen": 1
 }
+
 ```
 - devuelven
 ```JSON
