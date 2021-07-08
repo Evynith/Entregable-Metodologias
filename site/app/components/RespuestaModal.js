@@ -12,7 +12,7 @@ const RespuestaModalTemplate = `
         <p v-else>{{ respuesta.error ? respuesta.error : 'No se pudo realizar la operación' }}</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" @click="closeModal">Cancelar</button>
+        <button type="button" class="btn btn-primary" @click="closeModal">Entendido!</button>
       </div>
     </div>
   </div>
