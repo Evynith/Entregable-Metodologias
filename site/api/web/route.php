@@ -35,6 +35,9 @@ $router->addRoute("admin/registro", "POST", "UsuarioController", "postUsuario");
 
 $router->addRoute("admin/registro-ingreso","POST","RegistroIngresoController","postRegistroIngreso");
 $router->addRoute("admin/tipos-usuario","GET","RegistroIngresoController","getTiposUsuario");
+
+$router->addRoute("admin/validar-usuario", "POST", "UsuarioController", "validarUsuario");
+
 // rutea
 $router->route($resource, $method);
 

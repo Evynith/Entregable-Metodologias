@@ -140,6 +140,7 @@ export default class Api {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     }
+    // console.log('posting ', options)
     return Api.fetch(endpoint, options)
     // let options = {
     //   method,

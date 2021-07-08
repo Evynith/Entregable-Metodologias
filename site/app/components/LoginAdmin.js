@@ -1,4 +1,6 @@
 import Api from '../api/Api.js'
+import Auth from '../api/Auth.js'
+
 const LoginAdminTemplate =`
 <section class="m-0 container-fluid">
     <div class="row">
@@ -62,7 +64,7 @@ export default {
     methods: {
         async post() {
             if(this.verificado){
-                console.log("posteando", this.datosLogin);
+                // console.log("posteando", this.datosLogin);
                 // this.respuesta = await Api.login(this.datosLogin);
                 this.posting = true;
                 let r = await Api.login(this.datosLogin);
@@ -72,6 +74,7 @@ export default {
                     this.mensajeError = errorLogin ;
                 } else {
                     this.mensajeError = "";
+                    Auth.login(r.data.usuario)
                 }
                 this.posting = false;
             } else {

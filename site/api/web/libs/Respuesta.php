@@ -22,6 +22,8 @@
     }
 
     public function statusCode(): int {
+        // var_dump($this->error);
+        // die();
         return isset($this->error) ? 
             $this->error->getCode() :
             200;
