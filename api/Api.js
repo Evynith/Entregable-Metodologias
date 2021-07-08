@@ -1,6 +1,6 @@
 export default class Api {
 
-  static #ENVIRONMENT = 'local'
+  static #ENVIRONMENT = 'heroku'
   static get BASE_URL() {
     switch (Api.#ENVIRONMENT) {
       case 'local':         return 'http://localhost/tpe_metodologias/site/api/web/'
