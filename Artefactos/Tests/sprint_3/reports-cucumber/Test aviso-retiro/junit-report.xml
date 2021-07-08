@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" tests="9" failures="0" skipped="0">
+        <properties>
+            <property name="URI" value="C:/xampp/htdocs/tpe_metodologias/testing/features/aviso_envio.feature">
+            </property>
+        </properties>
+        <testcase name="When Escribo el nombre Juan" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="4.2425249">
+        </testcase>
+        <testcase name="And Escribo el apellido " classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1031235">
+        </testcase>
+        <testcase name="And Escribo la dirección Alem 500" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1969958">
+        </testcase>
+        <testcase name="And Escribo el telefono 2494121212" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.115108">
+        </testcase>
+        <testcase name="And Selecciono el horario de 9 a 12hs" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1450632">
+        </testcase>
+        <testcase name="And Selecciono un volumen de Caja" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1351727">
+        </testcase>
+        <testcase name="And Subo una imagen desde " classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.0003399">
+        </testcase>
+        <testcase name="And envío el formulario" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1064468">
+        </testcase>
+        <testcase name="Then Recibo una notificación que dice Faltan ingresar datos" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="1.1955225">
+        </testcase>
+    </testsuite>
+    <testsuite name="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" tests="9" failures="0" skipped="0">
+        <properties>
+            <property name="URI" value="C:/xampp/htdocs/tpe_metodologias/testing/features/aviso_envio.feature">
+            </property>
+        </properties>
+        <testcase name="When Escribo el nombre Juan" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="4.2850699">
+        </testcase>
+        <testcase name="And Escribo el apellido Perez" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.2544172">
+        </testcase>
+        <testcase name="And Escribo la dirección Alem 503" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1868692">
+        </testcase>
+        <testcase name="And Escribo el telefono 2494121212" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1120077">
+        </testcase>
+        <testcase name="And Selecciono el horario de 9 a 12hs" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1861207">
+        </testcase>
+        <testcase name="And Selecciono un volumen de Caja" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1410559">
+        </testcase>
+        <testcase name="And Subo una imagen desde " classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.0001232">
+        </testcase>
+        <testcase name="And envío el formulario" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1094235">
+        </testcase>
+        <testcase name="Then Recibo una notificación que dice El aviso de retiro de material ha sido cargado con éxito, un recolector pasará por su casa dentro de los horarios elegidos.." classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="3.0475343">
+        </testcase>
+    </testsuite>
+    <testsuite name="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" tests="9" failures="0" skipped="0">
+        <properties>
+            <property name="URI" value="C:/xampp/htdocs/tpe_metodologias/testing/features/aviso_envio.feature">
+            </property>
+        </properties>
+        <testcase name="When Escribo el nombre Juan" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="3.9500932">
+        </testcase>
+        <testcase name="And Escribo el apellido Perez" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.2933117">
+        </testcase>
+        <testcase name="And Escribo la dirección 1" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1029344">
+        </testcase>
+        <testcase name="And Escribo el telefono 2494121212" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1123225">
+        </testcase>
+        <testcase name="And Selecciono el horario de 9 a 12hs" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1874788">
+        </testcase>
+        <testcase name="And Selecciono un volumen de Caja" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1381345">
+        </testcase>
+        <testcase name="And Subo una imagen desde " classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.0001431">
+        </testcase>
+        <testcase name="And envío el formulario" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1077479">
+        </testcase>
+        <testcase name="Then Recibo una notificación que dice Usted vive a más de 6km del centro de recolección, puede acercarse personalmente o vincularse a otros ciudadanos a traves de la cartelera de ofertas de transporte." classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="2.7487612">
+        </testcase>
+    </testsuite>
+    <testsuite name="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" tests="9" failures="1" skipped="0">
+        <properties>
+            <property name="URI" value="C:/xampp/htdocs/tpe_metodologias/testing/features/aviso_envio.feature">
+            </property>
+        </properties>
+        <testcase name="When Escribo el nombre Juan" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="4.1154007">
+        </testcase>
+        <testcase name="And Escribo el apellido Perez" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.3280222">
+        </testcase>
+        <testcase name="And Escribo la dirección Alem 500" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1145357">
+        </testcase>
+        <testcase name="And Escribo el telefono 2494121212999999999999999999999999999" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1815224">
+        </testcase>
+        <testcase name="And Selecciono el horario de 9 a 12hs" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1967652">
+        </testcase>
+        <testcase name="And Selecciono un volumen de Caja" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.139786">
+        </testcase>
+        <testcase name="And Subo una imagen desde " classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.0001335">
+        </testcase>
+        <testcase name="And envío el formulario" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1009951">
+        </testcase>
+        <testcase name="Then Recibo una notificación que dice Algo salió mal :(" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="3.0731049">
+            <failure message="AssertionError: No cumple con el mensaje esperado">AssertionError: No cumple con el mensaje esperado
+    at C:\xampp\htdocs\tpe_metodologias\testing\features\step_definitions\aviso_envio_steps.js:15:13
+    at ManagedPromise.invokeCallback_ (C:\xampp\htdocs\tpe_metodologias\node_modules\selenium-webdriver\lib\promise.js:1384:14)
+    at TaskQueue.execute_ (C:\xampp\htdocs\tpe_metodologias\node_modules\selenium-webdriver\lib\promise.js:3092:14)
+    at TaskQueue.executeNext_ (C:\xampp\htdocs\tpe_metodologias\node_modules\selenium-webdriver\lib\promise.js:3075:27)
+    at C:\xampp\htdocs\tpe_metodologias\node_modules\selenium-webdriver\lib\promise.js:2935:27
+    at C:\xampp\htdocs\tpe_metodologias\node_modules\selenium-webdriver\lib\promise.js:676:7
+    at runMicrotasks (&lt;anonymous&gt;)
+    at processTicksAndRejections (node:internal/process/task_queues:93:5)</failure>
+        </testcase>
+    </testsuite>
+    <testsuite name="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" tests="9" failures="0" skipped="0">
+        <properties>
+            <property name="URI" value="C:/xampp/htdocs/tpe_metodologias/testing/features/aviso_envio.feature">
+            </property>
+        </properties>
+        <testcase name="When Escribo el nombre Juan" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="4.0641898">
+        </testcase>
+        <testcase name="And Escribo el apellido Perez" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.3071386">
+        </testcase>
+        <testcase name="And Escribo la dirección Alem 503" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1201443">
+        </testcase>
+        <testcase name="And Escribo el telefono 2494121212" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1232467">
+        </testcase>
+        <testcase name="And Selecciono el horario de 9 a 12hs" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1907898">
+        </testcase>
+        <testcase name="And Selecciono un volumen de Caja" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.1242885">
+        </testcase>
+        <testcase name="And Subo una imagen desde C:\xampp\htdocs\tpe_metodologias\testing\images\Reciclaje-casa.jpg" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.0717913">
+        </testcase>
+        <testcase name="And envío el formulario" classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="0.222439">
+        </testcase>
+        <testcase name="Then Recibo una notificación que dice El aviso de retiro de material ha sido cargado con éxito, un recolector pasará por su casa dentro de los horarios elegidos.." classname="creación-de-aviso-de-retiro-de-material-de-un-ciudadano;ingreso-datos-válidos" time="5.6781065">
+        </testcase>
+    </testsuite>
+</testsuites>
