@@ -4,7 +4,7 @@ import CartoneroFilter from './CartoneroFilter.js'
 const MaterialesRecolectadosTemplate = `
 
 <bs-spinner v-if="loading"></bs-spinner>
-<section v-else>
+<section  class="container-sm" v-else>
 
 <h1 class="fs-1 mb-4">Materiales recolectados</h1>
 
