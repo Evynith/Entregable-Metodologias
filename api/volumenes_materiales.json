@@ -1,4 +1,22 @@
 [
-    { "id": 0, "categoria": "Baúl" },
-    { "id": 1, "categoria": "Camión" }
+    {
+        "id": 1,
+        "cod_categoria": "A",
+        "categoria": "Caja"
+    },
+    {
+        "id": 2,
+        "cod_categoria": "B",
+        "categoria": "Baúl de un auto"
+    },
+    {
+        "id": 3,
+        "cod_categoria": "C",
+        "categoria": "Camioneta"
+    },
+    {
+        "id": 4,
+        "cod_categoria": "D",
+        "categoria": "Camión"
+    }
 ]

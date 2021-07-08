@@ -1,7 +1,16 @@
 export default class Api {
 
-  static async deleteMaterial(m) {
-    return Api.delete('admin/material-aceptado/' + m.id)
+  static #ENVIRONMENT = 'local'
+  static get BASE_URL() {
+    switch (Api.#ENVIRONMENT) {
+      case 'local':         return 'http://localhost/tpe_metodologias/site/api/web/'
+      case 'heroku':        return 'https://coop-rec-api.herokuapp.com/'
+      case 'heroku_local':  return 'http://localhost/coop-rec-api/web/'
+    }
+  }
+  
+  static async deleteMaterial(id) {
+    return Api.delete('admin/material-aceptado/' + id)
     // let r
     // try {
     //    r = await Api.delete('admin/material-aceptado/' + m.id)
@@ -19,30 +28,43 @@ export default class Api {
     let options = {
       method: 'DELETE'
     }
+    return Api.fetch(endpoint, options)
     // return {
       //   "ok": true
       // }
-    let r;
-    console.log('# Api : borrando ', endpoint)
-    try {
-      r = await Api.fetchHerokuAPI(endpoint, options)
-    }
-    catch (e) {
-      try {
-        r = await Api.fetchLocalAPI(endpoint, options)
-        // console.log(url)
-        // r = { "ok": true, "id": m.id }
-      }
-      catch (e2) {
-        console.log(e2)
-        r = {
-          ok: false,
-          mensaje: 'Error de conexión'
-        }
-      }
-    }
+    // let r;
+    // console.log('# Api : borrando ', endpoint)
+    // try {
+    //   r = await Api.fetchHerokuAPI(endpoint, options)
+    // }
+    // catch (e) {
+    //   try {
+    //     r = await Api.fetchLocalAPI(endpoint, options)
+    //     // console.log(url)
+    //     // r = { "ok": true, "id": m.id }
+    //   }
+    //   catch (e2) {
+    //     console.log(e2)
+    //     r = {
+    //       ok: false,
+    //       mensaje: 'Error de conexión'
+    //     }
+    //   }
+    // }
 
-    return r
+    // return r
+  }
+
+  static async postUsuario(u) {
+    // let r;
+    let url = 'admin/registro'
+    return Api.postData(url, u)
+  }
+  
+  static async login(d) {
+    // let r;
+    let url = 'admin/login'
+    return Api.postData(url, d)
   }
 
   static async postMaterial(m, id = null) {
@@ -83,8 +105,6 @@ export default class Api {
     // // console.log(r)
     // return r
   }
-  
-
   static async postAvisoRetiro(a) {
     return Api.postData('aviso_retiro', a)
     // const r = await Api.fetchLocalAPI('aviso_retiro', {
@@ -114,82 +134,231 @@ export default class Api {
     // // console.log(r)
     // return r
   }
+
   static async postData(endpoint, data, method = 'POST') {
     let options = {
       method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     }
-    let r;
-    try {
-      console.log('#Posteando datos a API heroku...')
-      r = await Api.fetchHerokuAPI(endpoint, options)
-    }
-    catch (e) {
-    // local
-    // console.log("Error", e, " # Posteando", data, `a ${endpoint}`)
-      try {
-        r = await Api.fetchLocalAPI(endpoint, options)
-      }
-      catch (e2) {
-        r = {
-          ok: false,
-          mensaje: 'Error de conexión'
-        }
-      }
-    }
-    return r
+    // console.log('posting ', options)
+    return Api.fetch(endpoint, options)
+    // let options = {
+    //   method,
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(data)
+    // }
+    // let r;
+    // try {
+    //   console.log('#Posteando datos a API heroku...')
+    //   r = await Api.fetchHerokuAPI(endpoint, options)
+    // }
+    // catch (e) {
+    // // local
+    // // console.log("Error", e, " # Posteando", data, `a ${endpoint}`)
+    //   try {
+    //     r = await Api.fetchLocalAPI(endpoint, options)
+    //   }
+    //   catch (e2) {
+    //     r = {
+    //       ok: false,
+    //       mensaje: 'Error de conexión'
+    //     }
+    //   }
+    // }
+    // return r
   }
+
+  static async postCartonero(c, id = null) {
+    console.log(`#Api - ${id == null ? 'post' : `id(${id})` } cartonero `, c)
+    let url = 'admin/cartonero'
+    const method = id == null ? 'POST' : 'PUT'
+    if (id != null) {
+      url += '/' + id
+    }
+    // console.log('#Api posting ', c)
+    return Api.postData(url, c, method)
+    // const cartonero_id = id != null ? id : 1 // para que no tire error el create con id null
+    // console.log('#Api - posting cartonero ', JSON.stringify(c))
+    // return new Promise(r => {
+    //   let ok = {
+    //     ok: true,
+    //     data: {
+    //       id: cartonero_id 
+    //     }
+    //   }
+    //   let err = {
+    //     ok: false,
+    //     error: "no existe el id 8",
+    //     data: {
+    //       id: 8
+    //     }
+    //   }
+    //   setTimeout(r(ok), 500)
+    // })
+  }
+
+  // static async deleteCartonero(id) {
+  //   return new Promise(r => {
+  //     let ok = {
+  //       ok: true,
+  //       data: {
+  //         id 
+  //       }
+  //     }
+  //     setTimeout(r(ok), 500)
+  //   })
+  // }
+
+  static async deleteCartonero(id) {
+    return Api.delete('admin/cartonero/' + id)
+  }
+  
+  static async getCartoneros() {
+    return Api.getData('admin/cartoneros').then(json => json.data.cartoneros)
+  }
+  static async getCartonero(id) {
+    return Api.getData('admin/cartonero/' + id).then(json => json.data.cartonero);
+    // const cartoneros = await Api.getLocalJSON('admin/cartoneros_full')
+    // let cartonero;
+    // for (const c of cartoneros) {
+    //   if (c.id == id) {
+    //     cartonero = c
+    //     break
+    //   }
+    // }
+    // // console.log('Api.js - get cartonero id', id, cartonero)
+
+    // return cartonero != undefined ? cartonero : 
+    //   await Api.getCartoneros().then(arr => arr.find((c) => c.id = id)) 
+    // {
+    //   "id": id,
+    //   "dni": 0,
+    //   "nombre": "no existe en json local",
+    //   "apellido": "",
+    //   "direccion": "",
+    //   "fecha_nacimiento": "0000-1-1",
+    //   "vehiculo_volumen": 0
+    // }
+  
+  }
+  
 
   static async getMaterialesAceptados() {
-    return Api.getData('materiales-aceptados')
-}
+    return Api.getData('materiales-aceptados').then(json => json.data.materialesAceptados)
+  }
 
   static async getVolumenesMateriales() {
-    return Api.getData('volumenes_materiales')
+    return Api.getData('volumenes_materiales').then(json => json.data.volumenesMateriales)
   }
   static async getFranjasHorarias() {
-    return Api.getData('franjas_horarias')
+    return Api.getData('franjas_horarias').then(json => json.data.franjasHorarias)
   }
   static async getAvisosRetiro() {
-    return Api.getData('admin/avisos-retiro');
+    return Api.getData('admin/avisos-retiro').then(json => json.data.avisosRetiro);
+  }
+
+  static async getMaterialesRecolectados(id) {
+    // return Api.getLocalJSON(`admin/materiales-recolectados/1`)
+    return Api.getData(`admin/materiales-recolectados/${id}`)
+  }
+  static async getCartoneros() {
+    return Api
+      .getData('admin/cartoneros', { "getLocal": true })
+      .then(r => r.data.cartoneros)
+
   }
 
   static async getData(endpoint) {
+    return Api.fetch(endpoint, { "getLocal": true })
+    // let json
+    // try {
+    //   console.log(`#Api.js - Obteniendo datos de API ${Api.#ENVIRONMENT}`, endpoint)
+    //   json = await Api.fetch(endpoint)
+    // }
+    // catch (e) {
+    //   try {
+    //     console.log('#Api.js - Error - Obteniendo datos de json local...', e)
+    //     json = await Api.getLocalJSON(endpoint)
+    //   }
+    //   catch (e2) {
+    //     console.log('#Api.js - Error', e2)
+    //     json = {
+    //       "ok": false,
+    //       "error": "No se pudo obtener datos locales"
+    //     }
+    //   }
+    // }
+    // try {
+    //   console.log('#Obteniendo datos de API heroku...', endpoint)
+    //   json = await Api.fetchHerokuAPI(endpoint)
+    // }
+    // catch (e) {
+    //   try {
+    //     // console.log(e, '#Obteniendo datos de API local...')
+    //     console.log('#Obteniendo datos de API local...', endpoint)
+    //     json = await Api.fetchLocalAPI(endpoint)
+    //   }
+    //   catch (e2) {
+    //     console.log(e2, '#Obteniendo datos de json local...', endpoint)
+    //     json = await Api.fetchLocalJSON(endpoint)
+    //   }
+    // }
+    // return json
+  }
+
+  static async fetch(endpoint, options = { "getLocal": false }) {
+    const getLocal = options.getLocal
+    delete options.getLocal
+    const url = Api.BASE_URL + endpoint
     let json;
     try {
-      console.log('#Obteniendo datos de API heroku...', endpoint)
-      json = await Api.fetchHerokuAPI(endpoint)
+      console.log(`#Api.js - Fetch API ${Api.#ENVIRONMENT}: ${options.method == undefined ? 'GET' : options.method} ${endpoint}`)
+      json = await fetch(url, options).then(r => r.json())
     }
     catch (e) {
-      try {
-        // console.log(e, '#Obteniendo datos de API local...')
-        console.log('#Obteniendo datos de API local...', endpoint)
-        json = await Api.fetchLocalAPI(endpoint)
-      }
-      catch (e2) {
-        console.log(e2, '#Obteniendo datos de json local...', endpoint)
-        json = await Api.fetchLocalJSON(endpoint)
+      if (getLocal) {
+        try {
+          console.log('#Api.js - Error - Obteniendo datos de json local...', e)
+          json = await Api.getLocalJSON(endpoint)
+        }
+        catch (e2) {
+          console.log('#Api.js - Error', e2)
+          json = {
+            "ok": false,
+            "error": "No se pudo obtener datos locales"
+          }
+        }
+      } else {
+        console.log('#Api.js - Error', e)
+        json = {
+          "ok": false,
+          "error": 'Error de conexión'
+        }
       }
     }
+    console.log("#Api.js - Devolviendo", json)
     return json
+    // return fetch(url, options).then(r => r.json())
   }
 
-  static fetchHerokuAPI(endpoint, options = { }) {
-    const url = `https://coop-rec-api.herokuapp.com/${endpoint}`
-    return fetch(url, options).then(r => r.json())
-  }
+  // static fetchHerokuAPI(endpoint, options = { }) {
+  //   const url = `https://coop-rec-api.herokuapp.com/${endpoint}`
+  //   return fetch(url, options).then(r => r.json())
+  // }
 
-  static fetchLocalAPI(endpoint, options = {}) {
-    const url = `http://localhost/tpe_metodologias/site/api/web/${endpoint}`
-    return fetch(url, options).then(r => r.json())
-  }
+  // static fetchLocalAPI(endpoint, options = {}) {
+  //   const url = `http://localhost/tpe_metodologias/site/api/web/${endpoint}`
+  //   return fetch(url, options).then(r => r.json())
+  // }
 
-  static fetchLocalJSON(endpoint) {
+  // static fetchLocalJSON(endpoint) {
+  static getLocalJSON(endpoint) {
     const url = `./api/${endpoint}.json`
     // console.log(url)
     return fetch(url).then(r => r.json())
   }
+  
 }
 
 /*

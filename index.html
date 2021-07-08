@@ -21,8 +21,9 @@
 </head>
 <body>
     <div id="app">
-        <app-nav></app-nav>
-        <router-view class="container-sm mt-4"></router-view>
+        <app-nav :logged-in="isLoggedIn" @logout="logout"></app-nav>
+        <bs-spinner v-if="loading"></bs-spinner>
+        <router-view v-else style= "min-height: 49vh;"></router-view>
         <app-footer></app-footer>
     </div>
 

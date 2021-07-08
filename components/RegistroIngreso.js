@@ -2,7 +2,7 @@ import Api from '../api/Api.js'
 
 const RegistroIngresoTemplate = `
 <bs-spinner v-if="loading"></bs-spinner>
-<section v-else>
+<section v-else class="container-sm mt-4">
   <h1 class="fs-1 text-md-center">Recepción de materiales</h1>
     
   <div class="row">
@@ -31,15 +31,16 @@ const RegistroIngresoTemplate = `
             <div @click="ingresarMateriales" class="card border border-1">
               <div class="card-body">
                 <blockquote class="blockquote mb-0 d-flex justify-content-between">
-                <div>
-                    <h2 class="h5">Materiales recolectados</h2>
-                    <p class="fs-6 text-muted">{{ registro_ingreso.materiales_cargados.length }} materiales cargados</p>
-                    <ul>
-                      <li v-for="m of registro_ingreso.materiales_cargados"
-                        class="fs-6 text-muted"
-                      >{{ m.nombre }}. {{ m.peso }}<small>kg</small></li>
-                    </ul>
-                </div>
+                  <div>
+                      <h2 class="h5">Materiales recolectados</h2>
+                      <p class="fs-6 text-muted">{{ registro_ingreso.materiales_cargados.length }} materiales cargados</p>
+                      <ul>
+                        <li v-for="m of registro_ingreso.materiales_cargados"
+                          class="fs-6 text-muted"
+                        >{{ m.nombre }}. {{ m.peso }}<small>kg</small></li>
+                      </ul>
+                  </div>
+                </blockquote>
               </div>
             </div>
               <!--
@@ -70,15 +71,7 @@ const RegistroIngresoTemplate = `
                 <btn-cancelar></btn-cancelar>
               </div>
         
-              <div v-if="respuesta"
-                :class="['alert', { 'alert-danger': !respuesta.ok, 'alert-success': respuesta.ok }]" role="alert">
-                <template v-if="respuesta.ok">
-                  Registro cargado con éxito
-                </template>
-                <template v-else>
-                  No se pudo cargar el registro
-                </template>
-              </div>
+              <respuesta-modal v-model="respuesta" r-id="respuesta-registroIngreso"></respuesta-modal>
           </form>
         </div>
   
@@ -165,10 +158,10 @@ export default {
   },
   async created() {
     const t = this
-    Api.getData('admin/cartoneros').then(r => t.cartoneros = r)
-    Api.getData('admin/tipos-usuario').then(r =>{
-      t.tiposUsuario = r.tiposUsuario
-      t.tipoCartonero = r["TIPO_CARTONERO"]
+    Api.getData('admin/cartoneros', { "getLocal": true }).then(r => t.cartoneros = r.data.cartoneros)
+    Api.getData('admin/tipos-usuario', { "getLocal": true }).then(r => {
+      t.tiposUsuario = r.data.tiposUsuario
+      t.tipoCartonero = r.data.TIPO_CARTONERO
     })
   },
   async mounted() {
@@ -185,10 +178,10 @@ export default {
         if (r.ok) 
           this.resetearRegistro();
         
-        const t = this
-        setTimeout(() => {
-          t.respuesta = undefined
-        }, 1500)
+        // const t = this
+        // setTimeout(() => {
+        //   t.respuesta = undefined
+        // }, 1500)
       }
     },
     resetearRegistro() {
