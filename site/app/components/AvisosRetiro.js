@@ -5,7 +5,7 @@ const AvisoRetiroRow = {
     <tr class="desplegable-click" @click="desplegada = !desplegada" :class="[ { 'bg-lg': desplegada } ]">
       <template v-if="!desplegada">
         
-        <div class="text-center d-none d-md-block">
+        <div class="text-center d-none d-md-block border-bottom border-1">
           <div class="row">
             <td class="col p-3">
                 <div style="border-color: forestgreen">
@@ -15,6 +15,7 @@ const AvisoRetiroRow = {
             </td>
             <td class="col p-3">{{ aviso.nombre + ' ' + aviso.apellido }}</td>
             <td class="col p-3">{{ aviso.telefono }}</td>
+            <td class="col p-3">{{new Date(aviso.fecha_emision).toLocaleDateString()}}</td>
           </div>
         </div>
         <td class="p-3 text-center">{{ aviso.direccion }}</td>
@@ -85,6 +86,7 @@ const AvisosRetiroTemplate = `
           <td class="col fw-bold text-white d-none d-md-block">Foto</td>
           <td class="col fw-bold text-white d-none d-md-block">Nombre</td>
           <td class="col fw-bold text-white d-none d-md-block">Teléfono</td>
+          <td class="col fw-bold text-white d-none d-md-block">Fecha</td>
         </div>
       </div>
       <td class="p-3 fw-bold text-white text-center" @click="ordenarPor('direccion')">Domicilio</td>
