@@ -27,6 +27,8 @@ https://docs.google.com/presentation/d/1oe8ByqSlHGPNsQpx2kAObGb3VYnZf93XehX0hg-5
 _Entrega Sprint #3 con diagrama de clases actualizado.
 Se deberán realizar las funcionalidades referidas a Log-in secretaria, registro de secretaria(preguntado al PO), listar materiales acopiados por cartonero y de Alta, baja y modificación de cartonero._
 
+https://docs.google.com/presentation/d/1ZzmAmd8KME4mkLv7is8weBxVJDtAmG-qLo8mjJGgaBk/edit?usp=sharing
+
 ## Construido con 🛠️
 
 * [Vue 3](https://v3.vuejs.org/guide/introduction.html) - Framework de interfaz
