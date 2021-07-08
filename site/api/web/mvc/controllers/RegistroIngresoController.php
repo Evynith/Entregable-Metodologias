@@ -15,7 +15,7 @@ class RegistroIngresoController extends ApiController {
     }
 
     public function getTiposUsuario() {
-
+        parent::checkLogin();
         $r = Model::query(
             "SELECT * FROM ( 
                 SELECT unnest(enum_range(null::usuarios)) as tipo 
@@ -29,6 +29,7 @@ class RegistroIngresoController extends ApiController {
     }
 
     public function postRegistroIngreso() {
+        parent::checkLogin();
         $data = $this->getData();
 
         $r = new Respuesta;

@@ -80,7 +80,11 @@ const routes = [
     path: '/admin/registro-ingreso', 
     component: () => import(RegistroIngreso),
     children: [
-      { path: 'materiales', component: RegistroIngresoMateriales, props: true }
+      { 
+        path: 'materiales', 
+        component: () => import(RegistroIngresoMateriales), 
+        props: true 
+      }
     ]
   },
   {
@@ -173,7 +177,8 @@ const app = Vue.createApp({
       this.usuario = u
       this.isLoggedIn = true
     },
-    logout() { 
+    logout() {
+      Api.fetch('admin/logout')
       this.usuario = undefined
       this.isLoggedIn = false
       this.$router.push('/')

@@ -75,6 +75,7 @@ class AvisoRetiroController extends ApiController {
     }  
 
     public function getAvisosRetiro() {
+        parent::checkLogin();
         $r = Model::query(
             "SELECT 
                 a.id,

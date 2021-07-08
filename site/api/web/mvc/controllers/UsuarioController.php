@@ -39,7 +39,7 @@ class UsuarioController extends ApiController {
                 // $coincidenContrasenias = password_verify($data->contrasenia, $usuario[0]->contrasenia);
                 $coincidenContrasenias = password_verify($data->contrasenia, $usuario->contrasenia);
                 if($coincidenContrasenias) {
-                    // Auth::login($usuario);
+                    Auth::login($usuario);
                 } else {
                     $respuesta = new Respuesta([
                         'error' => new Exception("La contraseña no coincide", 400)
@@ -55,7 +55,7 @@ class UsuarioController extends ApiController {
     }
 
     public function postUsuario() {
-
+        parent::checkLogin();
         $respuesta = new Respuesta; 
         $data = $this->getData();
 
