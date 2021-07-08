@@ -4,6 +4,8 @@ _Espacio de trabajo para los entregables de la materia de Introducción a las me
 
 ### [Enlace al sitio](https://federico-de-muguruza.github.io/tpe_metodologias/#/)
 
+*De momento probarlo con LOCALHOST*
+
 *Si se lo ejecuta de manera local y se utiliza XAMPP:* [Solucionar error de driver en XAMPP](https://parzibyte.me/blog/2019/06/04/php-habilitar-extension-postgres-pdo-windows/)
 
 ## Entregas:
