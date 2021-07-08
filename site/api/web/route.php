@@ -41,6 +41,10 @@ $router->addRoute("admin/cartonero/:id", "DELETE", "CartoneroController", "delet
 
 $router->addRoute("admin/registro-ingreso","POST","RegistroIngresoController","postRegistroIngreso");
 $router->addRoute("admin/tipos-usuario","GET","RegistroIngresoController","getTiposUsuario");
+
+$router->addRoute("admin/validar-usuario", "POST", "UsuarioController", "validarUsuario");
+$router->addRoute("admin/logout", "GET", "ApiController", "logout");
+
 // rutea
 $router->route($resource, $method);
 

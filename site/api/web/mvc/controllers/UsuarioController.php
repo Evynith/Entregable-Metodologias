@@ -20,27 +20,30 @@ class UsuarioController extends ApiController {
 
         if (!empty($data->usuario) && !empty($data->contrasenia)){
 
-            $respuesta = $this->modelUsuario->query(
+            $respuesta = Model::query(
                 "SELECT *
                  FROM usuario
                  WHERE usuario = ?
                 ",
                 [
                     'values'    => [$data->usuario],
-                    'fetchType' => 'fetchAll',
+                    'fetchType' => 'fetch',
                     'recurso'   => 'usuario'
                 ]
             );
-            if ($respuesta->ok()) {
+            if ($respuesta->ok() && $respuesta->get('usuario') != false) {
                 $usuario = $respuesta->get("usuario");
 
                 // var_dump($usuario[0]->contrasenia);
 
-                $coincidenContrasenias = password_verify($data->contrasenia, $usuario[0]->contrasenia);
+                // $coincidenContrasenias = password_verify($data->contrasenia, $usuario[0]->contrasenia);
+                $coincidenContrasenias = password_verify($data->contrasenia, $usuario->contrasenia);
                 if($coincidenContrasenias) {
-                    // Auth::login($usuario);
+                    Auth::login($usuario);
                 } else {
-                    $respuesta->setError(new Exception("La contraseña no coincide", 400));
+                    $respuesta = new Respuesta([
+                        'error' => new Exception("La contraseña no coincide", 400)
+                    ]);
                 }
             } else {
                 $respuesta->setError(new Exception("No existe el usuario", 400));
@@ -52,7 +55,7 @@ class UsuarioController extends ApiController {
     }
 
     public function postUsuario() {
-
+        parent::checkLogin();
         $respuesta = new Respuesta; 
         $data = $this->getData();
 
@@ -71,7 +74,7 @@ class UsuarioController extends ApiController {
                 ]
             );
             if ($respuesta->ok()) {
-                $respuesta->setMensaje( "El registro de ingreso fue cargado con exito." );
+                $respuesta->setMensaje( "Su usuario ha sido registrado con éxito." );
             } else {
                 $respuesta->setMensaje( 'Error en la carga del registro.' );
             }
@@ -81,4 +84,29 @@ class UsuarioController extends ApiController {
         $this->view->response($respuesta);
     }
 
+    public function validarUsuario() {
+        $data = parent::getData();
+        $r = new Respuesta;
+        $usuario = filter_var($data->usuario, FILTER_SANITIZE_STRING);
+        $contrasenia = filter_var($data->contrasenia, FILTER_SANITIZE_STRING);
+        if (!empty($usuario) && !empty($contrasenia)) {
+            $query = 
+            "SELECT true as resultado
+            FROM usuario
+            WHERE usuario = ?
+            AND contrasenia = ?";
+
+            $r =  Model::query($query, [
+                'values' => [ $usuario, $contrasenia ],
+                'fetchType' => 'fetch'
+            ]);
+            if (!$r->tiene('resultado')) {
+                $r->set('resultado', false, true);
+            }
+        }
+        else {
+            $r->setError(new Exception('Ingresar todos los datos', 400));
+        }
+        $this->view->response($r);
+    }
 }

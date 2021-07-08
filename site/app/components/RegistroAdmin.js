@@ -36,7 +36,12 @@ const RegistroAdminTemplate =`
                     </div>
         
                     <div class="d-grid gap-2">
-                        <button class="btn btn-primary">Registrarse</button>
+                        <button :disabled="!verificado || posting" class="btn btn-primary">
+                            <template v-if="!posting">Registrarse</template>
+                            <div v-else class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </button>
                         <button class="btn btn-link">Cancelar</button>
                     </div>
 
@@ -46,6 +51,9 @@ const RegistroAdminTemplate =`
         </div>
         
     </div>
+
+    <respuesta-modal v-model="respuesta" r-id="respuesta-registroAdmin"></respuesta-modal>
+
 </section>
     `
 export default {
@@ -58,7 +66,9 @@ export default {
             },
             mensajeError: "",
             contraseniaReingreso: "",
-            emailReingreso: ""
+            emailReingreso: "",
+            respuesta: undefined,
+            posting: false
         }
     },
     computed: {
@@ -84,9 +94,17 @@ export default {
         async post() {
             if(this.verificado){
                 console.log("posteando", JSON.parse(JSON.stringify(this.datosRegistro)));
-                const r = await Api.postUsuario(this.datosRegistro)
-                console.log("recibido ", r)
-                // this.respuesta = r
+                this.posting = true;
+                let r = await Api.postUsuario(this.datosRegistro)
+                console.log("recibido ", this.respuesta)
+                let errorRegistro = r.error;
+                // console.log(r.error);
+                if(errorRegistro){
+                    this.mensajeError = errorRegistro ;
+                } else {
+                    this.respuesta = r;
+                }
+                this.posting = false;
             }
         }
     },

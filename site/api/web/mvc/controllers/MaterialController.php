@@ -32,6 +32,7 @@ class MaterialController extends ApiController {
         // $r->throw();
     }
     public function getHistoricos() { 
+        parent::checkLogin();
         $r = Model::query(
             "SELECT id,nombre 
              FROM material_historico 
@@ -44,12 +45,14 @@ class MaterialController extends ApiController {
     }  
 
     public function deleteMaterial($params = []) {
+        parent::checkLogin();
         $r = $this->modelMaterial->delete($params[':id']);
         $this->view->response($r);
         // $r->throw();
     }
 
     public function postMaterial($params) {
+        parent::checkLogin();
         $data = $this->getData();
         $data->nombre = filter_var($data->nombre ?? null, FILTER_SANITIZE_STRING);
         $data->imagen = filter_var($data->imagen ?? null, FILTER_SANITIZE_STRING);

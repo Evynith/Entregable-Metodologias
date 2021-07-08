@@ -61,14 +61,10 @@ export default class Api {
     return Api.postData(url, u)
   }
   
-  static async login(m, id = null) {
+  static async login(d) {
     // let r;
     let url = 'admin/login'
-    const method = id == null ? 'POST' : 'PUT'
-    if (id != null) {
-      url += '/' + id
-    }
-    return Api.postData(url, m, method)
+    return Api.postData(url, d)
   }
 
   static async postMaterial(m, id = null) {
@@ -145,6 +141,7 @@ export default class Api {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     }
+    // console.log('posting ', options)
     return Api.fetch(endpoint, options)
     // let options = {
     //   method,

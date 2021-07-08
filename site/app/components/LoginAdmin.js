@@ -1,4 +1,6 @@
 import Api from '../api/Api.js'
+import Auth from '../api/Auth.js'
+
 const LoginAdminTemplate =`
 <section class="m-0 container-fluid">
     <div class="row">
@@ -24,7 +26,12 @@ const LoginAdminTemplate =`
                     </div>
         
                     <div class="d-grid gap-2">
-                        <button class="btn btn-primary">Ingresar</button>
+                        <button :disabled="!verificado || posting" class="btn btn-primary">
+                            <template v-if="!posting">Ingresar</template>
+                            <div v-else class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </button>
                     </div>
                     <p v-if="mensajeError != ''" class="alert alert-danger mt-4">{{ mensajeError }}</p>
                 </form>
@@ -32,6 +39,9 @@ const LoginAdminTemplate =`
         </div>
         
     </div>
+
+    <respuesta-modal v-model="respuesta" r-id="respuesta-loginAdmin"></respuesta-modal>
+
 </section>
     `
 export default {
@@ -42,7 +52,8 @@ export default {
                     contrasenia: ""
                 },
                 mensajeError: '',
-                respuesta: undefined
+                respuesta: undefined,
+                posting: false
         }
     },
     computed: {
@@ -53,10 +64,19 @@ export default {
     methods: {
         async post() {
             if(this.verificado){
-                console.log("posteando", this.datosLogin);
-                const r = await Api.login(this.datosLogin)
-                this.respuesta = r
-                this.mensajeError = "";
+                // console.log("posteando", this.datosLogin);
+                // this.respuesta = await Api.login(this.datosLogin);
+                this.posting = true;
+                let r = await Api.login(this.datosLogin);
+                let errorLogin = r.error;
+                // console.log(r.error);
+                if(errorLogin){
+                    this.mensajeError = errorLogin ;
+                } else {
+                    this.mensajeError = "";
+                    Auth.login(r.data.usuario)
+                }
+                this.posting = false;
             } else {
                 this.mensajeError = "Faltan ingresar datos";
             }

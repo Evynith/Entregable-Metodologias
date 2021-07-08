@@ -24,6 +24,7 @@ class CartoneroController extends ApiController {
     }  
 
     public function postCartonero($params) {
+        parent::checkLogin();
         // $respuesta = parent::getData([
         //     'nombre' => FILTER_SANITIZE_STRING,
         //     'foto' => function ($foto) {
@@ -58,6 +59,7 @@ class CartoneroController extends ApiController {
     }
 
     public function getCartonero($params) {
+        parent::checkLogin();
         $id = filter_var($params[ ':id' ], FILTER_VALIDATE_INT);
         // $r = $this->modelCartonero->selectById($id);
         $query =
@@ -83,6 +85,7 @@ class CartoneroController extends ApiController {
     }
 
     public function deleteCartonero($params = []){
+        parent::checkLogin();
         $r = $this->modelCartonero->delete($params[':id']);
         $this->view->response($r);
     }
