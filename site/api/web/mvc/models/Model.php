@@ -3,11 +3,6 @@
 require_once ('./mvc/view/JSONView.php');
 require_once './libs/Respuesta.php';
 
-class ModelStmt {
-
-    
-}
-
 class Model {
     // protected $db;
     protected $tabla;

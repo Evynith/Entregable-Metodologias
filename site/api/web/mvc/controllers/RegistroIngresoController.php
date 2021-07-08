@@ -15,7 +15,7 @@ class RegistroIngresoController extends ApiController {
     }
 
     public function getTiposUsuario() {
-
+        parent::checkLogin();
         $r = Model::query(
             "SELECT * FROM ( 
                 SELECT unnest(enum_range(null::usuarios)) as tipo 
@@ -28,7 +28,38 @@ class RegistroIngresoController extends ApiController {
         $this->view->response($r);
     }
 
+    public function getMaterialesRecolectados($params) {
+        parent::checkLogin();
+        $id = filter_var($params[ ':id' ], FILTER_VALIDATE_INT);
+        $query = 
+        'SELECT mh.nombre, sum(mc.peso) AS "pesoTotal"
+        FROM material_historico mh
+        JOIN material_cargado mc ON (mh.material_id = mc.id_material)
+        JOIN registro_ingreso_material rim ON (mc.id_registro = rim.id_registro)
+        WHERE rim.cartonero_id = ?
+        -- AND mh.material_id IS NOT NULL
+        GROUP BY mh.nombre';
+
+        // Verificación:
+        // $query2 =
+        // 'SELECT *
+        // from material_cargado mc 
+        // join registro_ingreso_material rim on (mc.id_registro = rim.id_registro)
+        // WHERE rim.cartonero_id = ?';
+
+        $r = Model::query(
+            $query, [
+                'fetchType' => 'fetchAll',
+                'recurso' => 'materialesRecolectados',
+                'values' => [$id],
+            ]);  
+            // var_dump($r);
+            $r->set('cartonero_id', $params[':id']);
+            $this->view->response($r);
+    }
+
     public function postRegistroIngreso() {
+        parent::checkLogin();
         $data = $this->getData();
 
         $r = new Respuesta;

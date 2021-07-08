@@ -32,6 +32,7 @@ $router->addRoute("admin/material-aceptado/:id", "DELETE", "MaterialController",
 $router->addRoute("admin/avisos-retiro", "GET", "AvisoRetiroController", "getAvisosRetiro");
 $router->addRoute("admin/login", "POST", "UsuarioController", "login");
 $router->addRoute("admin/registro", "POST", "UsuarioController", "postUsuario");
+$router->addRoute("admin/materiales-recolectados/:id", "GET", "RegistroIngresoController", "getMaterialesRecolectados");
 $router->addRoute("admin/cartonero", "POST", "CartoneroController", "postCartonero");
 $router->addRoute("admin/cartonero/:id", "PUT", "CartoneroController", "postCartonero");
 $router->addRoute("admin/cartonero/:id", "GET", "CartoneroController", "getCartonero");
@@ -40,6 +41,10 @@ $router->addRoute("admin/cartonero/:id", "DELETE", "CartoneroController", "delet
 
 $router->addRoute("admin/registro-ingreso","POST","RegistroIngresoController","postRegistroIngreso");
 $router->addRoute("admin/tipos-usuario","GET","RegistroIngresoController","getTiposUsuario");
+
+$router->addRoute("admin/validar-usuario", "POST", "UsuarioController", "validarUsuario");
+$router->addRoute("admin/logout", "GET", "ApiController", "logout");
+
 // rutea
 $router->route($resource, $method);
 

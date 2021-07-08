@@ -1,4 +1,22 @@
-export default { 
+import Auth from '../api/Auth.js'
+
+export default {
+  methods: {
+    // isLoggedIn() {
+    //   return Auth.isLoggedIn()
+    // },
+    logout() {
+      // Auth.logout()
+      this.logoutAction()
+    }
+  },
+  props: [ 'logged-in' ],
+  emits: [ 'logout' ],
+  // computed: {
+  //   isLoggedIn() {
+  //     return this.loggedIn
+  //   }
+  // },
   template : `
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow sticky-top" id="app-nav">
   <div class="container-fluid">
@@ -16,11 +34,15 @@ export default {
         <li class="nav-item">
           <router-link to="/materiales-aceptados" class="nav-link">Materiales aceptados</router-link>
         </li>
-        <li class="nav-item dropdown">
+
+        <li v-if="loggedIn" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Admin</a>
           <ul class="dropdown-menu">
             <li class="nav-item">
               <router-link to="/admin/registro-ingreso" class="dropdown-item">Registrar ingreso de material</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/admin/materiales-recolectados" class="dropdown-item">Materiales recolectados</router-link>
             </li>
             <li class="nav-item">
               <router-link to="/admin/avisos-retiro" class="dropdown-item">Avisos de retiro</router-link>
@@ -32,7 +54,10 @@ export default {
               <router-link to="/admin/administrar-cartoneros" class="dropdown-item">Administrar cartoneros</router-link>
             </li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item disabled" href="#">Logout</a></li>
+            <li class="nav-item">
+              <router-link to="/admin/registro" class="dropdown-item">Agregar nuevo usuario</router-link>
+            </li>
+            <li><a class="dropdown-item" @click="$emit('logout')" >Logout</a></li>
           </ul>
         </li>
       </ul>

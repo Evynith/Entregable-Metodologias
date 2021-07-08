@@ -24,10 +24,13 @@
 
 #### Con el navegador
 
+Para ver los mensajes de consola se debe abrir la herramienta de desarrollo del navegador, usualmente se hace presionando la tecla f12.
+
 #### Con Postman
 
-Video para mostrar como guardar las consultas en colecciones para no tener que volver a escribir los datos y las rutas
+Se deben importar los archivos de testeo creados para el sprint actual, por ejemplo el del sprint 3 se encuentra [aquí](../Tests/_templates), luego se debe correr el test.
+En caso de utilizar Newman para exportarlo se debe instalar y ejecutar su inicio, puede usar esta [guía](https://adevait.com/qa/how-to-create-elegant-html-reports-in-postman).
 
-#### Con curl
+#### Con cucumber
 
-???
+Se debe ir a la rama test y mergear las ramas a testar allí, las instrucciones de uso estan descriptas en su README.md

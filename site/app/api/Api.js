@@ -141,6 +141,7 @@ export default class Api {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     }
+    // console.log('posting ', options)
     return Api.fetch(endpoint, options)
     // let options = {
     //   method,
@@ -255,6 +256,17 @@ export default class Api {
   }
   static async getAvisosRetiro() {
     return Api.getData('admin/avisos-retiro').then(json => json.data.avisosRetiro);
+  }
+
+  static async getMaterialesRecolectados(id) {
+    // return Api.getLocalJSON(`admin/materiales-recolectados/1`)
+    return Api.getData(`admin/materiales-recolectados/${id}`)
+  }
+  static async getCartoneros() {
+    return Api
+      .getData('admin/cartoneros', { "getLocal": true })
+      .then(r => r.data.cartoneros)
+
   }
 
   static async getData(endpoint) {
