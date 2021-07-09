@@ -37,9 +37,14 @@ class ApiController {
     }
 
     public function mostrar404() {
-        $this->view->response(new Respuesta([
-            'error' => new Exception("Ruta no reconocida: {$_GET[ 'action' ]}", 404)
-        ]));
+        if ($_SERVER[ 'REQUEST_METHOD' ] == 'OPTIONS') {
+            // preflight request de cors 
+        }
+        else {
+            $this->view->response(new Respuesta([
+                'error' => new Exception("Ruta no reconocida: {$_GET[ 'action' ]}", 404)
+            ]));
+        }
     }
 }
 
