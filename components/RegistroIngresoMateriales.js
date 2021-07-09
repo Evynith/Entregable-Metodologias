@@ -118,13 +118,18 @@ export default {
       this.nuevoMaterial.nombre = select.options[select.selectedIndex].text;
 
     },
+    dosDecimales(n) {
+      let t=n.toString();
+      let regex=/(\d*.\d{0,2})/;
+      return t.match(regex)[0];
+    },
     agregarMaterial() {
       // console.log(this.nuevoMaterial)
       const t = this
       const m = {
         id_material: t.nuevoMaterial.id_material,
         nombre: t.nuevoMaterial.nombre,
-        peso: parseInt(t.nuevoMaterial.peso)
+        peso: this.dosDecimales(t.nuevoMaterial.peso)
       }
       // console.log(m)
       if (this.validarNuevoMaterial(m)) {

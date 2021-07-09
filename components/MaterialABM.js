@@ -7,10 +7,11 @@ const MaterialABMTemplate = `
 
   <template v-if="material != undefined && !deleting">
     <div v-if="! (material.id == null || editar)" class="card" id="material-abm">
-      <div class="row card-header">
+      <div class="card-header">
+      <div class="row ">
         <h5 class="col-8" v-html="material.nombre"></h5>
 
-        <div class="d-flex col justify-content-around">
+        <div class="d-flex col gap-2 d-flex flex-row-reverse justify-content-start">
           <!-- botones de modificar  (pantalla gral.) -->
           <a v-if="material.id != null" @click="iniciarEdicion">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-pencil-square"
@@ -30,6 +31,8 @@ const MaterialABMTemplate = `
           </a>
         </div>
           <!--fin botones de modificar  (pantalla gral.) -->
+
+      </div>
 
       </div>
       <div class="card-body">

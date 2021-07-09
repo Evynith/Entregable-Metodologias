@@ -29,7 +29,7 @@ export default {
             <div class="col pt-3">
                 <h5>Contacto</h5>
                 <ul class="ps-0">
-                    <li>Calle Sin Nombre 123, Tandil, Bs As, Argentina</li>
+                    <li>Hipólito Yrigoyen 1178, Tandil, Bs As, Argentina</li>
                     <li>tel/fax: 000000000000</li>
                     <li>email@ejemplo.com</li>
                 </ul>
