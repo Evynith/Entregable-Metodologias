@@ -2,7 +2,7 @@ import Api from '../api/Api.js'
 import CartoneroABM from './CartoneroABM.js'
 
 const CartonerosTemplate = `
-<section>
+<section class="container-sm">
   <header class="d-flex align-items-center mt-2 mb-4">  <!-- class="d-flex justify-content-around" --> <!-- cuando aparece botón se le agrega esas clases a header-->
     <h1 class="d-flex justify-content-start fs-1 me-4">Listado de cartoneros</h1> 
   
